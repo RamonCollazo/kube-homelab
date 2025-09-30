@@ -21,3 +21,8 @@ spec:
     operatorNamespace: rook-ceph
     monitoring:
       enabled: true
+    cephClusterSpec:
+      mon:
+        count: 1
+      mgr:
+        count: 1
