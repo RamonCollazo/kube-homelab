@@ -18,6 +18,11 @@ spec:
     - name: rook-ceph
       namespace: rook-ceph
   values:
+    configOverride:
+      configOverride: |
+        [global]
+        osd_pool_default_size = 1
+        osd_pool_default_min_size = 1
     operatorNamespace: rook-ceph
     monitoring:
       enabled: true
@@ -26,3 +31,5 @@ spec:
         count: 1
       mgr:
         count: 1
+        allowMultiplePerNode: true
+      skipUpgradeChecks: true
