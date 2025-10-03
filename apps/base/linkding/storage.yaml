@@ -4,7 +4,7 @@ metadata:
   name: linkding-data-pvc
 spec:
   accessMode:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
