@@ -1,4 +1,4 @@
-# 🏡 My GitOps Homelab: Talos, Flux, and the Cloud-Native Stack
+# 🏡 Kubernetes Homelab
 
 This repository is the **single source of truth** for my personal Kubernetes homelab cluster, managed entirely through **GitOps**. Every piece of infrastructure, every operator, and every application is defined as code right here.
 
