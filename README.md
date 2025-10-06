@@ -30,7 +30,7 @@ My cluster uses modern, cloud-native principles to ensure it is secure, reliable
 
 ### 📂 Repository Structure (Monorepo)
 
-The cluster state is defined using a **monorepo** structure, which allows for a clear separation between core cluster components and end-user applications. Flux starts reconciliation from the `clusters/kube-homelab` path.
+The cluster state is defined using a **monorepo** structure, which allows for a clear separation between core cluster components and end-user applications.
 
 ### 🔒 Secrets Management
 
