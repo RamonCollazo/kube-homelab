@@ -66,5 +66,5 @@ These are the essential cluster-wide services and operators that enable the enti
 | Name | Category | Description |
 | :--- | :--- | :--- |
 | **Cilium** | Networking/Ingress | Provides CNI capabilities and acts as the **Ingress Controller** for all incoming traffic via eBPF. |
-| **Rook-Ceph** | Storage | Manages the highly available, distributed storage layer using the disks on the worker node. |
+| **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker node. |
 | **kube-prometheus-stack**| Monitoring/Observability | The full suite of Prometheus for metrics and alerting, and Grafana for visualization. |
