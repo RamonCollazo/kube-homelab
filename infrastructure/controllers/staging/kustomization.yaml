@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - cilium
   - rook-ceph
-  #- cloudflared
+  - cloudflared
