@@ -4,3 +4,4 @@ resources:
   - cilium
   - rook-ceph
   - cloudflared
+  - ./cert-manager/
