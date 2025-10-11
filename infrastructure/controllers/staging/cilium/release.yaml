@@ -3,7 +3,6 @@ kind: HelmRelease
 metadata:
   name: cilium
   namespace: kube-system
-
 spec:
   releaseName: cilium
   interval: 15m
@@ -15,7 +14,10 @@ spec:
         kind: HelmRepository
         name: cilium
         namespace: kube-system
-
   valuesFrom:
     - kind: ConfigMap
       name: cilium-values
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
