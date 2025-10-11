@@ -6,6 +6,8 @@ spec:
   acme:
     email: acme.fpdj9@simplelogin.com
     server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: clusterissuer-staging
     solvers:
       - dns01:
           cloudflare:
