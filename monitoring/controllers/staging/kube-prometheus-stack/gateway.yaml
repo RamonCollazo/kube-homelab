@@ -1,0 +1,37 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: grafana-gateway
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer=clusterissuer-staging
+spec:
+  gatewayClassName: cilium
+  listeners:
+    - name: grafana
+      protocol: HTTPS
+      port: 443
+      hostname: "grafana.raymondcollazo.com"
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: grafana-tls
+      allowedRoutes:
+        namespaces:
+          from: Same
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grafana-route
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: grafana-gateway
+  hostnames:
+    - "grafana.raymondcollazo.com"
+  rules:
+    backendRefs:
+      - name: kube-prometheus-stack-grafana
+        port: 80
