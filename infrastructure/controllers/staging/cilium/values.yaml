@@ -30,7 +30,7 @@ gatewayAPI:
   enableAlpn: true
   enableAppProtocol: true
   gatewayClass:
-    create: true
+    create: 'true'
 hubble:
   relay:
     enabled: true
