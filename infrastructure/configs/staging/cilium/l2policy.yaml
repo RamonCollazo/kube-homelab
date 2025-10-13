@@ -1,0 +1,12 @@
+---
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: service-policy
+  namespace: kube-system
+spec:
+  serviceSelector:
+    matchLabels:
+      cilium-lb-pool: gateway-pool
+  externalIPs: true
+  loadBalancerIPs: true

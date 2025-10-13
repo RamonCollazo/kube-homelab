@@ -6,6 +6,8 @@ metadata:
   namespace: monitoring
   annotations:
     cert-manager.io/cluster-issuer=clusterissuer-staging
+  labels:
+    cilium-lb-pool: gateway-pool
 spec:
   gatewayClassName: cilium
   listeners:

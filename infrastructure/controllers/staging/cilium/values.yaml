@@ -25,6 +25,9 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 k8sServiceHost: localhost
 k8sServicePort: 7445
+k8sClientRateLimit:
+  qps: 16
+  burst: 32
 l2announcements:
   enabled: true
 gatewayAPI:
