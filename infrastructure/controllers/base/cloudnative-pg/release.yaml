@@ -4,7 +4,6 @@ metadata:
   name: cloudnative-pg
   namespace: cnpg-system
 spec:
-  releaseName: 
   interval: 15m
   chart:
     spec:
