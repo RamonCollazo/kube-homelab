@@ -24,7 +24,7 @@ My cluster uses modern, cloud-native principles to ensure it is secure, reliable
 | :--- | :--- | :--- |
 | **Operating System** | **Talos Linux** | Immutable, minimal, and secure OS designed specifically for Kubernetes. |
 | **GitOps Engine** | **FluxCD** | Continuously reconciles the cluster state with this repository. |
-| **CNI & Ingress** | **Cilium** | eBPF-based networking, and acting as the **Ingress Controller**. |
+| **CNI & Gateway** | **Cilium** | eBPF-based networking, and acting as the **Gateway Controller**. |
 | **Storage (CSI)** | **Rook-Ceph** | Provides highly available, distributed storage across my nodes. |
 | **Secrets Management** | **SOPS** | Encrypts sensitive data directly in Git using an Age key. |
 
@@ -65,6 +65,6 @@ These are the essential cluster-wide services and operators that enable the enti
 
 | Name | Category | Description |
 | :--- | :--- | :--- |
-| **Cilium** | Networking/Ingress | Provides CNI capabilities and acts as the **Ingress Controller** for all incoming traffic via eBPF. |
+| **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
 | **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker node. |
 | **kube-prometheus-stack**| Monitoring/Observability | The full suite of Prometheus for metrics and alerting, and Grafana for visualization. |
