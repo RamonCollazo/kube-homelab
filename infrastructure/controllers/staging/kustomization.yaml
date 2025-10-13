@@ -5,3 +5,4 @@ resources:
   - rook-ceph
   - cloudflared
   - ./cert-manager/
+  - ./renovate/
