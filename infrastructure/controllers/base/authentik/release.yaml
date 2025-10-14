@@ -14,8 +14,13 @@ spec:
         kind: HelmRepository
         name: authentik
         namespace: authentik
-  valuesFrom:
-    - kind: ConfigMap
-      name: authentik-configmap
-    - kind: Secret
-      name: authentik-env
+  values:
+    env:
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: authentik-db
+            key: password
+    envFrom:
+      - configMapRef:
+        name: authentik-configmap
