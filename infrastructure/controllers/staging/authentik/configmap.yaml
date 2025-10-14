@@ -4,7 +4,6 @@ metadata:
   name: authentik-configmap
   namespace: authentik
 data:
-  AUTHENTIK_POSTGRESQL__HOST: authentik-db-rw.authentik.svc.cluster.local
-  AUTHENTIK_POSTGRESQL__USER: authentik
-  AUTHENTIK_POSTGRESQL__NAME: authentik
+  AUTHENTIK_POSTGRESQL__HOST: 'authentik-db-rw'
+  AUTHENTIK_POSTGRESQL__NAME: 'authentik'
   AUTHENTIK_ERROR_REPORTING: 'true'

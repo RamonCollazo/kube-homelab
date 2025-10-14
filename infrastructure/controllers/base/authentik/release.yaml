@@ -17,13 +17,38 @@ spec:
   values:
     redis:
       enabled: true
-    global:
+    server:
       env:
         - name: AUTHENTIK_POSTGRESQL__PASSWORD
           valueFrom:
             secretKeyRef:
               name: authentik-db
               key: password
+        - name: AUTHENTIK_POSTGRESQL__USER
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db
+              key: username
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-key
+              key: key
+      envFrom:
+        - configMapRef:
+            name: authentik-configmap
+    worker:
+      env:
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db
+              key: password
+        - name: AUTHENTIK_POSTGRESQL__USER
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db
+              key: username
         - name: AUTHENTIK_SECRET_KEY
           valueFrom:
             secretKeyRef:
