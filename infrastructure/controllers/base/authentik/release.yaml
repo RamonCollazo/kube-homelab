@@ -31,4 +31,4 @@ spec:
               key: key
       envFrom:
         - configMapRef:
-          name: authentik-configmap
+            name: authentik-configmap
