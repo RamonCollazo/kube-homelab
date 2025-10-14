@@ -15,22 +15,20 @@ spec:
         name: authentik
         namespace: authentik
   values:
-    authentik:
-      error_reporting:
-        enabled: true
     redis:
       enabled: true
-    env:
-      - name: AUTHENTIK_POSTGRESQL__PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: authentik-db
-            key: password
-      - name: AUTHENTIK_SECRET_KEY
-        valueFrom:
-          secretKeyRef:
-            name: authentik-key
-            key: key
-    envFrom:
-      - configMapRef:
-        name: authentik-configmap
+    global:
+      env:
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db
+              key: password
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-key
+              key: key
+      envFrom:
+        - configMapRef:
+          name: authentik-configmap
