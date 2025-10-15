@@ -6,4 +6,3 @@ metadata:
 data:
   AUTHENTIK_POSTGRESQL__HOST: 'authentik-db-rw'
   AUTHENTIK_POSTGRESQL__NAME: 'authentik'
-  AUTHENTIK_ERROR_REPORTING: 'true'
