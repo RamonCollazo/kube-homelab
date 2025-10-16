@@ -4,7 +4,7 @@ metadata:
   name: linkwarden-env
   namespace: linkwarden
 data:
-  DATABASE_URL: 'postgresql://linkwarden:${POSTGRES_PASSWORD}@linkwarden-db-rw:5432/linkwarden'
+  DATABASE_URL: 'postgresql://linkwarden:${POSTGRES_PASSWORD}@linkwarden-pg-rw.linkwarden.svc.cluster.local:5432/linkwarden'
   NEXT_PUBLIC_AUTHENTIK_ENABLED: 'true'
   AUTHENTIK_CUSTOM_NAME: authentik # Optionally set a custom provider name. Will be displayed on the login page
   AUTHENTIK_ISSUER: 'https://auth.raymondcollazo.com/application/o/linkwarden'
