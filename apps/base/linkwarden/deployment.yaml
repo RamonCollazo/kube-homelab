@@ -26,6 +26,11 @@ spec:
             - name: linkwarden-data
               mountPath: /data/data
           env:
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-next
+                  key: secret
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
