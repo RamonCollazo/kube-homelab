@@ -15,10 +15,10 @@ spec:
       labels:
         app: freshrss
     spec:
-      securityContext:
-        fsGroup: 33
-        runAsUser: 33
-        runAsGroup: 33
+      #securityContext:
+      #  fsGroup: 33
+      #  runAsUser: 33
+      #  runAsGroup: 33
       containers:
         - image: freshrss/freshrss:1.27.1
           name: freshrss
