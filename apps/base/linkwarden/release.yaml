@@ -14,9 +14,12 @@ spec:
         kind: GitRepository
         name: meilisearch
         namespace: linkwarden
+  valuesFrom:
+    - kind: Secret
+      name: linkwarden-meili
+      valuesKey: key
+      targetPath: MEILI_MASTER_KEY
   values:
     environment:
       MEILI_NO_ANALYTICS: 'false'
       MEILI_ENV: 'production'
-    auth:
-      existingMasterKeySecret: 'linkwarden-meili'
