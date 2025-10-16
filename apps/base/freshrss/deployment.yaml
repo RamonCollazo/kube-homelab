@@ -50,6 +50,11 @@ spec:
                 secretKeyRef:
                   name: freshrss-auth
                   key: secret
+            - name: OIDC_CLIENT_CRYPTO_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: freshrss-auth
+                  key: key
           envFrom:
             - configMapRef:
                 name: freshrss-env
