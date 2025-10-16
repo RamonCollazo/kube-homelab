@@ -4,6 +4,7 @@ metadata:
   labels:
     app: linkwarden
   name: linkwarden
+  namespace: linkwarden
 spec:
   ports:
     - port: 3000
