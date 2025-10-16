@@ -47,8 +47,8 @@ spec:
                   name: linkwarden-auth
                   key: secret
           envFrom:
-            configMapRef:
-              name: linkwarden-env
+            - configMapRef:
+                name: linkwarden-env
         - image: getmeili/meilisearch:v1.12.8
           name: meilisearch
           securityContext:
