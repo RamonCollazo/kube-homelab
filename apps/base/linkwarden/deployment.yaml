@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: linkwarden
+  name: linkwarden
+  namespace: linkwarden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: linkwarden
+  template:
+    metadata:
+      labels:
+        app: linkwarden
+    spec:
+      containers:
+        - image: ghcr.io/linkwarden/linkwarden:v2.13.1
+          name: linkwarden
+          ports:
+            - containerPort: 3000
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: linkwarden-data
+              mountPath: /data/data
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-pg
+                  key: password
+            - name: MEILI_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-meili
+                  key: key
+            - name: AUTHENTIK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-auth
+                  key: id
+            - name: AUTHENTIK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-auth
+                  key: secret
+          envFrom:
+            configMapRef:
+              name: linkwarden-env
+        - image: getmeili/meilisearch:v1.12.8
+          name: meilisearch
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: meili-data
+              mountPath: /meili_data
+          env:
+            - name: MEILI_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-meili
+                  key: key
+      volumes:
+        - name: linkwarden-data
+          persistentVolumeClaim:
+            claimName: linkwarden-data
+        - name: meili-data
+          persistentVolumeClaim:
+            claimName: meili-data
