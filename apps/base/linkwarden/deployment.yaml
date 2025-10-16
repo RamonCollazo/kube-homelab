@@ -49,23 +49,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: linkwarden-env
-        - image: getmeili/meilisearch:v1.12.8
-          name: meilisearch
-          securityContext:
-            allowPrivilegeEscalation: false
-          volumeMounts:
-            - name: meili-data
-              mountPath: /meili_data
-          env:
-            - name: MEILI_MASTER_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: linkwarden-meili
-                  key: key
       volumes:
         - name: linkwarden-data
           persistentVolumeClaim:
             claimName: linkwarden-data
-        - name: meili-data
-          persistentVolumeClaim:
-            claimName: meili-data

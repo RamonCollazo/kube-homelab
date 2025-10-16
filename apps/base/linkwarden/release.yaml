@@ -1,0 +1,22 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: meilisearch
+  namespace: linkwarden
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: charts/meilisearch
+      version: 0.17.1
+      sourceRef:
+        kind: GitRepository
+        name: meilisearch
+        namespace: linkwarden
+  values:
+    environment:
+      MEILI_NO_ANALYTICS: 'false'
+      MEILI_ENV: 'production'
+    auth:
+      existingMasterKeySecret: 'linkwarden-meili'

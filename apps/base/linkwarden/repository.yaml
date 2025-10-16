@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: meilisearch
+  namespace: linkwarden
+spec:
+  interval: 1h
+  url: https://github.com/meilisearch/meilisearch-kubernetes
+  ref:
+    branch: main 
