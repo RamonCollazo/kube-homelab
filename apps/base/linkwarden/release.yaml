@@ -14,12 +14,14 @@ spec:
         kind: GitRepository
         name: meilisearch
         namespace: linkwarden
-  valuesFrom:
-    - kind: Secret
-      name: linkwarden-meili
-      valuesKey: key
-      targetPath: MEILI_MASTER_KEY
   values:
-    environment:
-      MEILI_NO_ANALYTICS: 'false'
-      MEILI_ENV: 'production'
+    env:
+      - name: MEILI_MASTER_KEY
+        valuesFrom:
+          secretKeyRef:
+            name: linkwarden-meili
+            valuesKey: key
+      - name: MEILI_NO_ANALYTICS
+        value: 'true'
+      - name: MEILI_ENV
+        value: 'production'
