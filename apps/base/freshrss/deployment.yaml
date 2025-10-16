@@ -40,16 +40,16 @@ spec:
                 secretKeyRef:
                   name: freshrss-pg
                   key: password
-            #- name: OIDC_CLIENT_ID
-            #  valueFrom:
-            #    secretKeyRef:
-            #      name: freshrss-auth
-            #      key: id
-            #- name: OIDC_CLIENT_SECRET
-            #  valueFrom:
-            #    secretKeyRef:
-            #      name: freshrss-auth
-            #      key: secret
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: freshrss-auth
+                  key: id
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: freshrss-auth
+                  key: secret
           envFrom:
             - configMapRef:
                 name: freshrss-env

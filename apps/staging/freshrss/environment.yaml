@@ -9,7 +9,7 @@ data:
   DB_BASE: freshrss
   DB_HOST: freshrss-pg-rw
   # Authentik
-  #OIDC_ENABLED: 1
-  #OIDC_PROVIDER_METADATA_URL: https://auth.raymondcollazo.com/application/o/freshrss/.well-known/openid-configuration
-  #OIDC_X_FORWARDED_HEADERS: 'X-Forwarded-Port X-Forwarded-Proto X-Forwarded-Host'
-  #OIDC_SCOPE: 'openid email profile'
+  OIDC_ENABLED: '1'
+  OIDC_PROVIDER_METADATA_URL: 'https://auth.raymondcollazo.com/application/o/freshrss/.well-known/openid-configuration'
+  OIDC_X_FORWARDED_HEADERS: 'X-Forwarded-Port X-Forwarded-Proto X-Forwarded-Host'
+  OIDC_SCOPE: 'openid email profile'
