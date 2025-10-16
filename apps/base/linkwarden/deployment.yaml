@@ -15,6 +15,10 @@ spec:
       labels:
         app: linkwarden
     spec:
+      securityContext:
+        fsGroup: 33
+        runAsUser: 33
+        runAsGroup: 33
       containers:
         - image: ghcr.io/linkwarden/linkwarden:v2.13.1
           name: linkwarden
