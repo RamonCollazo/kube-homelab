@@ -26,6 +26,9 @@ My cluster uses modern, cloud-native principles to ensure it is secure, reliable
 | **GitOps Engine** | **FluxCD** | Continuously reconciles the cluster state with this repository. |
 | **CNI & Gateway** | **Cilium** | eBPF-based networking, and acting as the **Gateway Controller**. |
 | **Storage (CSI)** | **Rook-Ceph** | Provides highly available, distributed storage across my nodes. |
+| **Database** | **CloudNativePG** | Postgres operator for reliable, declarative PostgreSQL clusters. |
+| **Zero Trust Access** | **Cloudflare Zero Trust** | Secure remote access/tunneling to internal services without exposing the network. |
+| **Identity & Access** | **Authentik** | SSO/IdP for centralized authentication and fine-grained authorization. |
 | **Secrets Management** | **SOPS** | Encrypts sensitive data directly in Git using an Age key. |
 
 ### 📂 Repository Structure (Monorepo)
@@ -57,6 +60,8 @@ These are the end-user applications currently deployed and managed by Flux.
 
 | Name | Description |
 | :--- | :--- |
+| **Linkwarden** | Self-hosted, collaborative bookmark manager with archiving and tags. |
+| **FreshRSS** | Lightweight, multi-user RSS aggregator/reader. |
 | **linkding** | A minimal, self-hosted bookmark manager. |
 
 ### Infrastructure
@@ -67,4 +72,8 @@ These are the essential cluster-wide services and operators that enable the enti
 | :--- | :--- | :--- |
 | **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
 | **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker node. |
+| **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
 | **kube-prometheus-stack**| Monitoring/Observability | The full suite of Prometheus for metrics and alerting, and Grafana for visualization. |
+| **Cloudflare Zero Trust** | Networking/Security | Secure, identity-aware access to internal apps over Cloudflare Tunnels. |
+| **Authentik** | Identity/Access | SSO/IdP for apps; OIDC/SAML providers with policy-driven access. |
+| **Renovate** | Automation | Dependency discovery and automatic update PRs for charts/images/manifests. |
