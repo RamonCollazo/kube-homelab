@@ -60,6 +60,7 @@ These are the end-user applications currently deployed and managed by Flux.
 
 | Name | Description |
 | :--- | :--- |
+| **Homepage** | Self-hosted homelab dashboard with service tiles, widgets, and health checks. |
 | **Linkwarden** | Self-hosted, collaborative bookmark manager with archiving and tags. |
 | **FreshRSS** | Lightweight, multi-user RSS aggregator/reader. |
 | **linkding** | A minimal, self-hosted bookmark manager. |
