@@ -4,5 +4,5 @@ resources:
   - ./freshrss/
   - ./homepage/
   - ./kiwix/
-  - ./linkding/
+  #- ./linkding/
   - ./linkwarden/
