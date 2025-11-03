@@ -1,0 +1,37 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: kiwix
+  namespace: kiwix
+  annotations:
+    cert-manager.io/cluster-issuer: clusterissuer-staging
+spec:
+  gatewayClassName: cilium
+  listeners:
+    - name: kiwix
+      protocol: HTTPS
+      port: 443
+      hostname: "kiwix.raymondcollazo.com"
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: kiwix-tls
+      allowedRoutes:
+        namespaces:
+          from: Same
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: kiwix
+  namespace: kiwix
+spec:
+  parentRefs:
+    - name: kiwix
+  hostnames:
+    - "kiwix.raymondcollazo.com"
+  rules:
+    - backendRefs:
+        - name: kiwix
+          port: 8080

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiwix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kiwix
+  template:
+    metadata:
+      labels:
+        app: kiwix
+    spec:
+      #securityContext:
+      #  fsGroup: 33
+      #  runAsUser: 33
+      #  runAsGroup: 33
+      containers:
+        - name: kiwix
+          image: ghcr.io/kiwix/kiwix-serve:3.8.0
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: media-zim
+              mountPath: /data
+      volumes:
+        - name: media-zim
+          nfs:
+            server: 10.0.50.100
+            path: /mnt/DataVault/Media/ZIM
+            readOnly: true
