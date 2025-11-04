@@ -26,7 +26,6 @@ spec:
           volumeMounts:
             - name: media-zim
               mountPath: /data
-              readOnly: true
       volumes:
         - name: media-zim
           nfs:
