@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ./freshrss/
   - ./homepage/
+  - ./kavita/
   - ./kiwix/
   #- ./linkding/
   - ./linkwarden/

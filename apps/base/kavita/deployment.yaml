@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kavita
+  namespace: kavita
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kavita
+  template:
+    metadata:
+      labels:
+        app: kavita
+    spec:
+      #securityContext:
+      #  fsGroup: 33
+      #  runAsUser: 33
+      #  runAsGroup: 33
+      containers:
+        - name: kavita
+          image: ghcr.io/kareadita/kavita:0.8.8
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: kavita-config
+              mountPath: /kavita/config
+            - name: media-ebooks
+              mountPath: /books
+      volumes:
+        - name: kavita-config
+          persistentVolumeClaim:
+            claimName: kavita-config-pvc
+        - name: media-ebooks
+          nfs:
+            server: 10.0.50.100
+            path: /mnt/DataVault/Media/eBooks
+            readOnly: true
