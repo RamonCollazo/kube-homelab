@@ -13,18 +13,17 @@ spec:
       labels:
         app: kiwix
     spec:
-      securityContext:
-        fsGroup: 33
-        runAsUser: 33
-        runAsGroup: 33
+      #securityContext:
+      #  fsGroup: 33
+      #  runAsUser: 33
+      #  runAsGroup: 33
       containers:
         - name: kiwix
           image: ghcr.io/kiwix/kiwix-serve:3.8.0
-          command: ['*.zim']
+          command:
+            - '*.zim'
           ports:
             - containerPort: 8080
-          securityContext:
-            allowPrivilegeEscalation: false
           volumeMounts:
             - name: media-zim
               mountPath: /data
