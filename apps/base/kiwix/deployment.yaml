@@ -13,10 +13,10 @@ spec:
       labels:
         app: kiwix
     spec:
-      #securityContext:
-      #  fsGroup: 33
-      #  runAsUser: 33
-      #  runAsGroup: 33
+      securityContext:
+        fsGroup: 33
+        runAsUser: 33
+        runAsGroup: 33
       containers:
         - name: kiwix
           image: ghcr.io/kiwix/kiwix-serve:3.8.0
