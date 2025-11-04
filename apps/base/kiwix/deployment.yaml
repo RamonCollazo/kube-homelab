@@ -19,8 +19,10 @@ spec:
       #  runAsGroup: 33
       containers:
         - name: kiwix
-          image: ghcr.io/kiwix/kiwix-serve:3.8.0
-          command: ["*.zim"]
+          image: ghcr.io/kiwix/kiwix-tools:3.8.0
+          command:
+            - kiwix-serve
+            - *.zim
           ports:
             - containerPort: 8080
           volumeMounts:
