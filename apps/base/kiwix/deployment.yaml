@@ -21,7 +21,7 @@ spec:
         - name: kiwix
           image: ghcr.io/kiwix/kiwix-serve:3.8.0
           command:
-            - '*.zim'
+            - *.zim
           ports:
             - containerPort: 8080
           securityContext:
@@ -34,4 +34,4 @@ spec:
           nfs:
             server: 10.0.50.100
             path: /mnt/DataVault/Media/ZIM
-            #readOnly: true
+            readOnly: true
