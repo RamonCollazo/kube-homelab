@@ -32,4 +32,4 @@ spec:
           nfs:
             server: 10.0.50.100
             path: /mnt/DataVault/Media/zim
-            readOnly: false
+            readOnly: true
