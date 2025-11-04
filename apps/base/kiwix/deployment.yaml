@@ -33,5 +33,5 @@ spec:
         - name: media-zim
           nfs:
             server: 10.0.50.100
-            path: /mnt/DataVault/Media/ZIM
+            path: /mnt/DataVault/Media/zim
             readOnly: true
