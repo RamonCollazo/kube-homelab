@@ -13,10 +13,10 @@ spec:
       labels:
         app: kavita
     spec:
-      #securityContext:
-      #  fsGroup: 33
-      #  runAsUser: 33
-      #  runAsGroup: 33
+      securityContext:
+        fsGroup: 33
+        runAsUser: 33
+        runAsGroup: 33
       containers:
         - name: kavita
           image: ghcr.io/kareadita/kavita:0.8.8
