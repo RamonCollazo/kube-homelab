@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: OCIRepository
+kind: HelmRepository
 metadata:
-  name: dragonflydb
+  name: dragonfly
   namespace: dragonfly-system
 spec:
   interval: 24h
-  url: oci://ghcr.io/dragonflydb/dragonfly/helm/dragonfly
+  url: https://dragonflyoss.github.io/helm-charts/
