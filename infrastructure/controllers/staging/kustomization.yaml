@@ -6,5 +6,6 @@ resources:
   - ./cilium/
   - ./cloudflared/
   - ./cloudnative-pg/
+  - ./dragonfly/
   - ./renovate/
   - ./rook-ceph/
