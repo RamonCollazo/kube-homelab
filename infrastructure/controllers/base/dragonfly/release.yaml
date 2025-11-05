@@ -10,7 +10,7 @@ spec:
       chart: dragonfly
       version: 1.34.2
       sourceRef:
-        kind: HelmRelease
+        kind: HelmRepository
         name: dragonfly
         namespace: dragonfly-system
   install:
