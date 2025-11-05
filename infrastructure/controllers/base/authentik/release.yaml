@@ -15,7 +15,7 @@ spec:
         name: authentik
         namespace: authentik
   valuesFrom:
-    - kind: configMap
+    - kind: ConfigMap
       name: authentik-values
       valuesKey: values.yaml
     global:
