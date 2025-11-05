@@ -4,5 +4,6 @@ metadata:
   name: dragonfly
   namespace: dragonfly-system
 spec:
+  type: oci
   interval: 24h
-  url: https://dragonflyoss.github.io/helm-charts/
+  url: oci://ghcr.io/dragonflydb/dragonfly/helm

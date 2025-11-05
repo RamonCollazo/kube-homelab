@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: dragonfly
-      version: 1.4.17
+      version: 1.34.2
       sourceRef:
         kind: HelmRelease
         name: dragonfly
