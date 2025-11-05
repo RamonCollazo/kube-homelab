@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: community-charts
         namespace: actualbudget
-  valuesFrom:
-    - kind: ConfigMap
-      name: actualbudget-values
-      valuesKey: values.yaml
+  #valuesFrom:
+  #  - kind: ConfigMap
+  #    name: actualbudget-values
+  #    valuesKey: values.yaml
