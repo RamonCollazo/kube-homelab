@@ -1,0 +1,10 @@
+login:
+  method: "openid"
+  openid:
+    enforce: true
+    providerName: "Authentik
+    discoveryUrl: "https://aut.raymondcollazo.com/application/o/actual/"
+    existingSecret:
+      name: "actualbudget-openid-secret"
+      clientIdKey: "clientId"
+      clientSecretKey: "clientSecret"
