@@ -14,9 +14,10 @@ spec:
         kind: HelmRepository
         name: authentik
         namespace: authentik
-  values:
-    redis:
-      enabled: true
+  valuesFrom:
+    - kind: configMap
+      name: authentik-values
+      valuesKey: values.yaml
     global:
       env:
         - name: AUTHENTIK_POSTGRESQL__PASSWORD

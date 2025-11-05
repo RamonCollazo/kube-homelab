@@ -5,3 +5,7 @@ resources:
   - ./configmap.yaml
   - ./database.yaml
   - ./secrets.yaml
+configMapGenerator:
+  - name: authentik-values
+    files:
+      - ./values.yaml
