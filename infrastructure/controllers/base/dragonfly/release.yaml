@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: dragonflydb
-        namespace: dragonfly
+        namespace: dragonfly-system
   install:
     crds: CreateReplace
   upgrade:
