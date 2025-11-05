@@ -1,4 +1,4 @@
 authentik:
   redis:
-    host: "dragonfly.dragonfly-system.svc.cluster.local"
+    host: "dragonfly-redis-master.dragonfly-system.svc.cluster.local"
     port: 6379
