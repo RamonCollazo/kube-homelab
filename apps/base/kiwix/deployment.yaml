@@ -19,7 +19,7 @@ spec:
         runAsGroup: 101
       containers:
         - name: kiwix
-          image: ghcr.io/kiwix/kiwix-serve:3.8.0
+          image: ghcr.io/kiwix/kiwix-serve:3.8.1
           args:
             - '*.zim'
           ports:
