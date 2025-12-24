@@ -20,7 +20,7 @@ spec:
       #  runAsUser: 33
       #  runAsGroup: 33
       containers:
-        - image: freshrss/freshrss:1.27.1
+        - image: freshrss/freshrss:1.28.0
           name: freshrss
           ports:
             - containerPort: 80
