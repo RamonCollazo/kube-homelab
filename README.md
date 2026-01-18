@@ -47,8 +47,8 @@ My homelab operates on a hybrid architecture, balancing a low-power control plan
 
 | Device | CPU & Memory | Storage | OS | Role |
 | :--- | :--- | :--- | :--- | :--- |
-| **Raspberry Pi 4** | 8GB RAM | 1 x 256GB SD | **Talos Linux** | **Control Plane** |
-| **Lenovo ThinkStation Mini P330** | i7-8700T / 64GB RAM | 1 x 128GB NVME, 1 x 1TB NVME | **Talos Linux** | **Worker Node** |
+| **Raspberry Pi 4** | 8GB RAM | 3 x 256GB SD | **Talos Linux** | **Control Plane** |
+| **Lenovo ThinkStation Mini P330** | i7-8700T / 64GB RAM | 3 x 128GB NVME, 1 x 1TB NVME | **Talos Linux** | **Worker Node** |
 
 ---
 
