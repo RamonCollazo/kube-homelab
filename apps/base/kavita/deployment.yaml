@@ -19,7 +19,7 @@ spec:
         runAsGroup: 33
       containers:
         - name: kavita
-          image: ghcr.io/kareadita/kavita:0.8.8
+          image: ghcr.io/kareadita/kavita:0.8.9
           ports:
             - containerPort: 5000
           volumeMounts:
