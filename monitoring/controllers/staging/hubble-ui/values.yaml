@@ -1,0 +1,18 @@
+agent: false
+operator:
+  enabled: false
+cni:
+  install: false
+hubble:
+  enabled: false
+  relay:
+    enabled: false
+  ui:
+    enabled: true
+    standalone:
+      enabled: true
+    fullnameOverride: hubble-ui
+    backend:
+      extraEnv:
+        - name: FLOWS_API_ADDR
+          value: "hubble-relay.kube-system.svc.cluster.local:80"

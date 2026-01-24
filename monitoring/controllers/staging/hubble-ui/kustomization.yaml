@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - ../../base/hubble-ui/
+  - ./route.yaml
+
+configMapGenerator:
+  - name: hubble-ui-values
+    files:
+      - values.yaml=values.yaml
+      # - values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
