@@ -1,3 +1,5 @@
+cluster:
+  name: raymondcollazo-homelab-staging
 ipam:
   mode: kubernetes
 kubeProxyReplacement: true
