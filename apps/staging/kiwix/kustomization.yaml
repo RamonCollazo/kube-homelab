@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - ../../base/kiwix/
   # - ./certificate.yaml
-  - ./gateway.yaml
+  # - ./gateway.yaml
+  - ./route.yaml
