@@ -1,0 +1,42 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: lan-gateway
+  namespace: lan-gateway
+  annotations:
+    cert-manager.io/cluster-issuer=clusterissuer-staging
+spec:
+  gatewayClassName: cilium
+  addresses:
+    - type: IPAddress
+      value: 10.0.150.50
+  listeners:
+    - name: lan-https
+      protocol: HTTPS
+      port: 443
+      hostname: "*.raymondcollazo.com"
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: lan-gateway-tls
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector: 
+            matchLabels:
+              lan-gateway: "true"
+    # - name: lan-https-kube-system
+    #   protocol: HTTPS
+    #   port: 443
+    #   hostname: "*.raymondcollazo.com"
+    #   tls:
+    #     certificateRefs:
+    #       - kind: Secret
+    #         name: lan-gateway-tls
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           kubernetes.io/metadata.name: "kube-system"

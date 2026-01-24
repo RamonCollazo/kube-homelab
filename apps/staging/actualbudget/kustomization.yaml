@@ -3,8 +3,9 @@ kind: Kustomization
 namespace: actualbudget
 resources:
   - ../../base/actualbudget/
-  - ./certificate.yaml
-  - ./gateway.yaml
+  # - ./certificate.yaml
+  # - ./gateway.yaml
+  - ./route.yaml
   - ./secrets.yaml
 configMapGenerator:
   - name: actualbudget-values

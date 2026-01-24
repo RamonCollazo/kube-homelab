@@ -3,7 +3,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumLoadBalancerIPPool
 metadata:
   name: services-pool
-  namespace: kube-system
+  # namespace: kube-system
 spec:
   blocks:
     - start: "10.0.150.50"
