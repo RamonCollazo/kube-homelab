@@ -1,0 +1,19 @@
+apiVersion: v1alpha1
+kind: HostnameConfig
+hostname: talos-wk-03
+auto: off
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: eth0
+addresses:
+  - address: 10.0.150.16/24
+routes:
+  - gateway: 10.0.150.1
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+  - address: 10.0.150.1
+  - address: 1.1.1.1
+  - address: 9.9.9.9

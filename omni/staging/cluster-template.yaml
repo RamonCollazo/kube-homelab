@@ -1,7 +1,7 @@
 kind: Cluster
 name: homelab-staging
 talos:
-  version: v1.12.1
+  version: v1.12.2
 kubernetes:
   version: 1.35.0
 features:
@@ -10,16 +10,54 @@ patches:
   - name: cni-proxy
     file: ./patches/cni-proxy.yaml
 ---
+kind: Machine
+name: 30303031-3030-3030-3133-316366306400
+patches:
+  - file: ./patches/talos-cp-01.yaml
+---
+kind: Machine
+name: 30303031-3030-3030-3336-663366336400
+patches:
+  - file: ./patches/talos-cp-02.yaml
+---
+kind: Machine
+name: 30303031-3030-3030-3936-343762323800
+patches:
+  - file: ./patches/talos-cp-03.yaml
+---
+kind: Machine
+name: eadcfe00-9883-11e9-8f96-a080f0351f00
+patches:
+  - file: ./patches/talos-wk-01.yaml
+---
+kind: Machine
+name: 2081e700-9884-11e9-9e73-78a2c9321f00
+patches:
+  - file: ./patches/talos-wk-02.yaml
+---
+kind: Machine
+name: f6b63700-e9fb-11e8-82bb-a68fd6bf1a00
+patches:
+  - file: ./patches/talos-wk-03.yaml
+---
 kind: ControlPlane
-machineClass:
-  name: homelab-staging-controlplane
-  size: 3
+# machineClass:
+#   name: homelab-staging-controlplane
+#   size: 3
+machines:
+  - 30303031-3030-3030-3936-343762323800
+  - 30303031-3030-3030-3133-316366306400
+  - 30303031-3030-3030-3336-663366336400
 ---
 kind: Workers
 name: workers
-machineClass:
-  name: homelab-staging-workers
-  size: unlimited
+# machineClass:
+#   name: homelab-staging-workers
+#   size: unlimited
+machines:
+  - eadcfe00-9883-11e9-8f96-a080f0351f00
+  - 2081e700-9884-11e9-9e73-78a2c9321f00
+  - f6b63700-e9fb-11e8-82bb-a68fd6bf1a00
 systemExtensions:
   - siderolabs/nonfree-kmod-nvidia-lts
   - siderolabs/nvidia-container-toolkit-lts
