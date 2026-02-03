@@ -1,0 +1,17 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: unifi-route
+  namespace: unifi
+spec:
+  parentRefs:
+    - name: public-gateway
+      namespace: public-gateway
+      sectionName: https
+  hostnames:
+    - "unifi-test.collazoirizarry.xyz"
+  rules:
+    - backendRefs:
+        - name: unifi-svc
+          port: 8443
