@@ -1,0 +1,14 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: services-pool
+  # namespace: kube-system
+spec:
+  blocks:
+    - start: "10.0.150.50"
+      stop: "10.0.150.60"
+  serviceSelector:
+    matchExpressions:
+      - key: "gateway.networking.k8s.io/gateway-name"
+        operator: Exists

@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lan-gateway-cert
+  namespace: lan-gateway
+spec:
+  secretName: lan-gateway-tls
+  dnsNames:
+    - "*.collazoirizarry.xyz"
+  issuerRef:
+    name: clusterissuer-staging
+    kind: ClusterIssuer
+    group: cert-manager.io
