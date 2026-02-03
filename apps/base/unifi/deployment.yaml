@@ -14,10 +14,10 @@ spec:
       labels:
         app: unifi-network-application
     spec:
-      securityContext:
-        fsGroup: 33
-        runAsUser: 33
-        runAsGroup: 33
+      # securityContext:
+      #   fsGroup: 33
+      #   runAsUser: 33
+      #   runAsGroup: 33
       containers:
         - name: unifi-network-application
           image: lscr.io/linuxserver/unifi-network-application:10.0.162
