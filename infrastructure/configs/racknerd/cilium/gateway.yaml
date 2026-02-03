@@ -2,10 +2,10 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: https-gateway
-  namespace: https-gateway
+  name: public-gateway
+  namespace: public-gateway
   annotations:
-    cert-manager.io/cluster-issuer=clusterissuer-staging
+    cert-manager.io/cluster-issuer=clusterissuer-racknerd
 spec:
   gatewayClassName: cilium
   listeners:
@@ -16,24 +16,10 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
-            name: https-gateway-tls
+            name: public-gateway-tls
       allowedRoutes:
         namespaces:
           from: Selector
           selector: 
             matchLabels:
-              https-gateway: "true"
-    # - name: lan-https-kube-system
-    #   protocol: HTTPS
-    #   port: 443
-    #   hostname: "*.raymondcollazo.com"
-    #   tls:
-    #     certificateRefs:
-    #       - kind: Secret
-    #         name: lan-gateway-tls
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           kubernetes.io/metadata.name: "kube-system"
+              public-gateway: "true"
