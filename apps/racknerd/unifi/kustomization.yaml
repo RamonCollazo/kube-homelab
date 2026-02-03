@@ -4,3 +4,4 @@ resources:
   - ../../base/unifi/
   - ./configmap.yaml
   - ./secrets.yaml
+  - ./route.yaml
