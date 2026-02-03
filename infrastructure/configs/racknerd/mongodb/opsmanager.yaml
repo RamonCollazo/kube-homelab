@@ -13,4 +13,4 @@ spec:
   applicationDatabase:
     topology: SingleCluster
     members: 3
-    version: 8.0.0
+    version: 8.2.4
