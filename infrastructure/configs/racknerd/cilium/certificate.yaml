@@ -9,6 +9,6 @@ spec:
   dnsNames:
     - "*.collazoirizarry.xyz"
   issuerRef:
-    name: clusterissuer-staging
+    name: clusterissuer-racknerd
     kind: ClusterIssuer
     group: cert-manager.io
