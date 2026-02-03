@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unifi-env
+  namespace: unifi
+data:
+  PUID: 1000
+  PGID: 1000
+  TZ: "America/Puerto_Rico"
+  MONGO_USER: "unifi"
+  MONGO_HOST: "unifi-db-svc.mongodb.svc.cluster.local"
+  MONGO_PORT: "27017"
+  MONGO_DBNAME: "unifi"
+  MONGO_AUTHSOURCE: admin

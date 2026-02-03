@@ -1,0 +1,23 @@
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: unifi-db
+spec:
+  members: 3
+  type: ReplicaSet
+  version: "8.0.0"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: unifi
+      db: unifi
+      passwordSecretRef: # a reference to the secret that will be used to generate the user's password
+        name: unifi-db-password
+      roles:
+        - name: dbOwner
+          db: unifi
+      scramCredentialsSecretName: unifi-db-scram
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
