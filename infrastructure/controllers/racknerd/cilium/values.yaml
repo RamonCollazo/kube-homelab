@@ -25,8 +25,6 @@ envoy:
   securityContext:
     capabilities:
       keepCapNetBindService: true
-      envoy:
-        - NET_BIND_SERVICE
 
 operators:
   replicas: 1
