@@ -12,7 +12,7 @@ gatewayAPI:
   hostNetwork:
     enabled: true
   gatewayClass:
-    create: true
+    create: "true"
 envoy:
   securityContext:
     capabilities:
