@@ -20,7 +20,7 @@ spec:
       #   runAsGroup: 33
       containers:
         - name: unifi-network-application
-          image: lscr.io/linuxserver/unifi-network-application:10.0.162
+          image: lscr.io/linuxserver/unifi-network-application:10.1.84
           ports:
             - containerPort: 8443
           securityContext:
