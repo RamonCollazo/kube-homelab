@@ -11,8 +11,8 @@ gatewayAPI:
   enabled: true
   enableAlpn: true
   enableAppProtocol: true
-  gatewayClass:
-    create: "true"
+  # gatewayClass:
+  #   create: "true"
   hostNetwork:
     enabled: true
 envoy:
