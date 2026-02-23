@@ -6,7 +6,12 @@ metadata:
   namespace: unifi
 spec:
   ports:
-    - port: 8443
+    - name: https
+      port: 8443
+    - name: http-inform
+      port: 8080
+    - name: guest-portal
+      port: 8843
   selector:
     app: unifi-network-application
   type: ClusterIP

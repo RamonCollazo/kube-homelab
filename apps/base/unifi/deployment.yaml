@@ -23,6 +23,8 @@ spec:
           image: lscr.io/linuxserver/unifi-network-application:10.1.85
           ports:
             - containerPort: 8443
+            - containerPort: 8080
+            - containerPort: 8843
           securityContext:
             allowPrivilegeEscalation: false
           volumeMounts:
