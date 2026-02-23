@@ -10,7 +10,7 @@ spec:
   version: "8.0.0"
   security:
     authentication:
-      modes: ["SCRAM"]
+      modes: ["SCRAM-SHA-1", "SCRAM"]
   users:
     - name: unifi
       db: unifi
