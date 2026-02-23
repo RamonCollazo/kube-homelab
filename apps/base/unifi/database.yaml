@@ -22,3 +22,5 @@ spec:
       scramCredentialsSecretName: unifi-db-scram
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: zlib
+    setParameter:
+      authenticationMechanisms: "SCRAM-SHA-1,SCRAM-SHA-256"
