@@ -5,6 +5,8 @@ metadata:
   namespace: kube-system
 spec:
   releaseName: cilium
+  dependsOn:
+    - name: gateway-api-crds
   interval: 15m
   chart:
     spec:
