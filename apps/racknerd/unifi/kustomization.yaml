@@ -5,3 +5,4 @@ resources:
   - ./configmap.yaml
   - ./secrets.yaml
   - ./route.yaml
+  - ./certificate.yaml

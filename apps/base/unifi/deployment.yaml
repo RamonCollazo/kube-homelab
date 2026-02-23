@@ -30,6 +30,12 @@ spec:
           volumeMounts:
             - name: unifi-config
               mountPath: /config
+            - name: unifi-tls
+              mountPath: /config/keys/cert.crt
+              subPath: tls.crt
+            - name: unifi-tls
+              mountPath: /config/keys/privkey.pem
+              subPath: tls.key
           envFrom:
             - configMapRef:
                 name: unifi-env
@@ -39,3 +45,6 @@ spec:
         - name: unifi-config
           persistentVolumeClaim:
             claimName: unifi-config-pvc
+        - name: unifi-tls
+          secret:
+            secretName: unifi-tls
