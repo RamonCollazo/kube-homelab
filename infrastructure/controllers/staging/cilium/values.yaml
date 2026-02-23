@@ -5,7 +5,7 @@ ipam:
 kubeProxyReplacement: true
 securityContext:
   capabilities:
-    ciliumAgent: 
+    ciliumAgent:
       - CHOWN
       - KILL
       - NET_ADMIN

@@ -4,4 +4,3 @@ resources:
   - ./mongodb/
   - ./cilium/
   - ./cert-manager/
-  - ./gateway-api/
