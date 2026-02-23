@@ -7,9 +7,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer=clusterissuer-racknerd
 spec:
-  addresses:
-    - type: IPAddress
-      value: 23.95.171.104
   gatewayClassName: cilium
   listeners:
     - name: https
