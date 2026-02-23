@@ -1,8 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "ignorePaths": ["clusters/**"],
   "kubernetes": {
     "fileMatch": [
-      "\\.yaml$"
+      "\\.ya?ml$"
     ]
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex"
+      "description": "Update Flux GitRepository spec.ref.tag for GitHub repos",
+      "fileMatch": [
+        "(^|/)infrastructure/crds/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "kind:\\s*GitRepository[\\s\\S]*?url:\\s*https://github\\.com/(?<depName>[^\\s/]+/[^\\s/]+)\\.git[\\s\\S]*?ref:[\\s\\S]*?tag:\\s*v?(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    }
+  ]
 }
