@@ -52,7 +52,7 @@ spec:
     name: wordpress-capstone-db
   privileges:
     - "ALL PRIVILEGES"
-  database: "wordpress_capstone"
+  database: "wordpress-capstone"
   table: "*"
   username: wordpress
   host: "%"

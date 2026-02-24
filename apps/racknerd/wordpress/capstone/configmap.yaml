@@ -6,7 +6,7 @@ metadata:
   namespace: wordpress-capstone
 data:
   WORDPRESS_DB_HOST: "wordpress-capstone-db.wordpress-capstone.svc.cluster.local"
-  WORDPRESS_DB_NAME: "wordpress_capstone"
+  WORDPRESS_DB_NAME: "wordpress-capstone"
   WORDPRESS_DB_USER: "wordpress"
   WORDPRESS_TABLE_PREFIX: "wp_"
   WORDPRESS_CONFIG_EXTRA: |
