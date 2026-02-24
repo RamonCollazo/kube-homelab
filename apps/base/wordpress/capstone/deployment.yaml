@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-capstone
+  namespace: wordpress-capstone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-capstone
+  template:
+    metadata:
+      labels:
+        app: wordpress-capstone
+    spec:
+      # securityContext:
+      #   fsGroup: 33
+      #   runAsUser: 33
+      #   runAsGroup: 33
+      containers:
+        - name: wordpress
+          image: wordpress:6.9.1
+          ports:
+            - containerPort: 80
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: wordpress-capstone-storage
+              mountPath: /var/www/html
+          envFrom:
+            - configMapRef:
+                name: wordpress-capstone-env
+            - secretRef:
+                name: wordpress-capstone-secret
+      volumes:
+        - name: wordpress-capstone-storage
+          persistentVolumeClaim:
+            claimName: wordpress-capstone-pvc

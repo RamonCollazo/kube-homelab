@@ -1,0 +1,59 @@
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: wordpress-capstone-db
+  namespace: wordpress-capstone
+spec:
+  rootPasswordSecretKeyRef:
+    name: wordpress-capstone-db-root-secret
+    key: password
+  storage:
+    size: 1Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Database
+metadata:
+  name: wordpress-capstone
+  namespace: wordpress-capstone
+spec:
+  mariaDbRef:
+    name: wordpress-capstone-db
+  characterSet: utf8mb4
+  collate: utf8mb4_unicode_ci
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: User
+metadata:
+  name: wordpress
+  namespace: wordpress-capstone
+spec:
+  mariaDbRef:
+    name: wordpress-capstone-db
+  passwordSecretKeyRef:
+    name: wordpress-capstone-secret
+    key: WORDPRESS_DB_PASSWORD
+  host: "%"
+  maxUserConnections: 20
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Grant
+metadata:
+  name: wordpress-grant
+  namespace: wordpress-capstone
+spec:
+  mariaDbRef:
+    name: wordpress-capstone-db
+  privileges:
+    - "ALL PRIVILEGES"
+  database: "wordpress_capstone"
+  table: "*"
+  username: wordpress
+  host: "%"
+  grantOption: false

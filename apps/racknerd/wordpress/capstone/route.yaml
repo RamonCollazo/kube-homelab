@@ -1,0 +1,21 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: wordpress-capstone
+  namespace: wordpress-capstone
+spec:
+  parentRefs:
+    - name: public-gateway
+      namespace: public-gateway
+      sectionName: https
+  hostnames:
+    - "wordpress-test.collazoirizarry.xyz"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: wordpress-capstone-svc
+          port: 80
