@@ -2,10 +2,32 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
+  name: mariadb-operator-crds
+  namespace: mariadb
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: mariadb-operator-crds
+      version: 25.10.4
+      sourceRef:
+        kind: HelmRepository
+        name: mariadb-operator
+        namespace: mariadb
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
   name: mariadb-operator
   namespace: mariadb
 spec:
   interval: 15m
+  dependsOn:
+    - name: mariadb-operator-crds
   chart:
     spec:
       chart: mariadb-operator
@@ -18,3 +40,6 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+  values:
+    crds:
+      enabled: false
