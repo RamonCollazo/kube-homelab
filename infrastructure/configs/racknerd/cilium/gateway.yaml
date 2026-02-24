@@ -33,37 +33,37 @@ spec:
           selector:
             matchLabels:
               public-gateway: "true"
-    - name: tls-passthrough
-      protocol: TLS
-      port: 8443
-      hostname: "unifi-test.collazoirizarry.xyz"
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              public-gateway: "true"
-    - name: unifi-inform
-      protocol: HTTP
-      port: 8080
-      hostname: "unifi-test.collazoirizarry.xyz"
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              public-gateway: "true"
-    - name: unifi-guest-portal
-      protocol: TLS
-      port: 8843
-      hostname: "unifi-test.collazoirizarry.xyz"
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              public-gateway: "true"
+    # - name: tls-passthrough
+    #   protocol: TLS
+    #   port: 8443
+    #   hostname: "unifi-test.collazoirizarry.xyz"
+    #   tls:
+    #     mode: Passthrough
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           public-gateway: "true"
+    # - name: unifi-inform
+    #   protocol: HTTP
+    #   port: 8080
+    #   hostname: "unifi-test.collazoirizarry.xyz"
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           public-gateway: "true"
+    # - name: unifi-guest-portal
+    #   protocol: TLS
+    #   port: 8843
+    #   hostname: "unifi-test.collazoirizarry.xyz"
+    #   tls:
+    #     mode: Passthrough
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           public-gateway: "true"
