@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: unifi-network-application
+      annotations:
+        secret.reloader.stakater.com/reload: "unifi-tls"
     spec:
       # securityContext:
       #   fsGroup: 33
@@ -36,6 +38,9 @@ spec:
             - name: unifi-tls
               mountPath: /config/keys/privkey.pem
               subPath: tls.key
+            - name: unifi-cert-import
+              mountPath: /custom-cont-init.d/import-cert.sh
+              subPath: import-cert.sh
           envFrom:
             - configMapRef:
                 name: unifi-env
@@ -48,3 +53,7 @@ spec:
         - name: unifi-tls
           secret:
             secretName: unifi-tls
+        - name: unifi-cert-import
+          configMap:
+            name: unifi-cert-import
+            defaultMode: 0755
