@@ -7,6 +7,9 @@ resources:
   - ./route.yaml
   - ./secrets.yaml
 
+configurations:
+  - kustomizeconfig.yaml
+
 configMapGenerator:
   - name: n8n-values
     files:
