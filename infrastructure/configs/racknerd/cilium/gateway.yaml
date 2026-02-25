@@ -60,6 +60,15 @@ spec:
           selector:
             matchLabels:
               public-gateway: "true"
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: unifi-inform-gateway
+  namespace: public-gateway
+spec:
+  gatewayClassName: cilium
+  listeners:
     - name: unifi-inform
       protocol: HTTP
       port: 8080
