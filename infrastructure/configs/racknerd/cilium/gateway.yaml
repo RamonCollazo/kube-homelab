@@ -7,9 +7,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: clusterissuer-racknerd
 spec:
-  # addresses:
-  #   - type: IPAddress
-  #     value: 23.95.171.104
   gatewayClassName: cilium
   listeners:
     - name: https
@@ -26,16 +23,6 @@ spec:
           selector:
             matchLabels:
               public-gateway: "true"
-    # - name: http
-    #   protocol: HTTP
-    #   port: 80
-    #   hostname: "*.collazoirizarry.xyz"
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           public-gateway: "true"
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -43,9 +30,6 @@ metadata:
   name: tls-gateway
   namespace: public-gateway
 spec:
-  # addresses:
-  #   - type: IPAddress
-  #     value: 23.95.171.99
   gatewayClassName: cilium
   listeners:
     - name: tls-passthrough
