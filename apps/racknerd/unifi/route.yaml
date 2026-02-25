@@ -6,7 +6,7 @@ metadata:
   namespace: unifi
 spec:
   parentRefs:
-    - name: public-gateway
+    - name: tls-gateway
       namespace: public-gateway
       sectionName: tls-passthrough
   hostnames:
@@ -23,7 +23,7 @@ metadata:
   namespace: unifi
 spec:
   parentRefs:
-    - name: public-gateway
+    - name: tls-gateway
       namespace: public-gateway
       sectionName: unifi-inform
   hostnames:
@@ -40,7 +40,7 @@ metadata:
   namespace: unifi
 spec:
   parentRefs:
-    - name: public-gateway
+    - name: tls-gateway
       namespace: public-gateway
       sectionName: unifi-guest-portal
   hostnames:

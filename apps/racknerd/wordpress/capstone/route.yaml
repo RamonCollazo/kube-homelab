@@ -6,7 +6,7 @@ metadata:
   namespace: wordpress-capstone
 spec:
   parentRefs:
-    - name: public-gateway
+    - name: https-gateway
       namespace: public-gateway
       sectionName: https
   hostnames:

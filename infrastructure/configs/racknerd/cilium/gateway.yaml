@@ -2,11 +2,14 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: public-gateway
+  name: https-gateway
   namespace: public-gateway
   annotations:
-    cert-manager.io/cluster-issuer=clusterissuer-racknerd
+    cert-manager.io/cluster-issuer: clusterissuer-racknerd
 spec:
+  addresses:
+    - type: IPAddress
+      value: 23.95.171.104
   gatewayClassName: cilium
   listeners:
     - name: https
@@ -33,37 +36,49 @@ spec:
           selector:
             matchLabels:
               public-gateway: "true"
-    # - name: tls-passthrough
-    #   protocol: TLS
-    #   port: 8443
-    #   hostname: "unifi-test.collazoirizarry.xyz"
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           public-gateway: "true"
-    # - name: unifi-inform
-    #   protocol: HTTP
-    #   port: 8080
-    #   hostname: "unifi-test.collazoirizarry.xyz"
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           public-gateway: "true"
-    # - name: unifi-guest-portal
-    #   protocol: TLS
-    #   port: 8843
-    #   hostname: "unifi-test.collazoirizarry.xyz"
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           public-gateway: "true"
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: tls-gateway
+  namespace: public-gateway
+spec:
+  addresses:
+    - type: IPAddress
+      value: 23.95.171.99
+  gatewayClassName: cilium
+  listeners:
+    - name: tls-passthrough
+      protocol: TLS
+      port: 443
+      hostname: "unifi-test.collazoirizarry.xyz"
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              public-gateway: "true"
+    - name: unifi-inform
+      protocol: HTTP
+      port: 8080
+      hostname: "unifi-test.collazoirizarry.xyz"
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              public-gateway: "true"
+    - name: unifi-guest-portal
+      protocol: TLS
+      port: 8843
+      hostname: "unifi-test.collazoirizarry.xyz"
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              public-gateway: "true"
