@@ -7,15 +7,13 @@ externalPostgresql:
 
 existingEncryptionKeySecret: n8n-secret
 
-persistence:
-  enabled: true
-  size: 2Gi
-
 webhook:
   url: https://n8n.raymondcollazo.com/
 
 main:
   editorBaseUrl: https://n8n.raymondcollazo.com/
+  persistence:
+    enabled: true
+    size: 2Gi
   extraEnvVars:
-    - name: N8N_LISTEN_ADDRESS
-      value: "0.0.0.0"
+    N8N_LISTEN_ADDRESS: "0.0.0.0"
