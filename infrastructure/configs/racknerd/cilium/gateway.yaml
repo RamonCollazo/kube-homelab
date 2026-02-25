@@ -7,9 +7,9 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: clusterissuer-racknerd
 spec:
-  addresses:
-    - type: IPAddress
-      value: 23.95.171.104
+  # addresses:
+  #   - type: IPAddress
+  #     value: 23.95.171.104
   gatewayClassName: cilium
   listeners:
     - name: https
@@ -43,9 +43,9 @@ metadata:
   name: tls-gateway
   namespace: public-gateway
 spec:
-  addresses:
-    - type: IPAddress
-      value: 23.95.171.99
+  # addresses:
+  #   - type: IPAddress
+  #     value: 23.95.171.99
   gatewayClassName: cilium
   listeners:
     - name: tls-passthrough
