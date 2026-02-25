@@ -3,6 +3,10 @@ operator:
   enabled: false
 cni:
   install: false
+gatewayAPI:
+  secretsNamespace:
+    create: false
+    sync: false
 hubble:
   enabled: false
   relay:

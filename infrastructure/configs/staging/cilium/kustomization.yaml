@@ -6,3 +6,4 @@ resources:
   - ./gateway.yaml
   - ./certificate.yaml
   - ./namespace.yaml
+  - ./cilium-secrets-rbac.yaml
