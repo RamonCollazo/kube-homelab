@@ -7,3 +7,4 @@ resources:
   - route.yaml
 patches:
   - path: namespace.yaml
+  - path: patches.yaml

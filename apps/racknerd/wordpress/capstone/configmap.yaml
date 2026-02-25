@@ -15,3 +15,15 @@ data:
     if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
         $_SERVER['HTTPS'] = 'on';
     }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wordpress-capstone-php-ini
+  namespace: wordpress-capstone
+data:
+  uploads.ini: |
+    upload_max_filesize = 512M
+    post_max_size = 512M
+    memory_limit = 256M
+    max_execution_time = 300
