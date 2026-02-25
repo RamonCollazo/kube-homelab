@@ -50,7 +50,7 @@ spec:
   listeners:
     - name: tls-passthrough
       protocol: TLS
-      port: 443
+      port: 8443
       hostname: "unifi-test.collazoirizarry.xyz"
       tls:
         mode: Passthrough
