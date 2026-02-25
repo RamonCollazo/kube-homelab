@@ -1,0 +1,21 @@
+externalPostgresql:
+  host: n8n-db-rw.n8n.svc.cluster.local
+  port: 5432
+  database: n8n
+  username: n8n
+  existingSecret: n8n-secret
+
+existingEncryptionKeySecret: n8n-secret
+
+persistence:
+  enabled: true
+  size: 2Gi
+
+webhook:
+  url: https://n8n.raymondcollazo.com/
+
+main:
+  editorBaseUrl: https://n8n.raymondcollazo.com/
+  extraEnvVars:
+    - name: N8N_LISTEN_ADDRESS
+      value: "0.0.0.0"

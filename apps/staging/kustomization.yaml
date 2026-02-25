@@ -8,3 +8,4 @@ resources:
   - ./kiwix/
   #- ./linkding/
   - ./linkwarden/
+  - ./n8n/
