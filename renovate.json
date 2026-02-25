@@ -8,7 +8,7 @@
   },
   "customManagers": [
     {
-      "customType": "regex"
+      "customType": "regex",
       "description": "Update Flux GitRepository spec.ref.tag for GitHub repos",
       "fileMatch": [
         "(^|/)infrastructure/crds/.*\\.ya?ml$"
