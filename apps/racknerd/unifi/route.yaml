@@ -16,6 +16,23 @@ spec:
         - name: unifi-svc
           port: 8443
 ---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
+metadata:
+  name: unifi-guest-portal-route
+  namespace: unifi
+spec:
+  parentRefs:
+    - name: unifi-guest-gateway
+      namespace: public-gateway
+      sectionName: unifi-guest-portal
+  hostnames:
+    - "unifi-test.collazoirizarry.xyz"
+  rules:
+    - backendRefs:
+        - name: unifi-svc
+          port: 8843
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:

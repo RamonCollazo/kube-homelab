@@ -70,3 +70,24 @@ spec:
           selector:
             matchLabels:
               public-gateway: "true"
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: unifi-guest-gateway
+  namespace: public-gateway
+spec:
+  gatewayClassName: cilium
+  listeners:
+    - name: unifi-guest-portal
+      protocol: TLS
+      port: 8843
+      hostname: "unifi-test.collazoirizarry.xyz"
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              public-gateway: "true"
