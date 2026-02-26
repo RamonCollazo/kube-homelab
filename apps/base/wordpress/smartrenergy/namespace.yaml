@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wordpress-smartrenergy
+  labels:
+    public-gateway: "true"

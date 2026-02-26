@@ -23,6 +23,20 @@ spec:
           selector:
             matchLabels:
               public-gateway: "true"
+    - name: smartrenergy-https
+      protocol: HTTPS
+      port: 443
+      hostname: "smartrenergy.com"
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: smartrenergy-tls
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              public-gateway: "true"
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway

@@ -1,0 +1,19 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-smartrenergy
+  namespace: wordpress-smartrenergy
+spec:
+  template:
+    spec:
+      containers:
+        - name: wordpress
+          volumeMounts:
+            - name: php-ini
+              mountPath: /usr/local/etc/php/conf.d/uploads.ini
+              subPath: uploads.ini
+      volumes:
+        - name: php-ini
+          configMap:
+            name: wordpress-smartrenergy-php-ini
