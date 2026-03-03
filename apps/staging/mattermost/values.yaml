@@ -1,0 +1,20 @@
+mysql:
+  enabled: false
+
+externalDB:
+  enabled: true
+  externalDriverType: "postgres"
+
+persistence:
+  data:
+    enabled: true
+    size: 10Gi
+  plugins:
+    enabled: true
+    size: 1Gi
+
+replicaCount: 1
+
+extraEnvVars:
+  - name: MM_SERVICESETTINGS_SITEURL
+    value: "https://mattermost.raymondcollazo.com"

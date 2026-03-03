@@ -8,4 +8,5 @@ resources:
   - ./kiwix/
   #- ./linkding/
   - ./linkwarden/
+  - ./mattermost/
   - ./n8n/
