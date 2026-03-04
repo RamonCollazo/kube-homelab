@@ -5,6 +5,7 @@ resources:
   - ../../base/mattermost/
   - ./database.yaml
   - ./secrets.yaml
+  - ./route.yaml
 
 configurations:
   - kustomizeconfig.yaml
