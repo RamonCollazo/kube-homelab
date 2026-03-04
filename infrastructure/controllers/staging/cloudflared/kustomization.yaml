@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: cloudflared
 resources:
   - ../../base/cloudflared/
-  - ./tunnel-token.yaml
+  - ./cloudflared-credentials.yaml

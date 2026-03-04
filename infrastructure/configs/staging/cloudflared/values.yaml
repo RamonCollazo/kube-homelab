@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-values
+  namespace: cloudflared
+data:
+  values.yaml: |
+    tunnelConfig:
+      name: kube-homelab-staging
+    existingPemFileSecret:
+      name: cloudflared-credentials
+      key: cert.pem
+    existingConfigJsonFileSecret:
+      name: cloudflared-credentials
+      key: credentials.json
+    allNodes: false
+    replicaCount: 2
+    ingress:
+      - hostname: mattermost.raymondcollazo.com
+        service: http://mattermost.mattermost.svc.cluster.local:8065
+      - service: http_status:404
