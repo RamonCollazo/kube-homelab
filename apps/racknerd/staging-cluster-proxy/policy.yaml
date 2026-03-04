@@ -9,7 +9,7 @@ spec:
     - group: ""
       kind: Service
       name: staging-lan-gateway
-      port: 443
+      sectionName: https
   validation:
     wellKnownCACertificates: "System"
     hostname: "gateway.raymondcollazo.com"
