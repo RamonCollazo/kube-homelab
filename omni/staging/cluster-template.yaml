@@ -1,9 +1,9 @@
 kind: Cluster
 name: homelab-staging
 talos:
-  version: v1.12.2
+  version: v1.12.4
 kubernetes:
-  version: 1.35.0
+  version: 1.35.2
 features:
   diskEncryption: true
 patches:
@@ -61,6 +61,9 @@ machines:
 systemExtensions:
   - siderolabs/nonfree-kmod-nvidia-lts
   - siderolabs/nvidia-container-toolkit-lts
+  - siderolabs/netbird
 patches:
   - name: nvidia
     file: patches/gpu-worker-patch.yaml
+  - name: netbird
+    file: patches/netbird-worker-patch.yaml

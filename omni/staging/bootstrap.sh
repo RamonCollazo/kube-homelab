@@ -25,12 +25,14 @@ check_deps() {
   need_deps flux
   need_deps sops
   need_deps age
+  need_deps envsubst
   echo "Dependencies present"
 }
 
 check_env() {
   need_env GITHUB_TOKEN
   need_env AGE_PRIVATE
+  need_env NB_SETUP_KEYS
   echo "Required env vars exported"
 }
 
@@ -39,6 +41,12 @@ export CLUSTER_NAME
 
 omni_cluster() {
   local template="${OMNI_TEMPLATE_FILE:-./cluster-template.yaml}"
+  local template_dir
+  template_dir="$(dirname "$template")"
+
+  echo "Generating netbird patch from template"
+  envsubst < "${template_dir}/patches/netbird-worker-patch.template.yaml" \
+    > "${template_dir}/patches/netbird-worker-patch.yaml"
 
   echo "Validating Omni cluster template"
   omnictl cluster template validate -f "$template"
