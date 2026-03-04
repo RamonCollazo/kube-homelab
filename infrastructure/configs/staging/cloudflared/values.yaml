@@ -7,6 +7,7 @@ data:
   values.yaml: |
     tunnelConfig:
       name: kube-homelab-staging
+      protocol: http2
     tunnelSecrets:
       existingPemFileSecret:
         name: cloudflared-credentials
