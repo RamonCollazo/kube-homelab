@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: netbird-operator-config
+  namespace: netbird
+spec:
+  dependsOn:
+    - name: netbird-operator
+  chart:
+    spec:
+      chart: netbird-operator-config
+      sourceRef:
+        kind: HelmRepository
+        name: netbirdio
+        namespace: netbird
+      version: 0.1.0
+      interval: 12h
+  interval: 30m
+  values:
+    router:
+      enabled: true
+      replicas: 3

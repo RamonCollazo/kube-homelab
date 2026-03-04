@@ -7,5 +7,6 @@ resources:
   - ./cloudflared/
   - ./cloudnative-pg/
   - ./dragonfly/
+  - ./netbird/
   - ./renovate/
   - ./rook-ceph/
