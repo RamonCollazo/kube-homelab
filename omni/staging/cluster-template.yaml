@@ -65,5 +65,5 @@ systemExtensions:
 patches:
   - name: nvidia
     file: patches/gpu-worker-patch.yaml
-  - name: netbird
-    file: patches/netbird-worker-patch.yaml
+  # - name: netbird
+  #   file: patches/netbird-worker-patch.yaml
