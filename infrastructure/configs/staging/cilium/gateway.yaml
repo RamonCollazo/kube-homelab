@@ -23,7 +23,17 @@ spec:
       allowedRoutes:
         namespaces:
           from: Selector
-          selector: 
+          selector:
+            matchLabels:
+              lan-gateway: "true"
+    - name: lan-http
+      protocol: HTTP
+      port: 8080
+      hostname: "*.raymondcollazo.com"
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
             matchLabels:
               lan-gateway: "true"
     # - name: lan-https-kube-system

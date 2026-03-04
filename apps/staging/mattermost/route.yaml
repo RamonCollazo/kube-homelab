@@ -9,6 +9,9 @@ spec:
     - name: lan-gateway
       namespace: lan-gateway
       sectionName: lan-https
+    - name: lan-gateway
+      namespace: lan-gateway
+      sectionName: lan-http
   hostnames:
     - "mattermost.raymondcollazo.com"
   rules:
