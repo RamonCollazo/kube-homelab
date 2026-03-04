@@ -20,5 +20,5 @@ data:
       count: 2
     ingress:
       - hostname: mattermost.raymondcollazo.com
-        service: http://mattermost.mattermost.svc.cluster.local:8065
+        service: http://mattermost-team-edition.mattermost.svc.cluster.local:8065
       - service: http_status:404
