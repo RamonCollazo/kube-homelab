@@ -21,4 +21,12 @@ data:
     ingress:
       - hostname: mattermost.raymondcollazo.com
         service: http://mattermost-team-edition.mattermost.svc.cluster.local:8065
+      - hostname: auth.raymondcollazo.com
+        service: http://authentik-server.authentik.svc.cluster.local
+      - hostname: linkwarden.raymondcollazo.com
+        service: http://linkwarden.linkwarden.svc.cluster.local:3000
+      - hostname: freshrss.raymondcollazo.com
+        service: http://freshrss.freshrss.svc.cluster.local
+      - hostname: kavita.raymondcollazo.com
+        service: http://kavita.kavita.svc.cluster.local:5000
       - service: http_status:404
