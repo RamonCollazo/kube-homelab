@@ -7,14 +7,16 @@ data:
   values.yaml: |
     tunnelConfig:
       name: kube-homelab-staging
-    existingPemFileSecret:
-      name: cloudflared-credentials
-      key: cert.pem
-    existingConfigJsonFileSecret:
-      name: cloudflared-credentials
-      key: credentials.json
-    allNodes: false
-    replicaCount: 2
+    tunnelSecrets:
+      existingPemFileSecret:
+        name: cloudflared-credentials
+        key: cert.pem
+      existingConfigJsonFileSecret:
+        name: cloudflared-credentials
+        key: credentials.json
+    replica:
+      allNodes: false
+      count: 2
     ingress:
       - hostname: mattermost.raymondcollazo.com
         service: http://mattermost.mattermost.svc.cluster.local:8065
