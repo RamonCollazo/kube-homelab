@@ -1,0 +1,15 @@
+---
+apiVersion: gateway.networking.k8s.io/v1alpha3
+kind: BackendTLSPolicy
+metadata:
+  name: staging-lan-gateway-tls
+  namespace: staging-cluster-proxy
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: staging-lan-gateway
+      port: 443
+  validation:
+    wellKnownCACertificates: "System"
+    hostname: "gateway.raymondcollazo.com"

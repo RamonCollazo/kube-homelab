@@ -4,3 +4,4 @@ resources:
   - ./unifi/
   - ./wordpress/capstone/
   - ./wordpress/smartrenergy/
+  - ./staging-cluster-proxy/
