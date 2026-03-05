@@ -5,8 +5,6 @@ metadata:
   namespace: kube-system
 spec:
   releaseName: cilium
-  dependsOn:
-    - name: gateway-api-crds
   interval: 15m
   chart:
     spec:
@@ -20,6 +18,6 @@ spec:
     - kind: ConfigMap
       name: cilium-values
   install:
-    crds: Create
+    crds: Skip
   upgrade:
-    crds: CreateReplace
+    crds: Skip
