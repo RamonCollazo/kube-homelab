@@ -18,6 +18,6 @@ spec:
     - kind: ConfigMap
       name: cilium-values
   install:
-    crds: Skip
+    crds: Create
   upgrade:
-    crds: Skip
+    crds: CreateReplace
