@@ -27,3 +27,9 @@ data:
     post_max_size = 512M
     memory_limit = 256M
     max_execution_time = 300
+    opcache.enable = 1
+    opcache.memory_consumption = 128
+    opcache.interned_strings_buffer = 8
+    opcache.max_accelerated_files = 4000
+    opcache.revalidate_freq = 60
+    opcache.fast_shutdown = 1

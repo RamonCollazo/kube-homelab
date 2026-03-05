@@ -12,10 +12,11 @@ spec:
     size: 1Gi
   resources:
     requests:
-      cpu: 100m
-      memory: 256Mi
-    limits:
+      cpu: 200m
       memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
 ---
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: Database
