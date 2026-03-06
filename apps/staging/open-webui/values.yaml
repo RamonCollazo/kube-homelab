@@ -1,0 +1,118 @@
+ollama:
+  enabled: true
+  replicaCount: 3
+  ollama:
+    gpu:
+      enabled: true
+      draEnabled: false
+      type: 'nvidia'
+      number: 1
+  podSecurityContext:
+    fsGroup: 2000
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+  resources:
+    requests:
+      memory: 4096Mi
+      cpu: 2000m
+    limits:
+      memory: 8192Mi
+      cpu: 4000m
+  persistentVolume:
+    enabled: true
+    accessModes:
+      - ReadWriteMany
+    storageClass: ceph-filesystem
+    size: 50Gi
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: open-webui-ollama
+          topologyKey: kubernetes.io/hostname
+
+tika:
+  enabled: true
+
+websocket:
+  enabled: true
+  manager: redis
+  url: "redis://open-webui-ds.open-webui.svc.cluster.local:6379/0"
+  redis:
+    enabled: false
+
+replicaCount: 3
+
+persistence:
+  accessModes:
+    - ReadWriteMany
+  storageClass: ceph-filesystem
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/component: open-webui
+        topologyKey: kubernetes.io/hostname
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  failureThreshold: 3
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /health/db
+    port: http
+  failureThreshold: 3
+  periodSeconds: 10
+
+startupProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 5
+  failureThreshold: 20
+
+route:
+  enabled: false
+
+extraEnvVars:
+  - name: DATABASE_USER
+    valueFrom:
+      secretKeyRef:
+        name: open-webui-db
+        key: username
+  - name: DATABASE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: open-webui-db
+        key: password
+
+commonEnvVars:
+  - name: DATABASE_TYPE
+    value: "postgresql"
+  - name: DATABASE_HOST
+    value: "open-webui-db-rw.open-webui.svc.cluster.local"
+  - name: DATABASE_PORT
+    value: "5432"
+  - name: DATABASE_NAME
+    value: "open-webui"
+  - name: DATABASE_POOL_SIZE
+    value: "5"
+  - name: DATABASE_POOL_MAX_OVERFLOW
+    value: "10"
+  - name: DATABASE_POOL_TIMEOUT
+    value: "30"
+  - name: DATABASE_POOL_RECYCLE
+    value: "3600"

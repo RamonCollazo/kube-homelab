@@ -1,0 +1,16 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: open-webui-db
+  namespace: open-webui
+spec:
+  instances: 3
+  storage:
+    size: 2Gi
+  bootstrap:
+    initdb:
+      database: open-webui
+      owner: open-webui
+      secret:
+        name: open-webui-db

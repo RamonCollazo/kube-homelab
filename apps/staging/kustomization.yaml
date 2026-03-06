@@ -10,3 +10,4 @@ resources:
   - ./linkwarden/
   - ./mattermost/
   - ./n8n/
+  - ./open-webui/
