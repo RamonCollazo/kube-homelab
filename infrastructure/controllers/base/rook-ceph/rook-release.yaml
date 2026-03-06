@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -20,7 +21,7 @@ spec:
     crds: CreateReplace
   driftDetection:
     mode: enabled
-  values: 
-    enableDiscoveryDaemon: true
-    monitoring:
-      enabled: true
+  valuesFrom:
+    - kind: ConfigMap
+      name: rook-ceph-values
+      valuesKey: values.yaml

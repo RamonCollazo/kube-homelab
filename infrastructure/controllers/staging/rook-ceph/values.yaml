@@ -1,0 +1,41 @@
+enableDiscoveryDaemon: true
+monitoring:
+  enabled: true
+csiRBDPluginResource: |
+  - name: csi-rbdplugin
+    resource:
+      requests:
+        memory: 128Mi
+      limits:
+        memory: 512Mi
+  - name: driver-registrar
+    resource:
+      requests:
+        memory: 64Mi
+      limits:
+        memory: 256Mi
+  - name: liveness-prometheus
+    resource:
+      requests:
+        memory: 64Mi
+      limits:
+        memory: 256Mi
+csiCephFSPluginResource: |
+  - name: csi-cephfsplugin
+    resource:
+      requests:
+        memory: 128Mi
+      limits:
+        memory: 512Mi
+  - name: driver-registrar
+    resource:
+      requests:
+        memory: 64Mi
+      limits:
+        memory: 256Mi
+  - name: liveness-prometheus
+    resource:
+      requests:
+        memory: 64Mi
+      limits:
+        memory: 256Mi
