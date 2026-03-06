@@ -8,12 +8,7 @@ gramps:
 podSecurityContext:
   fsGroup: 2000
 
-securityContext:
-  capabilities:
-    drop:
-      - ALL
-  runAsNonRoot: true
-  runAsUser: 1000
+securityContext: {}
 
 # resources:
 #   limits:
