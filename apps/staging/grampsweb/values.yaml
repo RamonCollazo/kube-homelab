@@ -1,0 +1,42 @@
+gramps:
+  tree: "*"
+  baseURL: "https://grampsweb.raymondcollazo.com"
+  mediaPrefixTree: true
+  registrationDisabled: true
+  disableTelemetry: true
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+persistence:
+  enabled: true
+  storageClass: ceph-block
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+volumes:
+  - name: gramps-config-file
+    secret:
+      secretName: grampsweb-config
+      optional: false
+
+volumeMounts:
+  - name: gramps-config-file
+    mountPath: "/app/config/config.cfg"
+    subPath: config.cfg
+    readOnly: true

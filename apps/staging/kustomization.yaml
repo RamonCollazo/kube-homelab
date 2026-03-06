@@ -10,4 +10,5 @@ resources:
   - ./linkwarden/
   - ./mattermost/
   - ./n8n/
+  - ./grampsweb/
   - ./open-webui/

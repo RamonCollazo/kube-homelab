@@ -1,0 +1,16 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grampsweb
+  namespace: grampsweb
+spec:
+  interval: 15m
+  releaseName: grampsweb
+  chartRef:
+    kind: OCIRepository
+    name: grampsweb
+  valuesFrom:
+    - kind: ConfigMap
+      name: grampsweb-values
+      valuesKey: values.yaml

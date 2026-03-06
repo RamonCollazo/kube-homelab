@@ -19,6 +19,8 @@ data:
       allNodes: false
       count: 2
     ingress:
+      - hostname: grampsweb.raymondcollazo.com
+        service: http://grampsweb.grampsweb.svc.cluster.local:5000
       - hostname: mattermost.raymondcollazo.com
         service: http://mattermost-team-edition.mattermost.svc.cluster.local:8065
       - hostname: auth.raymondcollazo.com

@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: grampsweb
+  namespace: grampsweb
+spec:
+  interval: 24h
+  url: oci://codeberg.org/wrenix/helm-charts/grampsweb
+  ref:
+    tag: "0.2.38"

@@ -1,0 +1,16 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: grampsweb-db
+  namespace: grampsweb
+spec:
+  instances: 3
+  storage:
+    size: 2Gi
+  bootstrap:
+    initdb:
+      database: grampsweb
+      owner: grampsweb
+      secret:
+        name: grampsweb-db
