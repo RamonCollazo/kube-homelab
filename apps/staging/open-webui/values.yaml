@@ -93,8 +93,28 @@ extraEnvVars:
       secretKeyRef:
         name: open-webui-db
         key: password
+  - name: OAUTH_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: open-webui-oidc
+        key: client-id
+  - name: OAUTH_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: open-webui-oidc
+        key: client-secret
 
 commonEnvVars:
+  - name: ENABLE_OAUTH_SIGNUP
+    value: "False"
+  - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+    value: "True"
+  - name: OAUTH_PROVIDER_NAME
+    value: "Authentik"
+  - name: OPENID_PROVIDER_URL
+    value: "https://auth.raymondcollazo.com/application/o/open-webui/"
+  - name: OAUTH_SCOPES
+    value: "openid email profile"
   - name: DATABASE_TYPE
     value: "postgresql"
   - name: DATABASE_HOST
