@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: authentik-configmap
-  namespace: authentik
-data:
-  AUTHENTIK_POSTGRESQL__HOST: 'authentik-db-rw'
-  AUTHENTIK_POSTGRESQL__NAME: 'authentik'

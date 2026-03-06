@@ -9,36 +9,11 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2025.8.4
+      version: 2026.2.1
       sourceRef:
         kind: HelmRepository
         name: authentik
         namespace: authentik
-  values:
-    global:
-      env:
-        - name: AUTHENTIK_POSTGRESQL__PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: authentik-db
-              key: password
-        - name: AUTHENTIK_POSTGRESQL__USER
-          valueFrom:
-            secretKeyRef:
-              name: authentik-db
-              key: username
-        - name: AUTHENTIK_SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: authentik-key
-              key: key
-      envFrom:
-        - configMapRef:
-            name: authentik-configmap
-    server:
-      replicas: 1
-    worker:
-      replicas: 1
   valuesFrom:
     - kind: ConfigMap
       name: authentik-values

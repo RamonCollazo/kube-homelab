@@ -1,4 +1,27 @@
-authentik:
-  redis:
-    host: "dragonfly.dragonfly-system.svc.cluster.local"
-    port: 6379
+global:
+  env:
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: "authentik-db-rw"
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: "authentik"
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db
+          key: password
+    - name: AUTHENTIK_POSTGRESQL__USER
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db
+          key: username
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-key
+          key: key
+
+server:
+  replicas: 1
+
+worker:
+  replicas: 1
