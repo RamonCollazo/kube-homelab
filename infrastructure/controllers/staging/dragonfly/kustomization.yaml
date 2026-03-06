@@ -1,8 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: dragonfly-system
+namespace: dragonfly-operator-system
 resources:
   - ../../base/dragonfly/
+configurations:
+  - ./kustomizeconfig.yaml
+
 configMapGenerator:
   - name: dragonfly-values
     files:

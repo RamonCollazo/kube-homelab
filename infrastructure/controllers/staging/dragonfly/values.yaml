@@ -1,18 +1,23 @@
-storage:
-  enabled: true
-  requests: 128Mi # Set a desired volume size for PVC.
+replicaCount: 1
 
-extraArgs:
-  - --dbfilename=my-dump-{timestamp} # Only the filename without any file extensions.
-  - --snapshot_cron=* * * * *        # Set a valid cron schedule.
-
-podSecurityContext:
-  fsGroup: 2000
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
 
 securityContext:
+  allowPrivilegeEscalation: false
   capabilities:
     drop:
       - ALL
-  readOnlyRootFilesystem: true
+
+podSecurityContext:
   runAsNonRoot: true
-  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+serviceMonitor:
+  enabled: true
