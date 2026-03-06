@@ -7,5 +7,3 @@ affinity:
             - key: extensions.talos.dev/nonfree-kmod-nvidia-lts
               operator: Exists
 
-# -- RuntimeClass for NVIDIA (provided by siderolabs/nvidia-container-toolkit-lts extension)
-runtimeClassName: nvidia

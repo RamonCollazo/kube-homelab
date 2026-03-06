@@ -29,6 +29,8 @@ ollama:
       - ReadWriteMany
     storageClass: ceph-filesystem
     size: 50Gi
+  # -- Use nvidia containerd runtime (provided by siderolabs/nvidia-container-toolkit-lts)
+  runtimeClassName: nvidia
   affinity:
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
