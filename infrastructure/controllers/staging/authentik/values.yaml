@@ -20,9 +20,6 @@ global:
           name: authentik-key
           key: key
 
-redis:
-  enabled: true
-
 server:
   replicas: 1
 
