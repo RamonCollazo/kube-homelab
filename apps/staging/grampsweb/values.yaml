@@ -17,11 +17,11 @@ securityContext:
 
 resources:
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 1000m
+    memory: 1536Mi
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 512Mi
 
 persistence:
   enabled: true
