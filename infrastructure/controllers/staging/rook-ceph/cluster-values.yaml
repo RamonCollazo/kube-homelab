@@ -12,7 +12,17 @@ cephClusterSpec:
 cephFileSystems:
   - name: ceph-filesystem
     spec:
+      metadataPool:
+        replicated:
+          size: 3
+      dataPools:
+        - failureDomain: host
+          replicated:
+            size: 3
+          name: data0
       metadataServer:
+        activeCount: 1
+        activeStandby: true
         resources:
           requests:
             cpu: "250m"
@@ -20,10 +30,27 @@ cephFileSystems:
     storageClass:
       enabled: true
       name: ceph-filesystem
+      pool: data0
+      reclaimPolicy: Delete
+      allowVolumeExpansion: true
 cephObjectStores:
   - name: ceph-objectstore
     spec:
+      metadataPool:
+        failureDomain: host
+        replicated:
+          size: 3
+      dataPool:
+        failureDomain: host
+        erasureCoded:
+          dataChunks: 2
+          codingChunks: 1
+        parameters:
+          bulk: "true"
+      preservePoolsOnDelete: true
       gateway:
+        port: 80
+        instances: 1
         resources:
           requests:
             cpu: "250m"
@@ -31,3 +58,5 @@ cephObjectStores:
     storageClass:
       enabled: true
       name: ceph-bucket
+      reclaimPolicy: Delete
+      volumeBindingMode: "Immediate"
