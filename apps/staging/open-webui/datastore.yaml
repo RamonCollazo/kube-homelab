@@ -14,7 +14,6 @@ spec:
       cpu: 500m
       memory: 512Mi
   podSecurityContext:
-    runAsNonRoot: true
     seccompProfile:
       type: RuntimeDefault
   containerSecurityContext:

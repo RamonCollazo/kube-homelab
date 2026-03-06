@@ -8,5 +8,6 @@ resources:
   - ./cloudnative-pg/
   - ./dragonfly/
   - ./netbird/
+  - ./nvidia-device-plugin/
   - ./renovate/
   - ./rook-ceph/
