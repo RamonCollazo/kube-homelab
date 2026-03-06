@@ -9,13 +9,6 @@ ollama:
       number: 1
   podSecurityContext:
     fsGroup: 2000
-  securityContext:
-    capabilities:
-      drop:
-        - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
   resources:
     requests:
       memory: 4096Mi
