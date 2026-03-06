@@ -1,3 +1,6 @@
+# -- RuntimeClass for NVIDIA (provided by siderolabs/nvidia-container-toolkit-lts extension)
+runtimeClassName: nvidia
+
 # -- Only schedule on nodes with the NVIDIA Talos extension (key exists, version-agnostic)
 affinity:
   nodeAffinity:
