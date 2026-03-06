@@ -30,3 +30,11 @@ spec:
               - op: add
                 path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
                 value: 30
+              - op: add
+                path: /spec/template/spec/containers/0/env
+                value:
+                  - name: GRAMPSWEB_USER_DB_URI
+                    valueFrom:
+                      secretKeyRef:
+                        name: grampsweb-config
+                        key: user-db-uri
