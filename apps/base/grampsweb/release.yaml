@@ -14,3 +14,19 @@ spec:
     - kind: ConfigMap
       name: grampsweb-values
       valuesKey: values.yaml
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: grampsweb
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
+                value: 60
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe/periodSeconds
+                value: 30
+              - op: add
+                path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
+                value: 30
