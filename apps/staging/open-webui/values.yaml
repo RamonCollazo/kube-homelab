@@ -103,6 +103,11 @@ extraEnvVars:
       secretKeyRef:
         name: open-webui-oidc
         key: client-secret
+  - name: WEBUI_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: open-webui-oidc
+        key: webui-secret-key
 
 commonEnvVars:
   - name: ENABLE_OAUTH_SIGNUP
