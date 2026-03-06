@@ -1,5 +1,5 @@
 gramps:
-  tree: "*"
+  tree: "collazo"
   baseURL: "https://grampsweb.raymondcollazo.com"
   mediaPrefixTree: true
   registrationDisabled: true
