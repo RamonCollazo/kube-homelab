@@ -10,13 +10,13 @@ podSecurityContext:
 
 securityContext: {}
 
-# resources:
-#   limits:
-#     cpu: 1000m
-#     memory: 1536Mi
-#   requests:
-#     cpu: 100m
-#     memory: 512Mi
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1536Mi
+  requests:
+    cpu: 100m
+    memory: 512Mi
 
 persistence:
   enabled: true
