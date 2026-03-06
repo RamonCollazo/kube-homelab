@@ -17,6 +17,8 @@ cephFileSystems:
           requests:
             cpu: "250m"
             memory: "512Mi"
+    storageClass:
+      enabled: true
 cephObjectStores:
   - name: ceph-objectstore
     spec:
@@ -25,3 +27,5 @@ cephObjectStores:
           requests:
             cpu: "250m"
             memory: "512Mi"
+    storageClass:
+      enabled: true
