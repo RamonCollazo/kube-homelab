@@ -5,11 +5,11 @@ metadata:
   name: homepage
   namespace: homepage
   annotations:
-    gethomepage.dev/description: Dynamically Detected Homepage
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/group: Cluster Management
-    gethomepage.dev/icon: homepage.png
+    gethomepage.dev/group: Management
     gethomepage.dev/name: Homepage
+    gethomepage.dev/icon: homepage.png
+    gethomepage.dev/description: Dynamically detected Homepage
 spec:
   parentRefs:
     - name: lan-gateway

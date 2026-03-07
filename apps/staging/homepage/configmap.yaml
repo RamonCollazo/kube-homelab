@@ -117,10 +117,6 @@ data:
             icon: opnsense.png
 
     - Management:
-        - Homepage:
-            href: https://homepage.raymondcollazo.com
-            description: This dashboard
-            icon: homepage.png
         - Omni:
             href: https://raymondcollazo.na-west-1.omni.siderolabs.io/
             description: Talos Linux cluster management
