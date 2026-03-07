@@ -36,13 +36,26 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - Developer:
-        - GitHub:
-            - abbr: GH
-              href: https://github.com/
+    - Repositories:
         - kube-homelab:
-            - abbr: KH
-              href: https://github.com/RamonCollazo/kube-homelab
+            - href: https://github.com/RamonCollazo/kube-homelab
+              icon: github.png
+
+    - Cloud Platforms:
+        - GreenCloud VPS:
+            - href: https://greencloudvps.com/billing/login
+              icon: https://cdn.brandfetch.io/id0SQOHn0d/w/2048/h/2048/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1768745422984
+        - RackNerd:
+            - href: https://my.racknerd.com/index.php?rp=/login
+              icon: racknerd-dark.png
+
+    - Cloud Services:
+        - Cloudflare:
+            href: https://dash.cloudflare.com/
+            icon: cloudflare.png
+        - Netbird:
+            href: https://app.netbird.io/
+            icon: netbird.png
   services.yaml: |
     - Apps:
         - ActualBudget:
@@ -108,21 +121,7 @@ data:
             description: SSO and identity provider
             icon: authentik.png
 
-    - Infrastructure:
-        - GreenCloud VPS:
-            href: https://greencloudvps.com/billing/login
-            description: VPS manager portal
-            icon: https://cdn.brandfetch.io/id0SQOHn0d/w/2048/h/2048/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1768745422984
-        - RackNerd:
-            href: https://my.racknerd.com/index.php?rp=/login
-            description: VPS management portal
-            icon: racknerd-dark.png
-
     - Networking:
-        - Netbird:
-            href: https://app.netbird.io/
-            description: Zero-trust networking platform
-            icon: netbird.png
         - OPNsense:
             href: https://opnsense.bayamon.lan/
             description: Firewall and network management
