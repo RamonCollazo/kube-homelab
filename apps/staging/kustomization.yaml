@@ -6,7 +6,6 @@ resources:
   - ./homepage/
   - ./kavita/
   - ./kiwix/
-  #- ./linkding/
   - ./linkwarden/
   - ./mattermost/
   - ./netbox/
