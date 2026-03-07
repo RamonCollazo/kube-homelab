@@ -97,6 +97,11 @@ data:
             href: https://grafana.raymondcollazo.com
             description: Metrics and observability dashboards
             icon: grafana.png
+            widget:
+              type: grafana
+              url: https://grafana.raymondcollazo.com
+              username: api_key
+              password: "{{HOMEPAGE_VAR_GRAFANA_TOKEN}}"
         - Hubble:
             href: https://hubble.raymondcollazo.com
             description: Cilium network observability
