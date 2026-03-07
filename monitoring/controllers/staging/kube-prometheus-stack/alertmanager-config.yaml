@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: mattermost
+  namespace: monitoring
+spec:
+  route:
+    receiver: mattermost
+    groupBy: ['alertname', 'namespace', 'device']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+  receivers:
+    - name: mattermost
+      slackConfigs:
+        - apiURL:
+            name: grafana-alerting
+            key: mattermost-webhook-url
+          username: Alertmanager
+          iconEmoji: ":warning:"
+          title: '{{ template "slack.default.title" . }}'
+          text: '{{ range .Alerts }}*{{ .Labels.alertname }}*{{ if .Labels.device }} — `{{ .Labels.device }}`{{ end }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}'
+          sendResolved: true

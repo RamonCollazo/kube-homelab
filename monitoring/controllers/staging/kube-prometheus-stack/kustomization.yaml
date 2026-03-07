@@ -9,6 +9,7 @@ resources:
   # - ./gateway.yaml
   - ./route.yaml
   - ./secrets.yaml
+  - ./alertmanager-config.yaml
 configMapGenerator:
   - name: kube-prometheus-stack-values
     files:

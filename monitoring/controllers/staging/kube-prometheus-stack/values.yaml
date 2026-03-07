@@ -8,6 +8,33 @@ grafana:
       secretKeyRef:
         name: grafana-oidc
         key: client-secret
+    MATTERMOST_WEBHOOK_URL:
+      secretKeyRef:
+        name: grafana-alerting
+        key: mattermost-webhook-url
+  alerting:
+    contactpoints.yaml:
+      apiVersion: 1
+      contactPoints:
+        - orgId: 1
+          name: Mattermost
+          receivers:
+            - uid: mattermost-receiver
+              type: slack
+              settings:
+                url: $MATTERMOST_WEBHOOK_URL
+                username: Grafana
+                icon_emoji: ":bell:"
+              disableResolveMessage: false
+    notification-policy.yaml:
+      apiVersion: 1
+      policies:
+        - orgId: 1
+          receiver: Mattermost
+          group_by: ['grafana_folder', 'alertname']
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 12h
   grafana.ini:
     server:
       root_url: https://grafana.raymondcollazo.com
