@@ -10,5 +10,6 @@ configurations:
   - ./kustomizeconfig.yaml
 configMapGenerator:
   - name: meilisearch-values
+    namespace: linkwarden
     files:
       - ./values-meili.yaml
