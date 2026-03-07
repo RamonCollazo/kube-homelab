@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: netbox
+resources:
+  - ../../base/netbox/
+  - ./database.yaml
+  - ./datastore.yaml
+  - ./route.yaml
+  - ./secrets.yaml
+
+configurations:
+  - kustomizeconfig.yaml
+
+configMapGenerator:
+  - name: netbox-values
+    files:
+      - values.yaml=values.yaml

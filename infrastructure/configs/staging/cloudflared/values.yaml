@@ -19,6 +19,8 @@ data:
       allNodes: false
       count: 2
     ingress:
+      - hostname: netbox.raymondcollazo.com
+        service: http://netbox.netbox.svc.cluster.local:80
       - hostname: grampsweb.raymondcollazo.com
         service: http://grampsweb.grampsweb.svc.cluster.local:5000
       - hostname: mattermost.raymondcollazo.com

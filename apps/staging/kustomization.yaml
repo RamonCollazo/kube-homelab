@@ -9,6 +9,7 @@ resources:
   #- ./linkding/
   - ./linkwarden/
   - ./mattermost/
+  - ./netbox/
   - ./n8n/
   - ./grampsweb/
   - ./open-webui/

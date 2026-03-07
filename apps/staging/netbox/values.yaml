@@ -1,0 +1,43 @@
+postgresql:
+  enabled: false
+
+valkey:
+  enabled: false
+
+externalDatabase:
+  host: "netbox-db-rw.netbox.svc.cluster.local"
+  port: 5432
+  database: netbox
+  username: netbox
+  existingSecretName: netbox-db
+  existingSecretKey: password
+
+tasksDatabase:
+  host: "netbox-ds.netbox.svc.cluster.local"
+  port: 6379
+  database: 0
+
+cachingDatabase:
+  host: "netbox-ds.netbox.svc.cluster.local"
+  port: 6379
+  database: 1
+
+existingSecret: netbox-secret
+
+superuser:
+  existingSecret: netbox-secret
+
+remoteAuth:
+  enabled: true
+  backends:
+    - social_core.backends.open_id_connect.OpenIdConnectAuth
+
+extraConfig:
+  - secret:
+      secretName: netbox-oidc
+
+persistence:
+  enabled: true
+  size: 10Gi
+
+metricsEnabled: true
