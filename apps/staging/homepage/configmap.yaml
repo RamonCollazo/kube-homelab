@@ -17,7 +17,7 @@ data:
     background:
       image: https://w.wallhaven.cc/full/d8/wallhaven-d86673.jpg
       blur: sm
-      opacity: 30
+      opacity: 10
     layout:
       Apps:
         style: column
