@@ -88,7 +88,7 @@ data:
             href: https://kiwix.raymondcollazo.com
             description: Offline reader for Wikipedia and ZIM content
             icon: kiwix.png
-            href: https://kiwix.raymondcollazo.com
+            siteMonitor: https://kiwix.raymondcollazo.com
         - Linkwarden:
             href: https://linkwarden.raymondcollazo.com
             description: Collaborative bookmark manager
