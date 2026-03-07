@@ -123,6 +123,10 @@ data:
             href: https://opnsense.bayamon.lan/
             description: Firewall and network management
             icon: opnsense.png
+        - Netbird:
+            href: https://app.netbird.io/
+            description: Zero-trust networking platform
+            icon: netbird.png
 
     - Management:
         - Omni:
