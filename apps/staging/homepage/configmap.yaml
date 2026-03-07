@@ -12,7 +12,7 @@ data:
   settings.yaml: |
     title: Homelab
     theme: dark
-    color: stone
+    color: teal
     headerStyle: boxed
     background:
       image: https://w.wallhaven.cc/full/d8/wallhaven-d86673.jpg
