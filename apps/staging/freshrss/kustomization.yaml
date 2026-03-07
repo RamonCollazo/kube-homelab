@@ -5,3 +5,4 @@ resources:
   - ./environment.yaml
   - ./secrets.yaml
   - ./database.yaml
+  - ./route.yaml

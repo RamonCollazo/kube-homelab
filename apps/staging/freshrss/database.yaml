@@ -13,4 +13,4 @@ spec:
       database: freshrss
       owner: freshrss
       secret:
-        name: freshrss-pg
+        name: freshrss-db

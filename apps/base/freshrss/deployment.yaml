@@ -15,49 +15,41 @@ spec:
       labels:
         app: freshrss
     spec:
-      #securityContext:
-      #  fsGroup: 33
-      #  runAsUser: 33
-      #  runAsGroup: 33
       containers:
         - image: freshrss/freshrss:1.28.1
+          imagePullPolicy: IfNotPresent
           name: freshrss
           ports:
             - containerPort: 80
           securityContext:
             allowPrivilegeEscalation: false
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 30
           volumeMounts:
             - name: freshrss-data
               mountPath: /var/www/FreshRSS/data
-          env:
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-pg
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-pg
-                  key: password
-            - name: OIDC_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-auth
-                  key: id
-            - name: OIDC_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-auth
-                  key: secret
-            - name: OIDC_CLIENT_CRYPTO_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-auth
-                  key: key
           envFrom:
             - configMapRef:
                 name: freshrss-env
+            - secretRef:
+                name: freshrss-env-secret
       volumes:
         - name: freshrss-data
           persistentVolumeClaim:
