@@ -9,33 +9,110 @@ data:
   kubernetes.yaml: |
     mode: cluster
     gateway: true
-  settings.yaml: ""
-  #settings.yaml: |
-  #  providers:
-  #    longhorn:
-  #      url: https://longhorn.my.network
+  settings.yaml: |
+    title: Homelab
+    theme: dark
+    color: slate
+    headerStyle: boxed
+    layout:
+      Apps:
+        style: row
+        columns: 3
+      Dev Tools:
+        style: row
+        columns: 3
+      Infrastructure:
+        style: row
+        columns: 3
+      Cluster Management:
+        style: row
+        columns: 3
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
     - Developer:
-        - Github:
+        - GitHub:
             - abbr: GH
               href: https://github.com/
+        - kube-homelab:
+            - abbr: KH
+              href: https://github.com/RamonCollazo/kube-homelab
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
+    - Apps:
+        - ActualBudget:
+            href: https://actual.raymondcollazo.com
+            description: Personal finance and budgeting
+            icon: actualbudget.png
+        - FreshRSS:
+            href: https://freshrss.raymondcollazo.com
+            description: RSS aggregator and reader
+            icon: freshrss.png
+        - GrampsWeb:
+            href: https://grampsweb.raymondcollazo.com
+            description: Genealogy web frontend
+            icon: gramps.png
+        - Kavita:
+            href: https://kavita.raymondcollazo.com
+            description: Digital library for manga, comics, and books
+            icon: kavita.png
+        - Kiwix:
+            href: https://kiwix.raymondcollazo.com
+            description: Offline reader for Wikipedia and ZIM content
+            icon: kiwix.png
+        - Linkwarden:
+            href: https://linkwarden.raymondcollazo.com
+            description: Collaborative bookmark manager
+            icon: linkwarden.png
 
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
+    - Dev Tools:
+        - Forgejo:
+            href: https://forgejo.raymondcollazo.com
+            description: Self-hosted Git forge
+            icon: forgejo.png
+        - Mattermost:
+            href: https://mattermost.raymondcollazo.com
+            description: Team messaging and collaboration
+            icon: mattermost.png
+        - n8n:
+            href: https://n8n.raymondcollazo.com
+            description: Workflow automation
+            icon: n8n.png
+        - NetBox:
+            href: https://netbox.raymondcollazo.com
+            description: Network source of truth
+            icon: netbox.png
+        - Open WebUI:
+            href: https://open-webui.raymondcollazo.com
+            description: AI chat interface with GPU acceleration
+            icon: open-webui.png
 
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
+    - Infrastructure:
+        - Grafana:
+            href: https://grafana.raymondcollazo.com
+            description: Metrics and observability dashboards
+            icon: grafana.png
+        - Authentik:
+            href: https://auth.raymondcollazo.com
+            description: SSO and identity provider
+            icon: authentik.png
+        - Hubble:
+            href: https://hubble.raymondcollazo.com
+            description: Cilium network observability
+            icon: hubble.png
+
+    - Cluster Management:
+        - Homepage:
+            href: https://homepage.raymondcollazo.com
+            description: This dashboard
+            icon: homepage.png
+        - Omni:
+            href: https://raymondcollazo.na-west-1.omni.siderolabs.io/
+            description: Talos Linux cluster management
+            icon: omni.png
+        - RackNerd:
+            href: https://my.racknerd.com/index.php?rp=/login
+            description: VPS management portal
+            icon: mdi-server
   widgets.yaml: |
     - kubernetes:
         cluster:
