@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - ./kube-prometheus-stack/
   - ./hubble-ui/
+  - ./smartctl-exporter/
   - ../base/namespace.yaml
