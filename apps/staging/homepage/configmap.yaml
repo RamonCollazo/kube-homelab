@@ -16,17 +16,13 @@ data:
     headerStyle: boxed
     layout:
       Apps:
-        style: row
-        columns: 3
+        style: column
       Dev Tools:
-        style: row
-        columns: 3
+        style: column
       Infrastructure:
-        style: row
-        columns: 3
+        style: column
       Cluster Management:
-        style: row
-        columns: 3
+        style: column
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -123,6 +119,12 @@ data:
           label: "cluster"
         nodes:
           show: false
+    - resources:
+        backend: resources
+        expanded: true
+        cpu: true
+        memory: true
+        network: default
     - search:
         provider: duckduckgo
         target: _blank
