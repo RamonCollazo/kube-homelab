@@ -109,24 +109,24 @@ data:
             icon: authentik.png
 
     - Infrastructure:
-        - RackNerd:
-            href: https://my.racknerd.com/index.php?rp=/login
-            description: VPS management portal
-            icon: racknerd-dark.png
         - GreenCloud VPS:
             href: https://greencloudvps.com/billing/login
             description: VPS manager portal
             icon: https://cdn.brandfetch.io/id0SQOHn0d/w/2048/h/2048/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1768745422984
+        - RackNerd:
+            href: https://my.racknerd.com/index.php?rp=/login
+            description: VPS management portal
+            icon: racknerd-dark.png
 
     - Networking:
-        - OPNsense:
-            href: https://opnsense.bayamon.lan/
-            description: Firewall and network management
-            icon: opnsense.png
         - Netbird:
             href: https://app.netbird.io/
             description: Zero-trust networking platform
             icon: netbird.png
+        - OPNsense:
+            href: https://opnsense.bayamon.lan/
+            description: Firewall and network management
+            icon: opnsense.png
 
     - Management:
         - Omni:
