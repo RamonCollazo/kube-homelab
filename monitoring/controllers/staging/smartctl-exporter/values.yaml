@@ -1,5 +1,5 @@
 config:
-  device_include: "/dev/nvme.*"
+  device_include: "nvme.*"
   collect_not_more_than_period: 120s
 
 serviceMonitor:
