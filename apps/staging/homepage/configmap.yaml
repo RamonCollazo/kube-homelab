@@ -151,7 +151,7 @@ data:
             href: https://opnsense.bayamon.lan/
             description: Firewall and network management
             icon: opnsense.png
-            siteMonitor: https://opnsense.bayamon.lan/
+            ping: https://opnsense.bayamon.lan/
 
     - Management:
         - Omni:
