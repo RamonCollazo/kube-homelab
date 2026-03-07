@@ -113,6 +113,10 @@ data:
             href: https://my.racknerd.com/index.php?rp=/login
             description: VPS management portal
             icon: racknerd-dark.png
+        - GreenCloud VPS:
+            href: https://greencloudvps.com/billing/login
+            description: VPS manager portal
+            icon: https://cdn.brandfetch.io/id0SQOHn0d/w/2048/h/2048/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1768745422984
 
     - Networking:
         - OPNsense:
