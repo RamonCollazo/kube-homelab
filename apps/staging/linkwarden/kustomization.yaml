@@ -5,3 +5,10 @@ resources:
   - ./configmap-env.yaml
   - ./database.yaml
   - ./secrets.yaml
+  - ./route.yaml
+configurations:
+  - ./kustomizeconfig.yaml
+configMapGenerator:
+  - name: meilisearch-values
+    files:
+      - ./values-meili.yaml

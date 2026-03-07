@@ -21,43 +21,39 @@ spec:
         runAsGroup: 33
       containers:
         - image: ghcr.io/linkwarden/linkwarden:v2.13.5
+          imagePullPolicy: IfNotPresent
           name: linkwarden
           ports:
             - containerPort: 3000
           securityContext:
             allowPrivilegeEscalation: false
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 30
           volumeMounts:
             - name: linkwarden-data
               mountPath: /data/data
-          env:
-            - name: NEXTAUTH_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: linkwarden-next
-                  key: secret
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: linkwarden-pg
-                  key: password
-            - name: MEILI_MASTER_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: linkwarden-meili
-                  key: key
-            - name: AUTHENTIK_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: linkwarden-auth
-                  key: id
-            - name: AUTHENTIK_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: linkwarden-auth
-                  key: secret
           envFrom:
             - configMapRef:
                 name: linkwarden-env
+            - secretRef:
+                name: linkwarden-env-secret
       volumes:
         - name: linkwarden-data
           persistentVolumeClaim:
