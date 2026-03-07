@@ -4,7 +4,10 @@
   "ignorePaths": ["clusters/**"],
   "kubernetes": {
     "fileMatch": [
-      "\\.ya?ml$"
+      "(^|/)deployment\\.ya?ml$",
+      "(^|/)statefulset\\.ya?ml$",
+      "(^|/)daemonset\\.ya?ml$",
+      "(^|/)cronjob\\.ya?ml$"
     ]
   },
   "flux": {
