@@ -68,76 +68,98 @@ data:
             href: https://actual.raymondcollazo.com
             description: Personal finance and budgeting
             icon: actual-budget.png
+            siteMonitor: https://actual.raymondcollazo.com
         - FreshRSS:
             href: https://freshrss.raymondcollazo.com
             description: RSS aggregator and reader
             icon: freshrss.png
+            siteMonitor: https://freshrss.raymondcollazo.com
         - GrampsWeb:
             href: https://grampsweb.raymondcollazo.com
             description: Genealogy web frontend
             icon: gramps.png
+            siteMonitor: https://grampsweb.raymondcollazo.com
         - Kavita:
             href: https://kavita.raymondcollazo.com
             description: Digital library for manga, comics, and books
             icon: kavita.png
+            siteMonitor: https://kavita.raymondcollazo.com
         - Kiwix:
             href: https://kiwix.raymondcollazo.com
             description: Offline reader for Wikipedia and ZIM content
             icon: kiwix.png
+            href: https://kiwix.raymondcollazo.com
         - Linkwarden:
             href: https://linkwarden.raymondcollazo.com
             description: Collaborative bookmark manager
             icon: linkwarden.png
+            siteMonitor: https://linkwarden.raymondcollazo.com
+        - SmartrEnergy:
+            href: https://smartrenergy.com/
+            description: WordPress-based capstone portfolio site
+            icon: wordpress.png
+            siteMonitor: https://smartrenergy.com/
 
     - Dev Tools:
         - Forgejo:
             href: https://forgejo.raymondcollazo.com
             description: Self-hosted Git forge
             icon: forgejo.png
+            siteMonitor: https://forgejo.raymondcollazo.com
         - Mattermost:
             href: https://mattermost.raymondcollazo.com
             description: Team messaging and collaboration
             icon: mattermost.png
+            siteMonitor: https://mattermost.raymondcollazo.com
         - n8n:
             href: https://n8n.raymondcollazo.com
             description: Workflow automation
             icon: n8n.png
+            siteMonitor: https://n8n.raymondcollazo.com
         - NetBox:
             href: https://netbox.raymondcollazo.com
             description: Network source of truth
             icon: netbox.png
+            siteMonitor: https://netbox.raymondcollazo.com
         - Open WebUI:
             href: https://open-webui.raymondcollazo.com
             description: AI chat interface with GPU acceleration
             icon: open-webui.png
+            siteMonitor: https://open-webui.raymondcollazo.com
 
     - Monitoring:
         - Grafana:
             href: https://grafana.raymondcollazo.com
             description: Metrics and observability dashboards
             icon: grafana.png
+            siteMonitor: https://grafana.raymondcollazo.com
         - Hubble:
             href: https://hubble.raymondcollazo.com
             description: Cilium network observability
             icon: cilium.png
+            siteMonitor: https://hubble.raymondcollazo.com
 
     - Security:
         - Authentik:
             href: https://auth.raymondcollazo.com
             description: SSO and identity provider
             icon: authentik.png
+            siteMonitor: https://auth.raymondcollazo.com
 
     - Networking:
         - OPNsense:
             href: https://opnsense.bayamon.lan/
             description: Firewall and network management
             icon: opnsense.png
+            siteMonitor: https://opnsense.bayamon.lan/
 
     - Management:
         - Omni:
             href: https://raymondcollazo.na-west-1.omni.siderolabs.io/
             description: Talos Linux cluster management
             icon: talos.png
+            siteMonitor: https://raymondcollazo.na-west-1.omni.siderolabs.io/
+
   widgets.yaml: |
     - kubernetes:
         cluster:
