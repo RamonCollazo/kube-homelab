@@ -1,32 +1,41 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "ignorePaths": ["clusters/**"],
+  "extends": [
+    "config:recommended"
+  ],
+  "ignorePaths": [
+    "clusters/**"
+  ],
   "kubernetes": {
-    "fileMatch": [
-      "(^|/)deployment\\.ya?ml$",
-      "(^|/)statefulset\\.ya?ml$",
-      "(^|/)daemonset\\.ya?ml$",
-      "(^|/)cronjob\\.ya?ml$"
+    "managerFilePatterns": [
+      "/(^|/)deployment\\.ya?ml$/",
+      "/(^|/)statefulset\\.ya?ml$/",
+      "/(^|/)daemonset\\.ya?ml$/",
+      "/(^|/)cronjob\\.ya?ml$/"
     ]
   },
   "flux": {
-    "fileMatch": [
-      "(^|/)apps/base/.+\\.ya?ml$",
-      "(^|/)infrastructure/controllers/base/.+\\.ya?ml$",
-      "(^|/)monitoring/controllers/base/.+\\.ya?ml$"
+    "managerFilePatterns": [
+      "/(^|/)apps/base/.+\\.ya?ml$/",
+      "/(^|/)infrastructure/controllers/base/.+\\.ya?ml$/",
+      "/(^|/)monitoring/controllers/base/.+\\.ya?ml$/"
     ]
   },
   "packageRules": [
     {
       "description": "Authentik uses CalVer (YYYY.MM.MICRO)",
-      "matchPackageNames": ["authentik"],
+      "matchPackageNames": [
+        "authentik"
+      ],
       "versioning": "calver:YYYY.MM.MICRO"
     },
     {
       "description": "Group rook-ceph operator and cluster chart upgrades together",
       "groupName": "rook-ceph",
-      "matchPackageNames": ["rook-ceph", "rook-ceph-cluster"]
+      "matchPackageNames": [
+        "rook-ceph",
+        "rook-ceph-cluster"
+      ]
     }
   ]
 }
