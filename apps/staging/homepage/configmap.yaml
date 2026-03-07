@@ -108,7 +108,7 @@ data:
         - RackNerd:
             href: https://my.racknerd.com/index.php?rp=/login
             description: VPS management portal
-            icon: mdi-server-network
+            icon: mdi-server
 
     - Networking:
         - OPNsense:
