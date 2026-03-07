@@ -112,7 +112,7 @@ Applications running on the VPS cluster, requiring a direct public IP or high-av
 | Name | Description |
 | :--- | :--- |
 | **Unifi Network Application** | Manages and monitors Unifi network devices at home over a direct public IP (bypasses CGNAT). |
-| **SmartRenergy** | WordPress-based capstone portfolio site, always-on and independent of the home network. |
+| **SmartrEnergy** | WordPress-based capstone portfolio site, always-on and independent of the home network. |
 
 ### Infrastructure
 
