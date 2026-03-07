@@ -40,6 +40,12 @@ data:
         - kube-homelab:
             - href: https://github.com/RamonCollazo/kube-homelab
               icon: github.png
+        - learning-lab:
+            - href: https://github.com/RamonCollazo/learning-lab
+              icon: github.png
+        - devops-best-practices:
+            - href: https://github.com/RamonCollazo/devops-best-practices
+              icon: github.png
 
     - Cloud Platforms:
         - GreenCloud VPS:
