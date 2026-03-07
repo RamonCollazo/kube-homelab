@@ -44,7 +44,7 @@ data:
         - ActualBudget:
             href: https://actual.raymondcollazo.com
             description: Personal finance and budgeting
-            icon: actualbudget.png
+            icon: actual-budget.png
         - FreshRSS:
             href: https://freshrss.raymondcollazo.com
             description: RSS aggregator and reader
