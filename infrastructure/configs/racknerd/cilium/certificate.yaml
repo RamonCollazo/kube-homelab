@@ -16,6 +16,20 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: raymondcollazo-cert
+  namespace: public-gateway
+spec:
+  secretName: raymondcollazo-tls
+  dnsNames:
+    - "*.raymondcollazo.com"
+  issuerRef:
+    name: clusterissuer-racknerd
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: smartrenergy-cert
   namespace: public-gateway
 spec:
