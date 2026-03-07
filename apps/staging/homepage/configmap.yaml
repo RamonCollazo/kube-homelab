@@ -51,11 +51,11 @@ data:
 
     - Cloud Services:
         - Cloudflare:
-            href: https://dash.cloudflare.com/
-            icon: cloudflare.png
+            - href: https://dash.cloudflare.com/
+              icon: cloudflare.png
         - Netbird:
-            href: https://app.netbird.io/
-            icon: netbird.png
+            - href: https://app.netbird.io/
+              icon: netbird.png
   services.yaml: |
     - Apps:
         - ActualBudget:
