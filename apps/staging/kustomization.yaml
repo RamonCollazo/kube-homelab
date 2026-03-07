@@ -10,6 +10,7 @@ resources:
   - ./linkwarden/
   - ./mattermost/
   - ./netbox/
+  - ./forgejo/
   - ./n8n/
   - ./grampsweb/
   - ./open-webui/

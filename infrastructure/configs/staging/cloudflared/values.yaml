@@ -19,6 +19,8 @@ data:
       allNodes: false
       count: 2
     ingress:
+      - hostname: forgejo.raymondcollazo.com
+        service: http://forgejo-http.forgejo.svc.cluster.local:3000
       - hostname: netbox.raymondcollazo.com
         service: http://netbox.netbox.svc.cluster.local:80
       - hostname: grampsweb.raymondcollazo.com

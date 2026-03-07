@@ -1,0 +1,43 @@
+gitea:
+  admin:
+    existingSecret: forgejo-admin
+
+  config:
+    server:
+      DOMAIN: forgejo.raymondcollazo.com
+      ROOT_URL: https://forgejo.raymondcollazo.com
+      DISABLE_SSH: "true"
+      START_SSH_SERVER: "false"
+    database:
+      DB_TYPE: postgres
+      HOST: forgejo-db-rw.forgejo.svc.cluster.local:5432
+      NAME: forgejo
+      USER: forgejo
+    cache:
+      ADAPTER: redis
+      HOST: redis://forgejo-ds.forgejo.svc.cluster.local:6379/0
+    queue:
+      TYPE: redis
+      CONN_STR: redis://forgejo-ds.forgejo.svc.cluster.local:6379/1
+    session:
+      PROVIDER: redis
+      PROVIDER_CONFIG: redis://forgejo-ds.forgejo.svc.cluster.local:6379/2
+    oauth2_client:
+      ENABLE_AUTO_REGISTRATION: "true"
+      USERNAME: preferred_username
+      ACCOUNT_LINKING: auto
+
+  additionalConfigFromEnvs:
+    - name: FORGEJO__database__PASSWD
+      valueFrom:
+        secretKeyRef:
+          name: forgejo-db
+          key: password
+
+  oauth:
+    - name: Authentik
+      provider: openidConnect
+      existingSecret: forgejo-oidc
+      autoDiscoverUrl: https://auth.raymondcollazo.com/application/o/forgejo/.well-known/openid-configuration
+      scopes: "openid profile email"
+      groupClaimName: groups
