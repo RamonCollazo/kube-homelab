@@ -1,23 +1,29 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
   "ignorePaths": ["clusters/**"],
   "kubernetes": {
     "fileMatch": [
       "\\.ya?ml$"
     ]
   },
-  "customManagers": [
+  "flux": {
+    "fileMatch": [
+      "(^|/)apps/base/.+\\.ya?ml$",
+      "(^|/)infrastructure/controllers/base/.+\\.ya?ml$",
+      "(^|/)monitoring/controllers/base/.+\\.ya?ml$"
+    ]
+  },
+  "packageRules": [
     {
-      "customType": "regex",
-      "description": "Update Flux GitRepository spec.ref.tag for GitHub repos",
-      "fileMatch": [
-        "(^|/)infrastructure/crds/.*\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "kind:\\s*GitRepository[\\s\\S]*?url:\\s*https://github\\.com/(?<depName>[^\\s/]+/[^\\s/]+)\\.git[\\s\\S]*?ref:[\\s\\S]*?tag:\\s*v?(?<currentValue>\\d+\\.\\d+\\.\\d+)"
-      ],
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
+      "description": "Authentik uses CalVer (YYYY.MM.MICRO)",
+      "matchPackageNames": ["authentik"],
+      "versioning": "calver:YYYY.MM.MICRO"
+    },
+    {
+      "description": "Group rook-ceph operator and cluster chart upgrades together",
+      "groupName": "rook-ceph",
+      "matchPackageNames": ["rook-ceph", "rook-ceph-cluster"]
     }
   ]
 }
