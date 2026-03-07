@@ -9,5 +9,6 @@ resources:
   - ./dragonfly/
   - ./netbird/
   - ./nvidia-device-plugin/
+  - ./reloader/
   - ./renovate/
   - ./rook-ceph/
