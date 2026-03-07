@@ -96,7 +96,7 @@ data:
         - Hubble:
             href: https://hubble.raymondcollazo.com
             description: Cilium network observability
-            icon: hubble.png
+            icon: si-cilium
 
     - Security:
         - Authentik:
@@ -108,7 +108,7 @@ data:
         - RackNerd:
             href: https://my.racknerd.com/index.php?rp=/login
             description: VPS management portal
-            icon: mdi-server
+            icon: mdi-server-network
 
     - Networking:
         - OPNsense:
@@ -120,7 +120,7 @@ data:
         - Omni:
             href: https://raymondcollazo.na-west-1.omni.siderolabs.io/
             description: Talos Linux cluster management
-            icon: omni.png
+            icon: mdi-kubernetes
   widgets.yaml: |
     - kubernetes:
         cluster:
