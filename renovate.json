@@ -36,6 +36,14 @@
         "rook-ceph",
         "rook-ceph-cluster"
       ]
+    },
+    {
+      "description": "Ignore OCI packages from Codeberg (not supported by Renovate)",
+      "matchPackageNames": [
+        "codeberg.org/forgejo-contrib/forgejo",
+        "codeberg.org/wrenix/helm-charts/grampsweb"
+      ],
+      "enabled": false
     }
   ]
 }
