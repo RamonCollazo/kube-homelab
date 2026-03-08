@@ -17,6 +17,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: cilium-values
+  timeout: 15m
   install:
     crds: Create
   upgrade:
