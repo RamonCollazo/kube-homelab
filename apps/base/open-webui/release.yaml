@@ -14,6 +14,10 @@ spec:
         kind: HelmRepository
         name: open-webui
         namespace: open-webui
+  install:
+    timeout: 15m
+  upgrade:
+    timeout: 15m
   valuesFrom:
     - kind: ConfigMap
       name: open-webui-values
