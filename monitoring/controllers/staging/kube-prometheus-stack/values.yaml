@@ -1,3 +1,21 @@
+alertmanager:
+  config:
+    route:
+      receiver: 'null'
+      routes:
+        - matchers:
+            - alertname = "InfoInhibitor"
+          receiver: 'null'
+    receivers:
+      - name: 'null'
+    inhibit_rules:
+      - source_matchers:
+          - alertname = "InfoInhibitor"
+        target_matchers:
+          - severity = "info"
+        equal:
+          - namespace
+
 grafana:
   envValueFrom:
     GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
