@@ -136,3 +136,5 @@ commonEnvVars:
     value: "30"
   - name: DATABASE_POOL_RECYCLE
     value: "3600"
+  - name: ENABLE_API_KEY
+    value: "True"
