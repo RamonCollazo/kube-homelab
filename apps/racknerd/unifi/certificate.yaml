@@ -10,4 +10,4 @@ spec:
     name: clusterissuer-racknerd
     kind: ClusterIssuer
   dnsNames:
-    - "unifi-test.collazoirizarry.xyz"
+    - "unifi.raymondcollazo.com"

@@ -10,7 +10,7 @@ spec:
       namespace: public-gateway
       sectionName: tls-passthrough
   hostnames:
-    - "unifi-test.collazoirizarry.xyz"
+    - "unifi.raymondcollazo.com"
   rules:
     - backendRefs:
         - name: unifi-svc
@@ -27,7 +27,7 @@ spec:
       namespace: public-gateway
       sectionName: unifi-guest-portal
   hostnames:
-    - "unifi-test.collazoirizarry.xyz"
+    - "unifi.raymondcollazo.com"
   rules:
     - backendRefs:
         - name: unifi-svc
@@ -44,7 +44,7 @@ spec:
       namespace: public-gateway
       sectionName: unifi-inform
   hostnames:
-    - "unifi-test.collazoirizarry.xyz"
+    - "unifi.raymondcollazo.com"
   rules:
     - backendRefs:
         - name: unifi-svc
