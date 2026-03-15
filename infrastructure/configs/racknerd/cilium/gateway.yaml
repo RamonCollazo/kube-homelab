@@ -63,7 +63,7 @@ spec:
     - name: tls-passthrough
       protocol: TLS
       port: 8443
-      hostname: "unifi-test.collazoirizarry.xyz"
+      hostname: "unifi.raymondcollazo.com"
       tls:
         mode: Passthrough
       allowedRoutes:
@@ -84,7 +84,7 @@ spec:
     - name: unifi-inform
       protocol: HTTP
       port: 8080
-      hostname: "unifi-test.collazoirizarry.xyz"
+      hostname: "unifi.raymondcollazo.com"
       allowedRoutes:
         namespaces:
           from: Selector
@@ -103,7 +103,7 @@ spec:
     - name: unifi-guest-portal
       protocol: TLS
       port: 8843
-      hostname: "unifi-test.collazoirizarry.xyz"
+      hostname: "unifi.raymondcollazo.com"
       tls:
         mode: Passthrough
       allowedRoutes:
