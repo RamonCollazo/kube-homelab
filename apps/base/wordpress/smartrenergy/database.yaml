@@ -10,6 +10,8 @@ spec:
     key: password
   storage:
     size: 1Gi
+  updateStrategy:
+    autoUpdateDataPlane: false
   resources:
     requests:
       cpu: 200m
