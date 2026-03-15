@@ -11,7 +11,7 @@ spec:
   storage:
     size: 1Gi
   updateStrategy:
-    autoUpdateDataPlane: true
+    autoUpdateDataPlane: false
   resources:
     requests:
       cpu: 200m
