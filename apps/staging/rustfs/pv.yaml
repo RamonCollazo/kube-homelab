@@ -1,0 +1,44 @@
+---
+# NFS-backed PV for RustFS data — bound directly, bypasses StorageClass provisioner
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rustfs-data
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  nfs:
+    server: 10.0.100.100
+    path: /mnt/DataVault/RustFS/Data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rustfs-data
+  namespace: rustfs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: ""
+  volumeName: rustfs-data
+---
+# Logs PVC — dynamically provisioned on Rook-Ceph
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rustfs-logs
+  namespace: rustfs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ceph-block
+  resources:
+    requests:
+      storage: 5Gi

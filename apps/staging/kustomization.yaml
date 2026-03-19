@@ -13,3 +13,4 @@ resources:
   - ./n8n/
   - ./grampsweb/
   - ./open-webui/
+  - ./rustfs/

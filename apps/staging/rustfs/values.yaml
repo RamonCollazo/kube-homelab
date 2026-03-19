@@ -1,0 +1,11 @@
+mode:
+  standalone:
+    enabled: true
+    existingClaim:
+      dataClaim: rustfs-data
+      logsClaim: rustfs-logs
+  distributed:
+    enabled: false
+
+secret:
+  existingSecret: rustfs-credentials
