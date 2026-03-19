@@ -13,5 +13,5 @@ spec:
     - "rustfs.raymondcollazo.com"
   rules:
     - backendRefs:
-        - name: rustfs
+        - name: rustfs-svc
           port: 9001
