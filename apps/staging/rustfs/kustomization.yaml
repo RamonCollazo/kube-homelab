@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rustfs
+resources:
+  - ../../base/rustfs/
+  - ./pv.yaml
+  - ./route.yaml
+  - ./secrets.yaml
+
+configurations:
+  - kustomizeconfig.yaml
+
+configMapGenerator:
+  - name: rustfs-values
+    files:
+      - values.yaml=values.yaml
