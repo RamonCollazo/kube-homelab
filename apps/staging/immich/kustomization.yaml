@@ -5,6 +5,7 @@ resources:
   - ../../base/immich/
   - ./database.yaml
   - ./datastore.yaml
+  - ./storage.yaml
   - ./route.yaml
   - ./secrets.yaml
 
