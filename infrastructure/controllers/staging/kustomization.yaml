@@ -6,6 +6,7 @@ resources:
   - ./cilium/
   - ./cloudflared/
   - ./cloudnative-pg/
+  - ../base/cnpg-barman-plugin/
   - ./dragonfly/
   - ./metrics-server/
   - ./netbird/

@@ -6,6 +6,7 @@ resources:
   - ./database.yaml
   - ./route.yaml
   - ./secrets.yaml
+  - ./scheduled-backup.yaml
 
 configurations:
   - kustomizeconfig.yaml

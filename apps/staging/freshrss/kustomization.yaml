@@ -6,3 +6,4 @@ resources:
   - ./secrets.yaml
   - ./database.yaml
   - ./route.yaml
+  - ./scheduled-backup.yaml

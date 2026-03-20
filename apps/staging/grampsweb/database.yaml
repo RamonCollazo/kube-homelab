@@ -14,3 +14,30 @@ spec:
       owner: grampsweb
       secret:
         name: grampsweb-db
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: grampsweb-db-store
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: grampsweb-db-store
+  namespace: grampsweb
+spec:
+  configuration:
+    endpointURL: http://rustfs-svc.rustfs.svc.cluster.local:9000
+    destinationPath: s3://grampsweb-db/
+    s3Credentials:
+      accessKeyId:
+        name: rustfs-backup-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: rustfs-backup-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: 30d
