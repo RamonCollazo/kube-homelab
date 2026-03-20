@@ -1,0 +1,72 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: unifi-mongodb-backup
+  namespace: mongodb
+spec:
+  schedule: "0 2 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          automountServiceAccountToken: false
+          initContainers:
+            - name: dump
+              image: mongo:8.0
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  DATE=$(date +%Y-%m-%d)
+                  echo "$DATE" > /backup/date
+                  for db in unifi unifi_stat unifi_audit; do
+                    mongodump \
+                      --host=unifi-db-svc.mongodb.svc.cluster.local:27017 \
+                      --username=unifi \
+                      --password="$MONGO_PASSWORD" \
+                      --authenticationDatabase=unifi \
+                      --db="$db" \
+                      --out=/backup/dump
+                  done
+                  tar czf /backup/unifi-$DATE.tar.gz -C /backup dump
+              env:
+                - name: MONGO_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: unifi-db-password
+                      key: password
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+          containers:
+            - name: upload
+              image: minio/mc:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  DATE=$(cat /backup/date)
+                  mc alias set rustfs https://rustfs-s3.raymondcollazo.com "$ACCESS_KEY_ID" "$ACCESS_SECRET_KEY" &&
+                  mc cp /backup/unifi-$DATE.tar.gz rustfs/unifi-db/
+              env:
+                - name: ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: rustfs-backup-creds
+                      key: ACCESS_KEY_ID
+                - name: ACCESS_SECRET_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: rustfs-backup-creds
+                      key: ACCESS_SECRET_KEY
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+          volumes:
+            - name: backup
+              emptyDir: {}
