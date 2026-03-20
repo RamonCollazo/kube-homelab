@@ -12,5 +12,6 @@ resources:
   - ./forgejo/
   - ./n8n/
   - ./grampsweb/
+  - ./immich/
   - ./open-webui/
   - ./rustfs/
