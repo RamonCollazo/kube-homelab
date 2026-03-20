@@ -42,7 +42,7 @@ websocket:
   redis:
     enabled: false
 
-replicaCount: 3
+replicaCount: 1
 
 persistence:
   accessModes:
