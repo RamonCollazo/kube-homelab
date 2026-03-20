@@ -1,0 +1,66 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: wordpress-smartrenergy-backup
+  namespace: wordpress-smartrenergy
+spec:
+  schedule: "0 2 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          automountServiceAccountToken: false
+          initContainers:
+            - name: dump
+              image: mariadb:11
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  DATE=$(date +%Y-%m-%d)
+                  echo "$DATE" > /backup/date
+                  mysqldump \
+                    -h wordpress-smartrenergy-db.wordpress-smartrenergy.svc.cluster.local \
+                    -u root \
+                    wordpress-smartrenergy | gzip > /backup/wordpress-smartrenergy-$DATE.sql.gz
+              env:
+                - name: MYSQL_PWD
+                  valueFrom:
+                    secretKeyRef:
+                      name: wordpress-smartrenergy-db-root-secret
+                      key: password
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+          containers:
+            - name: upload
+              image: minio/mc:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  DATE=$(cat /backup/date)
+                  mc alias set rustfs https://rustfs-s3.raymondcollazo.com "$ACCESS_KEY_ID" "$ACCESS_SECRET_KEY" &&
+                  mc cp /backup/wordpress-smartrenergy-$DATE.sql.gz rustfs/wordpress-smartrenergy-db/
+              env:
+                - name: ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: rustfs-backup-creds
+                      key: ACCESS_KEY_ID
+                - name: ACCESS_SECRET_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: rustfs-backup-creds
+                      key: ACCESS_SECRET_KEY
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+          volumes:
+            - name: backup
+              emptyDir: {}
