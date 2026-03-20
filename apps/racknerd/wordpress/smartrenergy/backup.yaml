@@ -24,7 +24,7 @@ spec:
                 - |
                   DATE=$(date +%Y-%m-%d)
                   echo "$DATE" > /backup/date
-                  mysqldump \
+                  mariadb-dump \
                     -h wordpress-smartrenergy-db.wordpress-smartrenergy.svc.cluster.local \
                     -u root \
                     wordpress-smartrenergy | gzip > /backup/wordpress-smartrenergy-$DATE.sql.gz
