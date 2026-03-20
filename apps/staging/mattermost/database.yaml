@@ -14,3 +14,30 @@ spec:
       owner: mattermost
       secret:
         name: mattermost-db
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: mattermost-db-store
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: mattermost-db-store
+  namespace: mattermost
+spec:
+  configuration:
+    endpointURL: http://rustfs-svc.rustfs.svc.cluster.local:9000
+    destinationPath: s3://mattermost-db/
+    s3Credentials:
+      accessKeyId:
+        name: rustfs-backup-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: rustfs-backup-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: 30d

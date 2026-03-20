@@ -14,3 +14,30 @@ spec:
       owner: freshrss
       secret:
         name: freshrss-db
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: freshrss-pg-store
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: freshrss-pg-store
+  namespace: freshrss
+spec:
+  configuration:
+    endpointURL: http://rustfs-svc.rustfs.svc.cluster.local:9000
+    destinationPath: s3://freshrss-db/
+    s3Credentials:
+      accessKeyId:
+        name: rustfs-backup-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: rustfs-backup-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: 30d
