@@ -35,4 +35,6 @@ data:
         service: http://freshrss.freshrss.svc.cluster.local
       - hostname: kavita.raymondcollazo.com
         service: http://kavita.kavita.svc.cluster.local:5000
+      - hostname: rustfs-s3.raymondcollazo.com
+        service: http://rustfs-svc.rustfs.svc.cluster.local:9000
       - service: http_status:404
