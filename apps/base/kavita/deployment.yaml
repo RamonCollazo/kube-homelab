@@ -22,6 +22,25 @@ spec:
           image: ghcr.io/kareadita/kavita:0.8.9
           ports:
             - containerPort: 5000
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: kavita-config
               mountPath: /kavita/config
@@ -33,6 +52,6 @@ spec:
             claimName: kavita-config-pvc
         - name: media-ebooks
           nfs:
-            server: 10.0.50.100
+            server: 10.0.150.100
             path: /mnt/DataVault/Media/eBooks
             readOnly: true
