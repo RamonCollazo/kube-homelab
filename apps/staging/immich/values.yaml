@@ -24,9 +24,7 @@ env:
 immich:
   persistence:
     library:
-      type: nfs
-      server: 10.0.150.100
-      path: /mnt/DataVault/Immich
+      existingClaim: immich-library-pvc
 
 machine-learning:
   persistence:
