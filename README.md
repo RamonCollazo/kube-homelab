@@ -41,16 +41,29 @@ The cluster state is defined using a **monorepo** structure, which allows for a 
 .
 ├── apps/
 │   ├── base/          # App HelmRelease + HelmRepository definitions
-│   └── staging/       # Staging overlays: secrets, DB clusters, routes, values
+│   ├── staging/       # Staging overlays: secrets, DB clusters, routes, values
+│   └── racknerd/      # Racknerd overlays: VPS-specific apps and staging proxy
 ├── infrastructure/
-│   ├── controllers/   # Operators and controllers (Cilium, CNPG, Rook-Ceph, etc.)
-│   ├── configs/       # Cluster-specific configuration (gateway, cloudflared, etc.)
-│   └── crds/          # Custom Resource Definitions (e.g. Gateway API)
+│   ├── controllers/
+│   │   ├── base/      # Shared operators (Cilium, CNPG, Rook-Ceph, cert-manager, etc.)
+│   │   ├── staging/   # Staging-specific controller overrides
+│   │   └── racknerd/  # Racknerd-specific controller overrides
+│   ├── configs/
+│   │   ├── staging/   # Staging cluster config (gateway, cloudflared, RBAC, etc.)
+│   │   └── racknerd/  # Racknerd cluster config (gateway, TLS, etc.)
+│   └── crds/
+│       ├── base/      # Shared CRDs
+│       ├── staging/   # Staging CRD overrides
+│       └── racknerd/  # Racknerd CRD overrides (e.g. Gateway API v1.4.1 experimental)
 ├── monitoring/
-│   ├── controllers/   # Monitoring stack (kube-prometheus-stack, smartctl-exporter)
-│   └── configs/       # Monitoring configuration and dashboards
+│   └── controllers/
+│       ├── base/      # Monitoring stack (kube-prometheus-stack, smartctl-exporter)
+│       └── staging/   # Staging-specific monitoring values and overrides
+├── omni/
+│   └── staging/       # Talos machine config patches managed via Omni
 └── clusters/
-    └── staging/       # Flux entrypoint: bootstraps all kustomizations
+    ├── staging/        # Flux entrypoint for the staging cluster
+    └── racknerd/       # Flux entrypoint for the racknerd cluster
 ```
 
 ### 🔒 Secrets Management
@@ -97,12 +110,14 @@ These are the end-user applications currently deployed on the staging cluster.
 | **FreshRSS** | Lightweight, multi-user RSS aggregator and reader. |
 | **GrampsWeb** | Web frontend for the Gramps genealogy application. |
 | **Homepage** | Self-hosted homelab dashboard with service tiles, widgets, and health checks. |
+| **Immich** | Self-hosted photo and video backup with ML-powered search and face recognition. |
 | **Kavita** | Self-hosted digital library for manga, comics, and books. |
 | **Kiwix** | Offline reader for Wikipedia and other ZIM content. |
 | **Linkwarden** | Self-hosted, collaborative bookmark manager with archiving and tags. |
 | **Mattermost** | Open-source team messaging and collaboration platform. |
 | **n8n** | Workflow automation platform with a visual node editor. |
 | **NetBox** | Network source of truth for IPAM, DCIM, and infrastructure documentation. |
+| **Nextcloud** | Self-hosted file sync, sharing, and collaboration platform. |
 | **Open WebUI** | AI chat interface backed by Ollama with GPU acceleration. |
 
 ### Racknerd Apps
@@ -130,5 +145,6 @@ These are the essential cluster-wide services and operators that enable the enti
 | **smartctl-exporter** | Monitoring/Observability | Exports NVMe/disk SMART health metrics to Prometheus. |
 | **Cloudflare Zero Trust** | Networking/Security | Secure, identity-aware access to internal apps over Cloudflare Tunnels. |
 | **Authentik** | Identity/Access | SSO/IdP for apps; OIDC/SAML providers with policy-driven access. |
+| **RustFS** | Storage | S3-compatible object storage for database backups and application data. |
 | **Renovate** | Automation | Dependency discovery and automatic update PRs for charts, images, and manifests. |
 | **Reloader** | Automation | Triggers rolling restarts of workloads when ConfigMaps or Secrets change. |
