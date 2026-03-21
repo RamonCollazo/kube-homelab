@@ -39,4 +39,6 @@ data:
         service: http://kavita.kavita.svc.cluster.local:5000
       - hostname: rustfs-s3.raymondcollazo.com
         service: http://rustfs-svc.rustfs.svc.cluster.local:9000
+      - hostname: nextcloud.raymondcollazo.com
+        service: http://nextcloud.nextcloud.svc.cluster.local:8080
       - service: http_status:404
