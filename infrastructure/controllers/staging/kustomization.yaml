@@ -13,3 +13,4 @@ resources:
   - ./nvidia-device-plugin/
   - ./renovate/
   - ./rook-ceph/
+  - ./rustfs/
