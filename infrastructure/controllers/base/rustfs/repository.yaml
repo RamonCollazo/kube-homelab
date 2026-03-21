@@ -5,5 +5,5 @@ metadata:
   name: rustfs
   namespace: rustfs
 spec:
-  interval: 24h
+  interval: 1h
   url: https://charts.rustfs.com
