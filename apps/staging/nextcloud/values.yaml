@@ -1,0 +1,44 @@
+nextcloud:
+  host: nextcloud.raymondcollazo.com
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-admin
+    usernameKey: adminUser
+    passwordKey: adminPassword
+  trustedDomains:
+    - nextcloud.raymondcollazo.com
+  extraEnv:
+    - name: REDIS_HOST
+      value: nextcloud-ds
+    - name: REDIS_HOST_PORT
+      value: "6379"
+
+internalDatabase:
+  enabled: false
+
+externalDatabase:
+  enabled: true
+  type: postgresql
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-database-app
+    hostKey: host
+    usernameKey: user
+    passwordKey: password
+    databaseKey: dbname
+
+redis:
+  enabled: false
+
+persistence:
+  enabled: true
+  storageClass: ceph-block
+  accessMode: ReadWriteOnce
+  size: 5Gi
+  nextcloudData:
+    enabled: true
+    existingClaim: nextcloud-data-pvc
+    accessMode: ReadWriteMany
+
+ingress:
+  enabled: false
