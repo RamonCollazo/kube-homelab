@@ -115,9 +115,9 @@ These are the end-user applications currently deployed on the staging cluster.
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/kiwix.png" height="40"/> | **Kiwix** | Offline reader for Wikipedia and other ZIM content. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/linkwarden.png" height="40"/> | **Linkwarden** | Self-hosted, collaborative bookmark manager with archiving and tags. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/mattermost.png" height="40"/> | **Mattermost** | Open-source team messaging and collaboration platform. |
-| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/n8n.png" width="48"/> | **n8n** | Workflow automation platform with a visual node editor. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/n8n.png" width="64"/> | **n8n** | Workflow automation platform with a visual node editor. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/netbox.png" height="40"/> | **NetBox** | Network source of truth for IPAM, DCIM, and infrastructure documentation. |
-| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nextcloud.png" width="48"/> | **Nextcloud** | Self-hosted file sync, sharing, and collaboration platform. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nextcloud.png" width="64"/> | **Nextcloud** | Self-hosted file sync, sharing, and collaboration platform. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/open-webui.png" height="40"/> | **Open WebUI** | AI chat interface backed by Ollama with GPU acceleration. |
 
 ### Racknerd Apps
@@ -137,14 +137,14 @@ These are the essential cluster-wide services and operators that enable the enti
 | :---: | :--- | :--- | :--- |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cilium.png" height="40"/> | **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/rook.png" height="40"/> | **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker nodes. |
-| <img src="https://cdn.brandfetch.io/id-MW8B1On/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1771339352046" width="48"/> | **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
-| <img src="https://cdn.brandfetch.io/idwKzhLusM/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1766534924983" width="48"/> | **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
+| <img src="https://cdn.brandfetch.io/id-MW8B1On/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1771339352046" width="64"/> | **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
+| <img src="https://cdn.brandfetch.io/idwKzhLusM/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1766534924983" width="64"/> | **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cert-manager.png" height="40"/> | **cert-manager** | TLS | Automated TLS certificate management for internal and external services. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nvidia.png" height="40"/> | **NVIDIA Device Plugin** | GPU | Exposes GPU resources to Kubernetes workloads (used by Ollama). |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prometheus.png" height="40"/> | **kube-prometheus-stack** | Monitoring/Observability | Full Prometheus metrics and alerting stack with Grafana for visualization. |
-| <img src="https://cdn.brandfetch.io/idY88QL3WO/w/150/h/40/theme/light/logo.png?c=1bxid64Mup7aczewSAYMX&t=1766799454821" width="48"/> | **smartctl-exporter** | Monitoring/Observability | Exports NVMe/disk SMART health metrics to Prometheus. |
-| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cloudflare.png" width="48"/> | **Cloudflare Zero Trust** | Networking/Security | Secure, identity-aware access to internal apps over Cloudflare Tunnels. |
+| <img src="https://cdn.brandfetch.io/idY88QL3WO/w/150/h/40/theme/light/logo.png?c=1bxid64Mup7aczewSAYMX&t=1766799454821" width="64"/> | **smartctl-exporter** | Monitoring/Observability | Exports NVMe/disk SMART health metrics to Prometheus. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cloudflare.png" width="64"/> | **Cloudflare Zero Trust** | Networking/Security | Secure, identity-aware access to internal apps over Cloudflare Tunnels. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/authentik.png" height="40"/> | **Authentik** | Identity/Access | SSO/IdP for apps; OIDC/SAML providers with policy-driven access. |
-| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/rustfs.png" width="48"/> | **RustFS** | Storage | S3-compatible object storage for database backups and application data. |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/rustfs.png" width="64"/> | **RustFS** | Storage | S3-compatible object storage for database backups and application data. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/renovate.png" height="40"/> | **Renovate** | Automation | Dependency discovery and automatic update PRs for charts, images, and manifests. |
 | <img src="https://raw.githubusercontent.com/stakater/Reloader/master/assets/web/reloader.jpg" height="40"/> | **Reloader** | Automation | Triggers rolling restarts of workloads when ConfigMaps or Secrets change. |
