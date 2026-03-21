@@ -33,6 +33,8 @@ data:
         service: http://linkwarden.linkwarden.svc.cluster.local:3000
       - hostname: freshrss.raymondcollazo.com
         service: http://freshrss.freshrss.svc.cluster.local
+      - hostname: immich.raymondcollazo.com
+        service: http://immich-server.immich.svc.cluster.local:2283
       - hostname: kavita.raymondcollazo.com
         service: http://kavita.kavita.svc.cluster.local:5000
       - hostname: rustfs-s3.raymondcollazo.com
