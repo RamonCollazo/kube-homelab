@@ -136,7 +136,7 @@ These are the essential cluster-wide services and operators that enable the enti
 | Name | Category | Description |
 | :--- | :--- | :--- |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cilium.png" width="20" height="20"/> **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
-| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/ceph.png" width="20" height="20"/> **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker nodes. |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/rook.png" width="20" height="20"/> **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker nodes. |
 | <img src="https://cdn.brandfetch.io/id-MW8B1On/w/400/h/400/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1771339352186" width="20" height="20"/> **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
 | <img src="https://cdn.brandfetch.io/idwKzhLusM/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1766534925069" width="20" height="20"/> **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cert-manager.png" width="20" height="20"/> **cert-manager** | TLS | Automated TLS certificate management for internal and external services. |
