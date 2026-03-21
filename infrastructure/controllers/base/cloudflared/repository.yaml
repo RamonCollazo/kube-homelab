@@ -4,5 +4,5 @@ metadata:
   name: community-charts
   namespace: cloudflared
 spec:
-  interval: 24h
+  interval: 1h
   url: https://community-charts.github.io/helm-charts
