@@ -62,8 +62,8 @@ The cluster state is defined using a **monorepo** structure, which allows for a 
 ├── omni/
 │   └── staging/       # Talos machine config patches managed via Omni
 └── clusters/
-    ├── staging/        # Flux entrypoint for the staging cluster
-    └── racknerd/       # Flux entrypoint for the racknerd cluster
+    ├── staging/       # Flux entrypoint for the staging cluster
+    └── racknerd/      # Flux entrypoint for the racknerd cluster
 ```
 
 ### 🔒 Secrets Management
@@ -105,20 +105,20 @@ These are the end-user applications currently deployed on the staging cluster.
 
 | Name | Description |
 | :--- | :--- |
-| **ActualBudget** | Local-first personal finance and budgeting tool. |
-| **Forgejo** | Self-hosted Git forge with OIDC login via Authentik. |
-| **FreshRSS** | Lightweight, multi-user RSS aggregator and reader. |
-| **GrampsWeb** | Web frontend for the Gramps genealogy application. |
-| **Homepage** | Self-hosted homelab dashboard with service tiles, widgets, and health checks. |
-| **Immich** | Self-hosted photo and video backup with ML-powered search and face recognition. |
-| **Kavita** | Self-hosted digital library for manga, comics, and books. |
-| **Kiwix** | Offline reader for Wikipedia and other ZIM content. |
-| **Linkwarden** | Self-hosted, collaborative bookmark manager with archiving and tags. |
-| **Mattermost** | Open-source team messaging and collaboration platform. |
-| **n8n** | Workflow automation platform with a visual node editor. |
-| **NetBox** | Network source of truth for IPAM, DCIM, and infrastructure documentation. |
-| **Nextcloud** | Self-hosted file sync, sharing, and collaboration platform. |
-| **Open WebUI** | AI chat interface backed by Ollama with GPU acceleration. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/actual-budget.png" width="20" height="20"/> **ActualBudget** | Local-first personal finance and budgeting tool. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/forgejo.png" width="20" height="20"/> **Forgejo** | Self-hosted Git forge with OIDC login via Authentik. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/freshrss.png" width="20" height="20"/> **FreshRSS** | Lightweight, multi-user RSS aggregator and reader. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gramps.png" width="20" height="20"/> **GrampsWeb** | Web frontend for the Gramps genealogy application. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homepage.png" width="20" height="20"/> **Homepage** | Self-hosted homelab dashboard with service tiles, widgets, and health checks. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/immich.png" width="20" height="20"/> **Immich** | Self-hosted photo and video backup with ML-powered search and face recognition. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/kavita.png" width="20" height="20"/> **Kavita** | Self-hosted digital library for manga, comics, and books. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/kiwix.png" width="20" height="20"/> **Kiwix** | Offline reader for Wikipedia and other ZIM content. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/linkwarden.png" width="20" height="20"/> **Linkwarden** | Self-hosted, collaborative bookmark manager with archiving and tags. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/mattermost.png" width="20" height="20"/> **Mattermost** | Open-source team messaging and collaboration platform. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/n8n.png" width="20" height="20"/> **n8n** | Workflow automation platform with a visual node editor. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/netbox.png" width="20" height="20"/> **NetBox** | Network source of truth for IPAM, DCIM, and infrastructure documentation. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nextcloud.png" width="20" height="20"/> **Nextcloud** | Self-hosted file sync, sharing, and collaboration platform. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/open-webui.png" width="20" height="20"/> **Open WebUI** | AI chat interface backed by Ollama with GPU acceleration. |
 
 ### Racknerd Apps
 
@@ -126,8 +126,8 @@ Applications running on the VPS cluster, requiring a direct public IP or high-av
 
 | Name | Description |
 | :--- | :--- |
-| **Unifi Network Application** | Manages and monitors Unifi network devices at home over a direct public IP (bypasses CGNAT). |
-| **SmartrEnergy** | WordPress-based capstone portfolio site, always-on and independent of the home network. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/unifi.png" width="20" height="20"/> **Unifi Network Application** | Manages and monitors Unifi network devices at home over a direct public IP (bypasses CGNAT). |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/wordpress.png" width="20" height="20"/> **SmartrEnergy** | WordPress-based capstone portfolio site, always-on and independent of the home network. |
 
 ### Infrastructure
 
@@ -135,16 +135,16 @@ These are the essential cluster-wide services and operators that enable the enti
 
 | Name | Category | Description |
 | :--- | :--- | :--- |
-| **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
-| **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker nodes. |
-| **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
-| **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
-| **cert-manager** | TLS | Automated TLS certificate management for internal and external services. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cilium.png" width="20" height="20"/> **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/ceph.png" width="20" height="20"/> **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker nodes. |
+| <img src="https://cdn.brandfetch.io/id-MW8B1On/w/400/h/400/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1771339352186" width="20" height="20"/> **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
+| <img src="https://cdn.brandfetch.io/idwKzhLusM/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1766534925069" width="20" height="20"/> **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cert-manager.png" width="20" height="20"/> **cert-manager** | TLS | Automated TLS certificate management for internal and external services. |
 | **NVIDIA Device Plugin** | GPU | Exposes GPU resources to Kubernetes workloads (used by Ollama). |
-| **kube-prometheus-stack** | Monitoring/Observability | Full Prometheus metrics and alerting stack with Grafana for visualization. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prometheus.png" width="20" height="20"/> **kube-prometheus-stack** | Monitoring/Observability | Full Prometheus metrics and alerting stack with Grafana for visualization. |
 | **smartctl-exporter** | Monitoring/Observability | Exports NVMe/disk SMART health metrics to Prometheus. |
-| **Cloudflare Zero Trust** | Networking/Security | Secure, identity-aware access to internal apps over Cloudflare Tunnels. |
-| **Authentik** | Identity/Access | SSO/IdP for apps; OIDC/SAML providers with policy-driven access. |
-| **RustFS** | Storage | S3-compatible object storage for database backups and application data. |
-| **Renovate** | Automation | Dependency discovery and automatic update PRs for charts, images, and manifests. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cloudflare.png" width="20" height="20"/> **Cloudflare Zero Trust** | Networking/Security | Secure, identity-aware access to internal apps over Cloudflare Tunnels. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/authentik.png" width="20" height="20"/> **Authentik** | Identity/Access | SSO/IdP for apps; OIDC/SAML providers with policy-driven access. |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/rustfs.png" width="20" height="20"/> **RustFS** | Storage | S3-compatible object storage for database backups and application data. |
+| <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/renovate.png" width="20" height="20"/> **Renovate** | Automation | Dependency discovery and automatic update PRs for charts, images, and manifests. |
 | **Reloader** | Automation | Triggers rolling restarts of workloads when ConfigMaps or Secrets change. |
