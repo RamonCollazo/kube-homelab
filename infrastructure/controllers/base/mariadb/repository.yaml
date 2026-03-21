@@ -5,5 +5,5 @@ metadata:
   name: mariadb-operator
   namespace: mariadb
 spec:
-  interval: 24h
+  interval: 1h
   url: https://mariadb-operator.github.io/mariadb-operator
