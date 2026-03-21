@@ -26,6 +26,8 @@ controllers:
                 key: dbname
 
 immich:
+  metrics:
+    enabled: true
   persistence:
     library:
       existingClaim: immich-library-pvc
