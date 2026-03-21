@@ -167,6 +167,11 @@ data:
             description: Collaborative bookmark manager
             icon: linkwarden.png
             siteMonitor: https://linkwarden.raymondcollazo.com
+        - Nextcloud:
+            href: https://nextcloud.raymondcollazo.com
+            description: Self-hosted file sync and sharing
+            icon: nextcloud.png
+            siteMonitor: https://nextcloud.raymondcollazo.com
         - SmartrEnergy:
             href: https://smartrenergy.com/
             description: WordPress-based capstone portfolio site
