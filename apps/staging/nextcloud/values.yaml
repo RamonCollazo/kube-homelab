@@ -7,6 +7,14 @@ nextcloud:
     passwordKey: adminPassword
   trustedDomains:
     - nextcloud.raymondcollazo.com
+  configs:
+    proxy.config.php: |-
+      <?php
+      $CONFIG = array(
+        'overwriteprotocol' => 'https',
+        'overwrite.cli.url' => 'https://nextcloud.raymondcollazo.com',
+        'trusted_proxies' => array('10.244.0.0/16'),
+      );
   extraEnv:
     - name: REDIS_HOST
       value: nextcloud-ds
