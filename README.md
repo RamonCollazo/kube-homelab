@@ -137,8 +137,8 @@ These are the essential cluster-wide services and operators that enable the enti
 | :---: | :--- | :--- | :--- |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cilium.png" height="40"/> | **Cilium** | Networking/Gateway | Provides CNI capabilities and acts as the **Gateway Controller** for all incoming traffic via eBPF. |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/rook.png" height="40"/> | **Rook-Ceph** | Storage | Manages highly available, distributed storage layer using the disks on the worker nodes. |
-| <img src="https://cdn.brandfetch.io/id-MW8B1On/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1771339352046" width="64"/> | **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
-| <img src="https://cdn.brandfetch.io/idwKzhLusM/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1766534924983" width="64"/> | **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
+| <img src="https://cdn.brandfetch.io/id-MW8B1On/w/400/h/400/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1771339352186" height="40"/> | **CloudNativePG** | Database | Kubernetes-native PostgreSQL operator and HA clusters. |
+| <img src="https://cdn.brandfetch.io/idwKzhLusM/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1766534925069" height="40"/> | **DragonflyDB** | Cache/Queue | Redis-compatible in-memory store used for cache, session, and queue workloads. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/cert-manager.png" height="40"/> | **cert-manager** | TLS | Automated TLS certificate management for internal and external services. |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nvidia.png" height="40"/> | **NVIDIA Device Plugin** | GPU | Exposes GPU resources to Kubernetes workloads (used by Ollama). |
 | <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prometheus.png" height="40"/> | **kube-prometheus-stack** | Monitoring/Observability | Full Prometheus metrics and alerting stack with Grafana for visualization. |
