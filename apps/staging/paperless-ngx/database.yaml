@@ -1,0 +1,55 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: paperless-database
+  namespace: paperless-ngx
+spec:
+  instances: 3
+  storage:
+    size: 5Gi
+  bootstrap:
+    initdb:
+      database: paperless
+      owner: paperless
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: paperless-db-store
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: paperless-db-store
+  namespace: paperless-ngx
+spec:
+  configuration:
+    endpointURL: http://rustfs-svc.rustfs.svc.cluster.local:9000
+    destinationPath: s3://paperless-db/
+    s3Credentials:
+      accessKeyId:
+        name: rustfs-backup-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: rustfs-backup-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: 30d
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: paperless-db-backup
+  namespace: paperless-ngx
+spec:
+  schedule: "0 4 * * *"
+  backupOwnerReference: self
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+  cluster:
+    name: paperless-database
