@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paperless-ngx-config
+  namespace: paperless-ngx
+data:
+  PAPERLESS_URL: "https://paperless.raymondcollazo.com"
+  PAPERLESS_DBENGINE: "postgresql"
+  PAPERLESS_DBHOST: "paperless-database-rw"
+  PAPERLESS_DBNAME: "paperless"
+  PAPERLESS_DBUSER: "paperless"
+  PAPERLESS_REDIS: "redis://paperless-ds:6379"
+  PAPERLESS_TIKA_ENABLED: "1"
+  PAPERLESS_TIKA_ENDPOINT: "http://paperless-tika:9998"
+  PAPERLESS_TIKA_GOTENBERG_ENDPOINT: "http://paperless-gotenberg:3000"
+  PAPERLESS_APPS: "allauth.socialaccount.providers.openid_connect"
+  PAPERLESS_TRUSTED_PROXIES: "10.244.0.0/16"
+  PAPERLESS_TIME_ZONE: "America/Puerto_Rico"
+  PAPERLESS_OCR_LANGUAGE: "eng"
+  PAPERLESS_CONSUMER_POLLING: "60"

@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-ngx-data-pv
+spec:
+  capacity:
+    storage: 250Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 10.0.150.100
+    path: /mnt/DataVault/PaperlessNGX
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    name: paperless-ngx-pvc
+    namespace: paperless-ngx
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx-pvc
+  namespace: paperless-ngx
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
+  volumeName: paperless-ngx-data-pv
+  storageClassName: ""
