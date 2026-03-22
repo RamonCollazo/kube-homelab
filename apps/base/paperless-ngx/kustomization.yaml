@@ -6,3 +6,5 @@ resources:
   - ./service.yaml
   - ./tika.yaml
   - ./gotenberg.yaml
+  - ./paperless-ai.yaml
+  - ./paperless-gpt.yaml

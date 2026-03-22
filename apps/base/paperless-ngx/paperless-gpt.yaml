@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-gpt
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-gpt
+  template:
+    metadata:
+      labels:
+        app: paperless-gpt
+    spec:
+      containers:
+        - name: paperless-gpt
+          image: ghcr.io/icereed/paperless-gpt:v0.25.1
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: paperless-gpt-config
+          env:
+            - name: PAPERLESS_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ai-secret
+                  key: PAPERLESS_API_TOKEN
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paperless-gpt
+  namespace: paperless-ngx
+spec:
+  selector:
+    app: paperless-gpt
+  ports:
+    - port: 8080
+      targetPort: 8080

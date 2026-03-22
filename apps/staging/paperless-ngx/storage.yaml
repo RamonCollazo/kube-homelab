@@ -29,3 +29,15 @@ spec:
       storage: 250Gi
   volumeName: paperless-ngx-data-pv
   storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ai-pvc
+  namespace: paperless-ngx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

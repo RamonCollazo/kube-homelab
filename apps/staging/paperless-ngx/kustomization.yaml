@@ -6,6 +6,6 @@ resources:
   - ./database.yaml
   - ./datastore.yaml
   - ./storage.yaml
-  - ./route.yaml
+  - ./routes.yaml
   - ./configmap.yaml
   - ./secrets.yaml
