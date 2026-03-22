@@ -27,6 +27,7 @@ metadata:
   namespace: paperless-ngx
 data:
   PAPERLESS_API_URL: "http://paperless-ngx.paperless-ngx.svc.cluster.local:8000/api"
+  PAPERLESS_USERNAME: "ramon"
   AI_PROVIDER: "ollama"
   OLLAMA_API_URL: "http://open-webui-ollama.open-webui.svc.cluster.local:11434"
   OLLAMA_MODEL: "qwen3.5:0.8b"
