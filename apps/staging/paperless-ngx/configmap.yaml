@@ -30,7 +30,7 @@ data:
   PAPERLESS_USERNAME: "ramon"
   AI_PROVIDER: "ollama"
   OLLAMA_API_URL: "http://open-webui-ollama.open-webui.svc.cluster.local:11434"
-  OLLAMA_MODEL: "qwen2.5:1.5b"
+  OLLAMA_MODEL: "deepseek-ocr:3b"
   SCAN_INTERVAL: "*/30 * * * *"
   ADD_AI_PROCESSED_TAG: "true"
   AI_PROCESSED_TAG_NAME: "ai-processed"
@@ -47,7 +47,7 @@ metadata:
 data:
   PAPERLESS_BASE_URL: "http://paperless-ngx.paperless-ngx.svc.cluster.local:8000"
   LLM_PROVIDER: "ollama"
-  LLM_MODEL: "qwen2.5:1.5b"
+  LLM_MODEL: "deepseek-ocr:3b"
   OLLAMA_HOST: "http://open-webui-ollama.open-webui.svc.cluster.local:11434"
   OLLAMA_CONTEXT_LENGTH: "8192"
   TOKEN_LIMIT: "1000"
