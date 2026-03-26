@@ -23,6 +23,10 @@ spec:
           db: unifi_stat
         - name: dbOwner
           db: unifi_audit
+        - name: readWriteAnyDatabase
+          db: admin
+        - name: dbAdminAnyDatabase
+          db: admin
       scramCredentialsSecretName: unifi-db-scram
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: zlib
