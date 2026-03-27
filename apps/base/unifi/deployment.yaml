@@ -31,7 +31,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-              add: ["SETGID", "SETUID"]
+              add: ["SETGID", "SETUID", "CHOWN"]
           volumeMounts:
             - name: unifi-config
               mountPath: /config
