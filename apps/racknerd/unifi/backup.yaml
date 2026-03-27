@@ -24,7 +24,7 @@ spec:
                 - |
                   DATE=$(date +%Y-%m-%d)
                   echo "$DATE" > /backup/date
-                  for db in unifi unifi_stat unifi_audit; do
+                  for db in unifi unifi_audit; do
                     mongodump \
                       --host=unifi-db-svc.mongodb.svc.cluster.local:27017 \
                       --username=unifi \
@@ -45,25 +45,31 @@ spec:
                   mountPath: /backup
           containers:
             - name: upload
-              image: minio/mc:latest
+              image: amazon/aws-cli:latest
               command:
                 - /bin/sh
                 - -c
                 - |
                   DATE=$(cat /backup/date)
-                  mc alias set rustfs https://rustfs-s3.raymondcollazo.com "$ACCESS_KEY_ID" "$ACCESS_SECRET_KEY" &&
-                  mc cp /backup/unifi-$DATE.tar.gz rustfs/unifi-db/
+                  aws s3api put-object \
+                    --endpoint-url https://rustfs-s3.raymondcollazo.com \
+                    --bucket unifi-db \
+                    --key unifi-$DATE.tar.gz \
+                    --body /backup/unifi-$DATE.tar.gz \
+                    --no-verify-ssl
               env:
-                - name: ACCESS_KEY_ID
+                - name: AWS_ACCESS_KEY_ID
                   valueFrom:
                     secretKeyRef:
                       name: rustfs-backup-creds
                       key: ACCESS_KEY_ID
-                - name: ACCESS_SECRET_KEY
+                - name: AWS_SECRET_ACCESS_KEY
                   valueFrom:
                     secretKeyRef:
                       name: rustfs-backup-creds
                       key: ACCESS_SECRET_KEY
+                - name: AWS_DEFAULT_REGION
+                  value: us-east-1
               volumeMounts:
                 - name: backup
                   mountPath: /backup
