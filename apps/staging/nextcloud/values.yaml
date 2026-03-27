@@ -75,5 +75,22 @@ persistence:
     existingClaim: nextcloud-data-pvc
     accessMode: ReadWriteMany
 
+cronjob:
+  enabled: true
+  type: cronjob
+  cronjob:
+    schedule: "*/5 * * * *"
+    successfulJobsHistoryLimit: 3
+    failedJobsHistoryLimit: 3
+    backoffLimit: 1
+
+resources:
+  limits:
+    cpu: "4"
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
 ingress:
   enabled: false
