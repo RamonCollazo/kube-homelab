@@ -15,7 +15,7 @@ spec:
             - name: renovate
               # Update this to the latest available and then enable Renovate on
               # the manifest
-              image: renovate/renovate:43.91.6
+              image: renovate/renovate:43.92.0
               args:
                 - RamonCollazo/kube-homelab
               # Environment Variables
