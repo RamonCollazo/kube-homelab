@@ -21,7 +21,27 @@ global:
           key: key
 
 server:
-  replicas: 1
+  replicas: 3
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: authentik
+                app.kubernetes.io/component: server
+            topologyKey: kubernetes.io/hostname
 
 worker:
-  replicas: 1
+  replicas: 3
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: authentik
+                app.kubernetes.io/component: worker
+            topologyKey: kubernetes.io/hostname
