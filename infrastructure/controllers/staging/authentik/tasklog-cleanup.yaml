@@ -10,6 +10,8 @@ spec:
   failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 300
+      backoffLimit: 2
       template:
         spec:
           restartPolicy: OnFailure
@@ -26,17 +28,25 @@ spec:
                 capabilities:
                   drop:
                     - ALL
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  memory: 64Mi
               command:
                 - sh
                 - -c
                 - |
                   psql "postgresql://${DB_USER}:${DB_PASSWORD}@authentik-db-rw:5432/authentik" <<'EOF'
+                  BEGIN;
                   DELETE FROM authentik_tasks_tasklog
                   WHERE task_id IN (
                     SELECT message_id FROM authentik_tasks_task
                     WHERE result_expiry < NOW()
                   );
                   DELETE FROM authentik_tasks_task WHERE result_expiry < NOW();
+                  COMMIT;
                   EOF
               env:
                 - name: DB_USER
