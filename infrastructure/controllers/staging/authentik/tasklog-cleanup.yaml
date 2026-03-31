@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: authentik-tasklog-cleanup
+  namespace: authentik
+spec:
+  schedule: "0 3 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: cleanup
+              image: postgres:17-alpine
+              command:
+                - sh
+                - -c
+                - |
+                  psql "postgresql://${DB_USER}:${DB_PASSWORD}@authentik-db-rw:5432/authentik" <<'EOF'
+                  DELETE FROM authentik_tasks_tasklog
+                  WHERE task_id IN (
+                    SELECT message_id FROM authentik_tasks_task
+                    WHERE result_expiry < NOW()
+                  );
+                  DELETE FROM authentik_tasks_task WHERE result_expiry < NOW();
+                  EOF
+              env:
+                - name: DB_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-db
+                      key: username
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-db
+                      key: password
