@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
   storage:
-    size: 2Gi
+    size: 5Gi
   bootstrap:
     initdb:
       database: authentik
