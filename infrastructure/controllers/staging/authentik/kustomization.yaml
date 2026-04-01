@@ -7,7 +7,6 @@ resources:
   - ./secrets.yaml
   - ./route.yaml
   - ./backup.yaml
-  - ./tasklog-cleanup.yaml
 configMapGenerator:
   - name: authentik-values
     files:
