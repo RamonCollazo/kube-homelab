@@ -14,7 +14,7 @@ ollama:
       memory: 1024Mi
       cpu: 500m
     limits:
-      memory: 8192Mi
+      memory: 16Gi
       cpu: 4000m
   persistentVolume:
     enabled: true
