@@ -16,3 +16,4 @@ resources:
   - ./open-webui/
   - ./nextcloud/
   - ./paperless-ngx/
+  - ./jellyfin/

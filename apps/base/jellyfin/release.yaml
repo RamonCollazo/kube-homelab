@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: jellyfin
+      version: 3.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: jellyfin
+        namespace: jellyfin
+  valuesFrom:
+    - kind: ConfigMap
+      name: jellyfin-values
+      valuesKey: values.yaml

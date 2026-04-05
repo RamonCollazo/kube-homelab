@@ -1,0 +1,121 @@
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 5Gi
+  media:
+    enabled: false
+
+volumes:
+  - name: media-movies
+    nfs:
+      server: 10.0.150.100
+      path: /mnt/DataVault/Media/Movies
+      readOnly: false
+  - name: media-series
+    nfs:
+      server: 10.0.150.100
+      path: /mnt/DataVault/Media/Series
+      readOnly: false
+
+volumeMounts:
+  - name: media-movies
+    mountPath: /media/Movies
+  - name: media-series
+    mountPath: /media/Series
+
+runtimeClassName: nvidia
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 4000m
+    memory: 4Gi
+    nvidia.com/gpu: 1
+
+ingress:
+  enabled: false
+
+httpRoute:
+  enabled: false
+
+extraInitContainers:
+  - name: install-sso-plugin
+    image: alpine:3.20
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+
+        PLUGIN_DIR="/config/plugins/sso-authentication_4.0.0.3"
+        CONFIG_FILE="/config/plugins/configurations/SSO-Auth.xml"
+
+        if [ ! -f "${PLUGIN_DIR}/SSO-Auth.dll" ]; then
+          mkdir -p "${PLUGIN_DIR}"
+          wget -q -O /tmp/sso.zip \
+            https://github.com/9p4/jellyfin-plugin-sso/releases/download/v4.0.0.3/sso-authentication_4.0.0.3.zip
+          unzip -q /tmp/sso.zip -d "${PLUGIN_DIR}"
+          rm /tmp/sso.zip
+        fi
+
+        mkdir -p /config/plugins/configurations
+        cat > "${CONFIG_FILE}" << XMLEOF
+        <?xml version="1.0" encoding="utf-8"?>
+        <PluginConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+          <SamlConfigs />
+          <OidConfigs>
+            <item>
+              <key>Authentik</key>
+              <value>
+                <OidEndpoint>https://auth.raymondcollazo.com/application/o/jellyfin/</OidEndpoint>
+                <OidClientId>${OIDC_CLIENT_ID}</OidClientId>
+                <OidSecret>${OIDC_CLIENT_SECRET}</OidSecret>
+                <Enabled>true</Enabled>
+                <EnableAuthorization>false</EnableAuthorization>
+                <EnableAllFolders>true</EnableAllFolders>
+                <EnabledFolders />
+                <AdminRoles />
+                <Roles />
+                <EnableFolderRoles>false</EnableFolderRoles>
+                <EnableLiveTvRoles>false</EnableLiveTvRoles>
+                <EnableLiveTv>true</EnableLiveTv>
+                <EnableLiveTvManagement>false</EnableLiveTvManagement>
+                <LiveTvRoles />
+                <LiveTvManagementRoles />
+                <FolderRoleMapping />
+                <RoleClaim>groups</RoleClaim>
+                <OidScopes>
+                  <string>openid</string>
+                  <string>profile</string>
+                  <string>email</string>
+                </OidScopes>
+                <SchemeOverride>https</SchemeOverride>
+                <NewPath>true</NewPath>
+                <DefaultUsernameClaim>preferred_username</DefaultUsernameClaim>
+                <DisableHttps>false</DisableHttps>
+                <DisablePushedAuthorization>false</DisablePushedAuthorization>
+                <DoNotValidateEndpoints>false</DoNotValidateEndpoints>
+                <DoNotValidateIssuerName>false</DoNotValidateIssuerName>
+                <DoNotLoadProfile>false</DoNotLoadProfile>
+              </value>
+            </item>
+          </OidConfigs>
+        </PluginConfiguration>
+        XMLEOF
+    env:
+      - name: OIDC_CLIENT_ID
+        valueFrom:
+          secretKeyRef:
+            name: jellyfin-oidc
+            key: client-id
+      - name: OIDC_CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: jellyfin-oidc
+            key: client-secret
+    volumeMounts:
+      - name: config
+        mountPath: /config
