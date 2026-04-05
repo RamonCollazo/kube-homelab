@@ -68,38 +68,36 @@ extraInitContainers:
           <SamlConfigs />
           <OidConfigs>
             <item>
-              <key>Authentik</key>
+              <key>
+                <string>Authentik</string>
+              </key>
               <value>
-                <OidEndpoint>https://auth.raymondcollazo.com/application/o/jellyfin/</OidEndpoint>
-                <OidClientId>${OIDC_CLIENT_ID}</OidClientId>
-                <OidSecret>${OIDC_CLIENT_SECRET}</OidSecret>
-                <Enabled>true</Enabled>
-                <EnableAuthorization>false</EnableAuthorization>
-                <EnableAllFolders>true</EnableAllFolders>
-                <EnabledFolders />
-                <AdminRoles />
-                <Roles />
-                <EnableFolderRoles>false</EnableFolderRoles>
-                <EnableLiveTvRoles>false</EnableLiveTvRoles>
-                <EnableLiveTv>true</EnableLiveTv>
-                <EnableLiveTvManagement>false</EnableLiveTvManagement>
-                <LiveTvRoles />
-                <LiveTvManagementRoles />
-                <FolderRoleMapping />
-                <RoleClaim>groups</RoleClaim>
-                <OidScopes>
-                  <string>openid</string>
-                  <string>profile</string>
-                  <string>email</string>
-                </OidScopes>
-                <SchemeOverride>https</SchemeOverride>
-                <NewPath>true</NewPath>
-                <DefaultUsernameClaim>preferred_username</DefaultUsernameClaim>
-                <DisableHttps>false</DisableHttps>
-                <DisablePushedAuthorization>false</DisablePushedAuthorization>
-                <DoNotValidateEndpoints>false</DoNotValidateEndpoints>
-                <DoNotValidateIssuerName>false</DoNotValidateIssuerName>
-                <DoNotLoadProfile>false</DoNotLoadProfile>
+                <PluginConfiguration>
+                  <OidEndpoint>https://auth.raymondcollazo.com/application/o/jellyfin/</OidEndpoint>
+                  <OidClientId>${OIDC_CLIENT_ID}</OidClientId>
+                  <OidSecret>${OIDC_CLIENT_SECRET}</OidSecret>
+                  <Enabled>true</Enabled>
+                  <EnableAuthorization>false</EnableAuthorization>
+                  <EnableAllFolders>true</EnableAllFolders>
+                  <EnabledFolders />
+                  <AdminRoles />
+                  <Roles />
+                  <EnableFolderRoles>false</EnableFolderRoles>
+                  <EnableLiveTvRoles>false</EnableLiveTvRoles>
+                  <EnableLiveTv>false</EnableLiveTv>
+                  <EnableLiveTvManagement>false</EnableLiveTvManagement>
+                  <LiveTvRoles />
+                  <LiveTvManagementRoles />
+                  <FolderRoleMappings />
+                  <OidScopes />
+                  <PortOverride xsi:nil="true" />
+                  <NewPath>false</NewPath>
+                  <CanonicalLinks />
+                  <DisableHttps>false</DisableHttps>
+                  <DisablePushedAuthorization>false</DisablePushedAuthorization>
+                  <DoNotValidateEndpoints>false</DoNotValidateEndpoints>
+                  <DoNotValidateIssuerName>false</DoNotValidateIssuerName>
+                </PluginConfiguration>
               </value>
             </item>
           </OidConfigs>
