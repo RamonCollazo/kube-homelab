@@ -1,6 +1,6 @@
 ollama:
   enabled: true
-  replicaCount: 3
+  replicaCount: 1
   ollama:
     gpu:
       enabled: true
@@ -24,13 +24,8 @@ ollama:
     size: 50Gi
   # -- Use nvidia containerd runtime (provided by siderolabs/nvidia-container-toolkit-lts)
   runtimeClassName: nvidia
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: open-webui-ollama
-          topologyKey: kubernetes.io/hostname
+  nodeSelector:
+    kubernetes.io/hostname: talos-wk-03
 
 tika:
   enabled: true
