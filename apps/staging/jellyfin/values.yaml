@@ -90,6 +90,7 @@ extraInitContainers:
                   <LiveTvManagementRoles />
                   <FolderRoleMappings />
                   <OidScopes />
+                  <SchemeOverride>https</SchemeOverride>
                   <PortOverride xsi:nil="true" />
                   <NewPath>false</NewPath>
                   <CanonicalLinks />
