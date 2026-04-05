@@ -43,7 +43,7 @@ httpRoute:
 
 extraInitContainers:
   - name: install-sso-plugin
-    image: alpine:3.20
+    image: alpine:3.23
     command:
       - sh
       - -c
