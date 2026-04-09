@@ -41,4 +41,6 @@ data:
         service: http://rustfs-svc.rustfs.svc.cluster.local:9000
       - hostname: nextcloud.raymondcollazo.com
         service: http://nextcloud.nextcloud.svc.cluster.local:8080
+      - hostname: jellyfin.raymondcollazo.com
+        service: http://jellyfin.jellyfin.svc.cluster.local:8096
       - service: http_status:404
