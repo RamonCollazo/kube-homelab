@@ -87,6 +87,14 @@ cronjob:
       runAsUser: 33
       runAsGroup: 33
 
+startupProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+
 resources:
   limits:
     cpu: "4"
