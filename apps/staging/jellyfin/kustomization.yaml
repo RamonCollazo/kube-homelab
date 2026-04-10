@@ -4,6 +4,8 @@ resources:
   - ../../base/jellyfin/
   - ./route.yaml
   - ./secrets.yaml
+  - ./zap2xml-pvc.yaml
+  - ./zap2xml-deployment.yaml
 
 configurations:
   - kustomizeconfig.yaml
