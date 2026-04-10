@@ -84,8 +84,8 @@ extraInitContainers:
                   <Roles />
                   <EnableFolderRoles>false</EnableFolderRoles>
                   <EnableLiveTvRoles>false</EnableLiveTvRoles>
-                  <EnableLiveTv>false</EnableLiveTv>
-                  <EnableLiveTvManagement>false</EnableLiveTvManagement>
+                  <EnableLiveTv>true</EnableLiveTv>
+                  <EnableLiveTvManagement>true</EnableLiveTvManagement>
                   <LiveTvRoles />
                   <LiveTvManagementRoles />
                   <FolderRoleMappings />
