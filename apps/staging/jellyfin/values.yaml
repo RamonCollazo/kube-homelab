@@ -17,12 +17,17 @@ volumes:
       server: 10.0.150.100
       path: /mnt/DataVault/Media/Series
       readOnly: false
+  - name: epg
+    persistentVolumeClaim:
+      claimName: zap2xml-epg
 
 volumeMounts:
   - name: media-movies
     mountPath: /media/Movies
   - name: media-series
     mountPath: /media/Series
+  - name: epg
+    mountPath: /epg
 
 runtimeClassName: nvidia
 

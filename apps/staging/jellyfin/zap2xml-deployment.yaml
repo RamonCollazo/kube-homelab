@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zap2xml
+  namespace: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zap2xml
+  template:
+    metadata:
+      labels:
+        app: zap2xml
+    spec:
+      containers:
+        - name: zap2xml
+          image: ghcr.io/jef/zap2xml:latest
+          env:
+            - name: POSTAL_CODE
+              value: "00961"
+            - name: COUNTRY
+              value: "USA"
+            - name: TZ
+              value: "America/Puerto_Rico"
+            - name: TIMESPAN
+              value: "72"
+            - name: SLEEP_TIME
+              value: "21600"
+            - name: OUTPUT_FILE
+              value: "/epg/xmltv.xml"
+            # LINEUP_ID defaults to USA OTA antenna — update if needed
+            # Find yours at: https://github.com/jef/zap2xml/wiki
+          volumeMounts:
+            - name: epg
+              mountPath: /epg
+      volumes:
+        - name: epg
+          persistentVolumeClaim:
+            claimName: zap2xml-epg
