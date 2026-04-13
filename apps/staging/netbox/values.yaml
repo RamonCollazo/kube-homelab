@@ -38,6 +38,6 @@ extraConfig:
 
 persistence:
   enabled: true
-  size: 10Gi
+  existingClaim: netbox-media-rwx
 
 metricsEnabled: true

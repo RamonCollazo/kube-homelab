@@ -7,7 +7,7 @@ apiVersion: v1alpha1
 kind: LinkConfig
 name: eth0
 addresses:
-  - address: 10.0.150.16/24
+  - address: 10.0.150.14/24
 routes:
   - gateway: 10.0.150.1
 ---
@@ -17,3 +17,9 @@ nameservers:
   - address: 10.0.150.1
   - address: 1.1.1.1
   - address: 9.9.9.9
+---
+machine:
+  install:
+    diskSelector:
+      size: "< 900GB"
+      type: nvme
