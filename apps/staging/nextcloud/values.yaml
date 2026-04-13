@@ -67,8 +67,9 @@ redis:
 
 persistence:
   enabled: true
-  storageClass: ceph-block
-  accessMode: ReadWriteOnce
+  existingClaim: nextcloud-nextcloud-rwx
+  storageClass: ceph-filesystem
+  accessMode: ReadWriteMany
   size: 5Gi
   nextcloudData:
     enabled: true
