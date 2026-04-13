@@ -40,6 +40,15 @@ resources:
     memory: 4Gi
     nvidia.com/gpu: 1
 
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 10
+  failureThreshold: 10
+  timeoutSeconds: 5
+  periodSeconds: 10
+
 ingress:
   enabled: false
 
