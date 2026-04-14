@@ -29,6 +29,9 @@ volumeMounts:
   - name: epg
     mountPath: /epg
 
+deploymentStrategy:
+  type: Recreate
+
 runtimeClassName: nvidia
 
 resources:
