@@ -1,6 +1,7 @@
 # Claude Code
-.claude/
+.claude
 CLAUDE.md
 CONTEXT.md
+.firecrawl
 
 omni/staging/patches/netbird-worker-patch.yaml
