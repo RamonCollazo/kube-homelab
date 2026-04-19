@@ -5,3 +5,6 @@ CONTEXT.md
 .firecrawl/
 
 omni/staging/patches/netbird-worker-patch.yaml
+
+# AI agent configs
+.kiro/
