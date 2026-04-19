@@ -7,7 +7,11 @@ metadata:
 spec:
   instances: 3
   storage:
-    size: 20Gi
+    size: 50Gi
+  postgresql:
+    parameters:
+      wal_level: replica
+      wal_keep_size: "0"
   bootstrap:
     initdb:
       database: nextcloud
