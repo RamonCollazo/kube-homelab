@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: netbirdio
         namespace: netbird
-      version: 0.2.2
+      version: 0.3.1
       interval: 12h
   interval: 30m
   values:
