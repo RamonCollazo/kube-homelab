@@ -15,6 +15,10 @@ persistence:
 
 replicaCount: 1
 
+deploymentStrategy:
+  type: Recreate
+  rollingUpdate: null
+
 extraEnvVars:
   - name: MM_SERVICESETTINGS_SITEURL
     value: "https://mattermost.raymondcollazo.com"

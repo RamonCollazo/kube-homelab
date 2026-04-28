@@ -10,6 +10,10 @@ existingEncryptionKeySecret: n8n-secret
 webhook:
   url: https://n8n.raymondcollazo.com/
 
+strategy:
+  type: Recreate
+  rollingUpdate: null
+
 main:
   editorBaseUrl: https://n8n.raymondcollazo.com/
   persistence:
