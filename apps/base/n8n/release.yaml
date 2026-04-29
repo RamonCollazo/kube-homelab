@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: n8n
-      version: 1.16.37
+      version: 1.16.38
       sourceRef:
         kind: HelmRepository
         name: community-charts
