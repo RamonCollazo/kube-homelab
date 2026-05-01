@@ -21,6 +21,10 @@ spec:
               kind: Deployment
               name: grampsweb
             patch: |
+              - op: replace
+                path: /spec/strategy
+                value:
+                  type: Recreate
               - op: add
                 path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
                 value: 60

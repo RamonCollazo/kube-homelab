@@ -18,3 +18,14 @@ spec:
     - kind: ConfigMap
       name: rustfs-values
       valuesKey: values.yaml
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: rustfs
+            patch: |
+              - op: replace
+                path: /spec/strategy
+                value:
+                  type: Recreate
