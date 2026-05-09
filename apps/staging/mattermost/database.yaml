@@ -8,6 +8,9 @@ spec:
   instances: 3
   storage:
     size: 2Gi
+  postgresql:
+    parameters:
+      wal_keep_size: "0"
   bootstrap:
     initdb:
       database: mattermost
