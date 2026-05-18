@@ -17,6 +17,22 @@ spec:
       labels:
         app: freshrss
     spec:
+      initContainers:
+        - name: install-extensions
+          image: alpine:3
+          command:
+            - sh
+            - -c
+            - |
+              apk add --no-cache unzip wget &&
+              wget -O /tmp/ext.zip https://github.com/Niehztog/freshrss-af-readability/archive/refs/heads/main.zip &&
+              unzip /tmp/ext.zip -d /tmp/ext &&
+              cp -r /tmp/ext/freshrss-af-readability-main/. /ext/
+          volumeMounts:
+            - name: ext-readability
+              mountPath: /ext
+          securityContext:
+            allowPrivilegeEscalation: false
       containers:
         - image: freshrss/freshrss:1.29.0
           imagePullPolicy: IfNotPresent
@@ -47,6 +63,8 @@ spec:
           volumeMounts:
             - name: freshrss-data
               mountPath: /var/www/FreshRSS/data
+            - name: ext-readability
+              mountPath: /var/www/FreshRSS/extensions/freshrss-af-readability
           envFrom:
             - configMapRef:
                 name: freshrss-env
@@ -56,3 +74,5 @@ spec:
         - name: freshrss-data
           persistentVolumeClaim:
             claimName: freshrss-data
+        - name: ext-readability
+          emptyDir: {}
