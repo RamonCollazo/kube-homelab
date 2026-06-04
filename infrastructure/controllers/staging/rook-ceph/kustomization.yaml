@@ -12,3 +12,6 @@ configMapGenerator:
   - name: rook-ceph-cluster-values
     files:
       - values.yaml=cluster-values.yaml
+  - name: ceph-csi-drivers-values
+    files:
+      - values.yaml=csi-drivers-values.yaml
