@@ -5,3 +5,5 @@ resources:
   - ./repository.yaml
   - ./rook-release.yaml
   - ./cluster-release.yaml
+  - ./csi-drivers-repository.yaml
+  - ./csi-drivers-release.yaml
