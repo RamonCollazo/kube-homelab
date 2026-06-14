@@ -37,6 +37,12 @@ lifecycle:
     - /bin/sh
     - -c
     - |
+      # postStart runs concurrently with the image entrypoint. On a version bump
+      # the entrypoint runs `occ upgrade`; a second occ process during that DB
+      # migration makes it fail (exit 5) and leaves the app stuck in maintenance
+      # mode. Wait for the upgrade to finish before provisioning OIDC.
+      i=0; until php occ status 2>/dev/null | grep -q 'installed: true' || [ "$i" -ge 60 ]; do i=$((i+1)); sleep 5; done
+      i=0; while php occ status 2>/dev/null | grep -qE 'maintenance: true|needsDbUpgrade: true'; do [ "$i" -ge 120 ] && break; i=$((i+1)); sleep 5; done
       php occ app:install user_oidc --keep-disabled || true
       php occ app:enable user_oidc || true
       php occ user_oidc:provider authentik \
