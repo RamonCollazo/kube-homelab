@@ -17,3 +17,4 @@ resources:
   - ./nextcloud/
   - ./paperless-ngx/
   - ./jellyfin/
+  - ./hermes/

@@ -8,6 +8,7 @@ resources:
   - ./cloudnative-pg/
   - ../base/cnpg-barman-plugin/
   - ./dragonfly/
+  - ./hermes/
   - ./metrics-server/
   - ./netbird/
   - ./nvidia-device-plugin/

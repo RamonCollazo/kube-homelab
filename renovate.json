@@ -21,6 +21,18 @@
       "/(^|/)monitoring/controllers/base/.+\\.ya?ml$/"
     ]
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)apps/base/hermes/instance\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "repository:\\s*(?<depName>\\S+)\\s+tag:\\s*[\"']?(?<currentValue>[^\"'\\s]+)[\"']?"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ],
   "packageRules": [
     {
       "description": "Authentik uses CalVer (YYYY.MM.MICRO)",
@@ -28,6 +40,13 @@
         "authentik"
       ],
       "versioning": "calver:YYYY.MM.MICRO"
+    },
+    {
+      "description": "hermes-agent uses CalVer (vYYYY.M.D[.PATCH])",
+      "matchPackageNames": [
+        "ghcr.io/paperclipinc/hermes-agent"
+      ],
+      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:\\.(?<build>\\d+))?$"
     },
     {
       "description": "Group rook-ceph operator and cluster chart upgrades together",
