@@ -1,5 +1,8 @@
 replicaCount: 1
 
+image:
+  tag: v0.1.17
+
 resources:
   requests:
     cpu: 100m
