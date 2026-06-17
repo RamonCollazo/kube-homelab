@@ -7,6 +7,9 @@ spec:
   image:
     repository: ghcr.io/paperclipinc/hermes-agent
     tag: "v2026.5.29.2"
+  runtime:
+    uv:
+      enabled: false
   storage:
     persistence:
       enabled: true
