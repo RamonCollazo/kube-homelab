@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: hermes
-  namespace: hermes-operator
-spec:
-  type: oci
-  interval: 1h
-  url: oci://ghcr.io/paperclipinc/charts
