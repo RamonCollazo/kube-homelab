@@ -1,28 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: signal-cli-rest-api
-  namespace: signal-cli-rest-api
+  name: signal-cli
+  namespace: signal-cli
   labels:
-    app: signal-cli-rest-api
+    app: signal-cli
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: signal-cli-rest-api
+      app: signal-cli
   template:
     metadata:
       labels:
-        app: signal-cli-rest-api
+        app: signal-cli
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
-        - name: signal-cli-rest-api
+        - name: signal-cli
           image: bbernhard/signal-cli-rest-api:0.100
-          env:
-            - name: MODE
-              value: "json-rpc"
+          command:
+            - signal-cli
+          args:
+            - -d
+            - /home/.local/share/signal-cli
+            - daemon
+            - --http
+            - 0.0.0.0:8080
+            - --receive-mode
+            - on-start
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -48,4 +59,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: signal-cli-rest-api-data
+            claimName: signal-cli-data

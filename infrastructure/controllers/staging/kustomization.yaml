@@ -15,4 +15,4 @@ resources:
   - ./renovate/
   - ./rook-ceph/
   - ./rustfs/
-  - ../base/signal-cli-rest-api/
+  - ../base/signal-cli/
