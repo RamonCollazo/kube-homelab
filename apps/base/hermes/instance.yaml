@@ -1,0 +1,13 @@
+apiVersion: hermes.agent/v1
+kind: HermesInstance
+metadata:
+  name: hermes-test
+  namespace: hermes-test
+spec:
+  image:
+    repository: ghcr.io/paperclipinc/hermes-agent
+    tag: "v0.16.0"
+  storage:
+    persistence:
+      enabled: true
+      size: 10Gi
