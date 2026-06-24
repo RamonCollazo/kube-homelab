@@ -21,18 +21,6 @@
       "/(^|/)monitoring/controllers/base/.+\\.ya?ml$/"
     ]
   },
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/(^|/)apps/base/hermes/instance\\.ya?ml$/"
-      ],
-      "matchStrings": [
-        "repository:\\s*(?<depName>\\S+)\\s+tag:\\s*[\"']?(?<currentValue>[^\"'\\s]+)[\"']?"
-      ],
-      "datasourceTemplate": "docker"
-    }
-  ],
   "packageRules": [
     {
       "description": "Authentik uses CalVer (YYYY.MM.MICRO)",
