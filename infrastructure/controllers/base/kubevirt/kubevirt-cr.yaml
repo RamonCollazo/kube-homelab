@@ -6,6 +6,8 @@ metadata:
 spec:
   certificateRotateStrategy: {}
   configuration:
+    architectureConfiguration:
+      defaultArchitecture: amd64
     developerConfiguration:
       featureGates: []
     imagePullPolicy: IfNotPresent
