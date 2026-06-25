@@ -24,3 +24,15 @@ patches:
         value:
           - secretRef:
               name: hermes-agent-ramon-secrets
+      - op: add
+        path: /spec/security
+        value:
+          networkPolicy:
+            additionalEgress:
+              - to:
+                  - namespaceSelector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: signal-cli
+                ports:
+                  - port: 8080
+                    protocol: TCP
