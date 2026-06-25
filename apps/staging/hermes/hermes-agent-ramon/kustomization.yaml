@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: hermes-agent-ramon
 resources:
   - ../../../base/hermes/
+  - ./secret.yaml
 patches:
   - target:
       kind: HermesInstance
@@ -11,3 +12,15 @@ patches:
       - op: replace
         path: /metadata/name
         value: hermes-agent-ramon
+      - op: add
+        path: /spec/env
+        value:
+          - name: SIGNAL_HTTP_URL
+            value: http://signal-cli.signal-cli.svc.cluster.local:8080
+          - name: SIGNAL_REQUIRE_MENTION
+            value: "false"
+      - op: add
+        path: /spec/envFrom
+        value:
+          - secretRef:
+              name: hermes-agent-ramon-secrets

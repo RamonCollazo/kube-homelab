@@ -11,3 +11,8 @@ spec:
     persistence:
       enabled: true
       size: 10Gi
+  config:
+    raw:
+      _config_version: 30
+      provider: anthropic
+      model: claude-opus-4-8
