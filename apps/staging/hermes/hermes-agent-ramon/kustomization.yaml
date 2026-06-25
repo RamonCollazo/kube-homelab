@@ -22,6 +22,10 @@ patches:
             value: "false"
           - name: CODEX_HOME
             value: /etc/codex
+          - name: HERMES_DASHBOARD
+            value: "true"
+          - name: HERMES_DASHBOARD_HOST
+            value: 127.0.0.1
       - op: add
         path: /spec/envFrom
         value:
