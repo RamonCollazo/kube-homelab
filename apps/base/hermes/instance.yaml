@@ -14,5 +14,5 @@ spec:
   config:
     raw:
       _config_version: 30
-      provider: anthropic
-      model: claude-opus-4-8
+      provider: openai-codex
+      model: gpt-5.5

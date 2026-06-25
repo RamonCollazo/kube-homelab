@@ -4,6 +4,7 @@ namespace: hermes-agent-ramon
 resources:
   - ../../../base/hermes/
   - ./secret.yaml
+  - ./codex-secret.yaml
 patches:
   - target:
       kind: HermesInstance
@@ -19,11 +20,25 @@ patches:
             value: http://signal-cli.signal-cli.svc.cluster.local:8080
           - name: SIGNAL_REQUIRE_MENTION
             value: "false"
+          - name: CODEX_HOME
+            value: /etc/codex
       - op: add
         path: /spec/envFrom
         value:
           - secretRef:
               name: hermes-agent-ramon-secrets
+      - op: add
+        path: /spec/extraVolumes
+        value:
+          - name: codex-auth
+            secret:
+              secretName: hermes-agent-ramon-codex
+      - op: add
+        path: /spec/extraVolumeMounts
+        value:
+          - name: codex-auth
+            mountPath: /etc/codex
+            readOnly: true
       - op: add
         path: /spec/security
         value:
