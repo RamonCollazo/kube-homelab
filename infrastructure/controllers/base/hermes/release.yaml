@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: hermes-operator
+  namespace: hermes-operator
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: hermes-operator
+      version: 0.1.18
+      sourceRef:
+        kind: HelmRepository
+        name: hermes
+        namespace: hermes-operator
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  valuesFrom:
+    - kind: ConfigMap
+      name: hermes-values
+      valuesKey: values.yaml

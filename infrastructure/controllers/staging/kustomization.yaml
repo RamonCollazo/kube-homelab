@@ -8,6 +8,7 @@ resources:
   - ./cloudnative-pg/
   - ../base/cnpg-barman-plugin/
   - ./dragonfly/
+  - ./hermes/
   - ./kubevirt/
   - ./metrics-server/
   - ./netbird/
