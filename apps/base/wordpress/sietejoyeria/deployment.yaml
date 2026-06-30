@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-sietejoyeria
+  namespace: wordpress-sietejoyeria
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-sietejoyeria
+  template:
+    metadata:
+      labels:
+        app: wordpress-sietejoyeria
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 33
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: wordpress
+          image: wordpress:7.0.0
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 768Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+              add: ["CHOWN", "FOWNER", "DAC_OVERRIDE", "SETGID", "SETUID", "NET_BIND_SERVICE"]
+          volumeMounts:
+            - name: wordpress-sietejoyeria-storage
+              mountPath: /var/www/html
+          envFrom:
+            - configMapRef:
+                name: wordpress-sietejoyeria-env
+            - secretRef:
+                name: wordpress-sietejoyeria-secret
+      volumes:
+        - name: wordpress-sietejoyeria-storage
+          persistentVolumeClaim:
+            claimName: wordpress-sietejoyeria-pvc

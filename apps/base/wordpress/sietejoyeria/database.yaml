@@ -1,0 +1,62 @@
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: wordpress-sietejoyeria-db
+  namespace: wordpress-sietejoyeria
+spec:
+  rootPasswordSecretKeyRef:
+    name: wordpress-sietejoyeria-db-root-secret
+    key: password
+  storage:
+    size: 1Gi
+  updateStrategy:
+    autoUpdateDataPlane: false
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Database
+metadata:
+  name: wordpress-sietejoyeria
+  namespace: wordpress-sietejoyeria
+spec:
+  mariaDbRef:
+    name: wordpress-sietejoyeria-db
+  characterSet: utf8mb4
+  collate: utf8mb4_unicode_ci
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: User
+metadata:
+  name: wordpress
+  namespace: wordpress-sietejoyeria
+spec:
+  mariaDbRef:
+    name: wordpress-sietejoyeria-db
+  passwordSecretKeyRef:
+    name: wordpress-sietejoyeria-secret
+    key: WORDPRESS_DB_PASSWORD
+  host: "%"
+  maxUserConnections: 20
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Grant
+metadata:
+  name: wordpress-grant
+  namespace: wordpress-sietejoyeria
+spec:
+  mariaDbRef:
+    name: wordpress-sietejoyeria-db
+  privileges:
+    - "ALL PRIVILEGES"
+  database: "wordpress-sietejoyeria"
+  table: "*"
+  username: wordpress
+  host: "%"
+  grantOption: false
