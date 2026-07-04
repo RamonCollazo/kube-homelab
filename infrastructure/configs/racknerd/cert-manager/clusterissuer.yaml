@@ -9,6 +9,15 @@ spec:
     privateKeySecretRef:
       name: clusterissuer-racknerd-account-key
     solvers:
+      - selector:
+          dnsZones:
+            - "sietejoyeria.com"
+        http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - kind: Gateway
+                name: https-gateway
+                namespace: public-gateway
       - dns01:
           cloudflare:
             apiTokenSecretRef:

@@ -8,9 +8,9 @@ spec:
   parentRefs:
     - name: https-gateway
       namespace: public-gateway
-      sectionName: raymondcollazo-https
+      sectionName: sietejoyeria-https
   hostnames:
-    - "sietejoyeria.raymondcollazo.com"
+    - "sietejoyeria.com"
   rules:
     - matches:
         - path:
@@ -19,3 +19,22 @@ spec:
       backendRefs:
         - name: wordpress-sietejoyeria-svc
           port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: wordpress-sietejoyeria-redirect
+  namespace: wordpress-sietejoyeria
+spec:
+  parentRefs:
+    - name: https-gateway
+      namespace: public-gateway
+      sectionName: sietejoyeria-http
+  hostnames:
+    - "sietejoyeria.com"
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
