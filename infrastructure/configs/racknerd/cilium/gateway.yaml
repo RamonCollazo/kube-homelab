@@ -4,8 +4,6 @@ kind: Gateway
 metadata:
   name: https-gateway
   namespace: public-gateway
-  annotations:
-    cert-manager.io/cluster-issuer: clusterissuer-racknerd
 spec:
   gatewayClassName: cilium
   listeners:
