@@ -1,0 +1,66 @@
+# Workspace-local secrets (gitignored, persists on the host bind mount):
+# OMNI_ENDPOINT, OMNI_SERVICE_ACCOUNT_KEY, RACKNERD_KUBECONFIG_B64.
+[env]
+_.file = ".env"
+
+[tools]
+# Kubernetes CLI.
+kubectl = "latest"
+# Talos Linux CLI — the immutable node OS.
+talosctl = "latest"
+# Omni CLI — manages the Talos/Omni staging cluster (see ./omni).
+omnictl = "latest"
+# Helm — chart installs.
+helm = "latest"
+# Flux CLI — the GitOps engine reconciling this monorepo.
+flux2 = "latest"
+# Kustomize — overlays across clusters/ and apps/.
+kustomize = "latest"
+# Cilium CLI — eBPF CNI + Gateway controller.
+cilium-cli = "latest"
+# SOPS + age — encrypt secrets in Git with an Age key.
+sops = "latest"
+age = "latest"
+# Commit tooling: pre-commit drives .pre-commit-config.yaml, commitizen backs
+# the commit-msg hook. Both are Python apps, so python + pipx back them.
+python = "3.12"
+pipx = "latest"
+"pipx:commitizen" = "latest"
+pre-commit = "latest"
+prek = "latest"
+
+[tasks.kubeconfig]
+description = "Rebuild ~/.kube/config for racknerd + staging from env credentials"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+mkdir -p "$HOME/.kube"
+
+if [ -n "${RACKNERD_KUBECONFIG_B64:-}" ]; then
+  umask 077
+  printf '%s' "$RACKNERD_KUBECONFIG_B64" | base64 -d > "$HOME/.kube/racknerd.yaml"
+  echo "racknerd: kubeconfig written from RACKNERD_KUBECONFIG_B64"
+else
+  echo "racknerd: RACKNERD_KUBECONFIG_B64 unset, keeping existing file (if any)"
+fi
+
+if [ -n "${OMNI_SERVICE_ACCOUNT_KEY:-}" ] && [ -n "${OMNI_ENDPOINT:-}" ]; then
+  omnictl kubeconfig "$HOME/.kube/staging.yaml" -c homelab-staging \
+    --service-account --user omni-devpod --force-context-name staging \
+    --merge=false --force
+  echo "staging: kubeconfig regenerated via omnictl service account"
+else
+  echo "staging: OMNI_ENDPOINT/OMNI_SERVICE_ACCOUNT_KEY unset, keeping existing file (if any)"
+fi
+
+sources=""
+for f in "$HOME"/.kube/*.yaml; do
+  [ -e "$f" ] && sources="${sources:+$sources:}$f"
+done
+[ -n "$sources" ] || { echo "no kubeconfig sources in ~/.kube, nothing to merge" >&2; exit 1; }
+KUBECONFIG="$sources" kubectl config view --flatten > "$HOME/.kube/config.tmp"
+chmod 600 "$HOME/.kube/config.tmp"
+mv "$HOME/.kube/config.tmp" "$HOME/.kube/config"
+echo "merged: $sources -> ~/.kube/config"
+kubectl config get-contexts
+'''
