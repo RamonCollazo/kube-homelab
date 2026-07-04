@@ -5,7 +5,7 @@
   },
   "remoteUser": "vscode",
   "containerUser": "vscode",
-  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.local && mise trust && mise install",
+  "postCreateCommand": "scripts/setup",
   "mounts": [
     "source=mise-data,target=/home/vscode/.local/share/mise,type=volume",
     "source=mise-state,target=/home/vscode/.local/state/mise,type=volume"
