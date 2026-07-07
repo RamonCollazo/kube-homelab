@@ -28,6 +28,7 @@ pipx = "latest"
 "pipx:commitizen" = "latest"
 pre-commit = "latest"
 prek = "latest"
+gh = "latest"
 
 [tasks.kubeconfig]
 description = "Rebuild ~/.kube/config for racknerd + staging from env credentials"
