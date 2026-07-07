@@ -23,7 +23,7 @@ sops = "latest"
 age = "latest"
 # Commit tooling: pre-commit drives .pre-commit-config.yaml, commitizen backs
 # the commit-msg hook. Both are Python apps, so python + pipx back them.
-python = "3.12"
+python = "3.14.6"
 pipx = "latest"
 "pipx:commitizen" = "latest"
 pre-commit = "latest"
