@@ -18,7 +18,7 @@ spec:
         app: linkwarden
     spec:
       containers:
-        - image: ghcr.io/linkwarden/linkwarden:v2.14.1
+        - image: ghcr.io/linkwarden/linkwarden:v2.15.0
           imagePullPolicy: IfNotPresent
           name: linkwarden
           ports:
