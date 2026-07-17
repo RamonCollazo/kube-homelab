@@ -13,3 +13,5 @@ secret:
 config:
   rustfs:
     log_level: "warn"
+    log_rotation:
+      keep_files: 24
