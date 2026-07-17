@@ -9,3 +9,7 @@ mode:
 
 secret:
   existingSecret: rustfs-credentials
+
+config:
+  rustfs:
+    log_level: "warn"
