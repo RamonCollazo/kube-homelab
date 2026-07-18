@@ -16,6 +16,19 @@ alertmanager:
         equal:
           - namespace
 
+prometheus:
+  prometheusSpec:
+    retentionSize: 45GB
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ceph-block
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+
 grafana:
   envValueFrom:
     GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
