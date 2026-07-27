@@ -254,6 +254,12 @@ Note that ufw does not govern published container ports: Docker inserts its own 
 of ufw's chain. Exposure is controlled by what the compose file publishes, so keeping the
 `ports` list minimal is the actual control.
 
+**Exposure is dual-stack.** The host has a global IPv6 address with a working default route
+learned from router advertisements, and both sshd and Docker's published ports bind `[::]`
+as well as `0.0.0.0`. Anything published is therefore reachable over IPv6 too. The DNS
+record is `A` only, so the hostname resolves v4, but the machine is directly addressable on
+its v6 address regardless. Reason about both stacks when opening a port.
+
 ## Not yet here
 
 The Omni service itself. It needs an account ID, a GPG key for etcd encryption, an initial
