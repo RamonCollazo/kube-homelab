@@ -9,6 +9,7 @@ Type=oneshot
 User=ramon
 SupplementaryGroups=docker
 WorkingDirectory=/home/ramon/kube-homelab
+Environment=SOPS_AGE_KEY_FILE=/home/ramon/.config/sops/age/keys.txt
 ExecStart=/usr/bin/git pull --ff-only
 ExecStart=/home/ramon/kube-homelab/machines/greencloud/deploy.sh
 TimeoutStartSec=600

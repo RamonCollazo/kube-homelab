@@ -21,9 +21,11 @@ currently managing the `homelab-staging` Talos cluster.
 
 ```
 machines/greencloud/
-├── .env.example          template; the real .env is gitignored and lives on the host
-├── deploy.sh             converges every app under apps/
-├── deploy/               systemd unit + timer, installed once by hand
+├── .sops.yaml            age recipient for this machine's secrets
+├── secrets.env.example   plaintext template
+├── secrets.env           SOPS-encrypted, committed
+├── deploy.sh             decrypts secrets, converges every app under apps/
+├── deploy/               systemd unit + timer + tool installer, run once by hand
 └── apps/
     └── traefik/          TLS termination and ACME for everything else
         ├── docker-compose.yaml
@@ -57,25 +59,53 @@ the default docker-compose manager, so version bumps arrive as PRs like everythi
 
 ```bash
 git clone git@github.com:RamonCollazo/kube-homelab.git ~/kube-homelab
-cp ~/kube-homelab/machines/greencloud/.env.example ~/kube-homelab/machines/greencloud/.env
-$EDITOR ~/kube-homelab/machines/greencloud/.env
+cd ~/kube-homelab/machines/greencloud
 
-sudo cp ~/kube-homelab/machines/greencloud/deploy/greencloud-deploy.* /etc/systemd/system/
+sudo ./deploy/install-tools.sh
+
+# restore the age private key to ~/.config/sops/age/keys.txt, mode 600
+
+sudo cp deploy/greencloud-deploy.{service,timer} /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now greencloud-deploy.timer
 ```
+
+`install-tools.sh` pins the `sops` version; Renovate tracks it through a custom manager in
+`renovate.json`, so upgrades arrive as PRs like everything else.
 
 Check on it with `systemctl list-timers greencloud-deploy.timer` and
 `journalctl -u greencloud-deploy.service -n 50`.
 
 ## Secrets
 
-`.env` is gitignored and placed on the host by hand, matching the existing `mise.toml`
-convention of `_.file = ".env"` for workspace-local secrets. This repo is public, so
-nothing secret belongs in it.
+Secrets live in `secrets.env`, SOPS-encrypted with an age key and committed to this repo,
+matching how the clusters handle theirs. SOPS encrypts dotenv values while leaving keys
+readable, so diffs still show which variable changed.
+
+`deploy.sh` re-executes itself under `sops exec-env`, so decrypted values reach `docker
+compose` through the environment and plaintext never touches disk.
+
+This machine has **its own age recipient**, distinct from the cluster keys in
+`clusters/*/.sops.yaml`. A compromise of the VPS must not expose cluster secrets.
+
+```
+age1tmvafqxwdw0nmpw9pryhgmpnuxjm9y6wztnas048zf3zvjgm29fsjls3gv
+```
+
+The private key lives at `~/.config/sops/age/keys.txt` on the host, mode 600. **Back it
+up somewhere off the machine.** Without it, `secrets.env` and any future encrypted file
+here are unrecoverable. To edit secrets you need the same key wherever you run `sops`.
+
+```bash
+sops secrets.env      # opens $EDITOR, re-encrypts on save
+sops -d secrets.env   # print decrypted, for debugging
+```
 
 `CF_DNS_API_TOKEN` needs `Zone:DNS:Edit` on the `raymondcollazo.com` zone. It is used only
 for ACME DNS-01 challenges.
+
+A `sops-encrypted` pre-commit hook refuses to commit a `secrets.env` that is not
+encrypted, because this repo is public and that mistake is unrecoverable once pushed.
 
 ## TLS
 
