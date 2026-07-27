@@ -82,17 +82,30 @@ the default docker-compose manager, so version bumps arrive as PRs like everythi
 git clone https://github.com/RamonCollazo/kube-homelab.git ~/kube-homelab
 cd ~/kube-homelab/machines/greencloud
 
-sudo ./deploy/install-tools.sh
+sudo ./deploy/bootstrap-host.sh
 
 # restore the age private key to ~/.config/sops/age/keys.txt, mode 600
-
-sudo cp deploy/greencloud-deploy.{service,timer} /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable --now greencloud-deploy.timer
 ```
 
-`install-tools.sh` pins the `sops` version; Renovate tracks it through a custom manager in
-`renovate.json`, so upgrades arrive as PRs like everything else.
+`bootstrap-host.sh` is idempotent and does everything root-owned in one place: installs a
+pinned `sops`, applies the host configuration from `deploy/host/`, and installs and enables
+the systemd timer. Renovate tracks the pinned `sops` version through a custom manager in
+`renovate.json`.
+
+It ends by restarting Docker, which stops running containers. They come back through their
+`unless-stopped` policy, and after this runs once `live-restore` keeps them up across future
+daemon restarts.
+
+## Host configuration
+
+`deploy/host/` holds the root-owned configuration so it is version controlled rather than
+applied by hand:
+
+| File | Installed to | Why |
+|---|---|---|
+| `docker-daemon.json` | `/etc/docker/daemon.json` | Default log rotation for every container, not just ones that remember to set it, and `live-restore` so a Docker upgrade does not take down the workloads |
+| `52unattended-upgrades-local` | `/etc/apt/apt.conf.d/` | Security updates alone never reboot, so kernel fixes sit unapplied. Reboots at 04:30 and prunes old kernels |
+| `journald-size.conf` | `/etc/systemd/journald.conf.d/size.conf` | `SystemMaxUse` defaults to 10% of the filesystem, roughly 5.7 GB here |
 
 Check on it with `systemctl list-timers greencloud-deploy.timer` and
 `journalctl -u greencloud-deploy.service -n 50`.
@@ -228,12 +241,18 @@ deliberate trade for a single-admin box, not an oversight.
 |---|---|
 | 80 | ACME HTTP-01 challenge, and redirect to 443. Must stay open for renewals |
 | 443 | Omni UI and API |
-| 8090 | Omni SideroLink gRPC, Talos nodes connect here |
-| 8100 | Omni Kubernetes proxy |
+| 8090 | Omni SideroLink gRPC, Talos nodes connect here. Entrypoint exists, **not published yet** |
+| 8100 | Omni Kubernetes proxy. Entrypoint exists, **not published yet** |
 | 50180/udp | SideroLink WireGuard, published by Omni directly, not proxied |
 | 127.0.0.1:8080 | Traefik dashboard, loopback only, reach it over an SSH tunnel |
 
-Nothing but 22 is open in ufw yet. Open the rest when the corresponding app is deployed.
+`mapi` and `kproxy` are defined as entrypoints but their ports are deliberately not
+published, because nothing answers on them until Omni exists. Add them to the compose
+`ports` list when Omni ships.
+
+Note that ufw does not govern published container ports: Docker inserts its own rules ahead
+of ufw's chain. Exposure is controlled by what the compose file publishes, so keeping the
+`ports` list minimal is the actual control.
 
 ## Not yet here
 

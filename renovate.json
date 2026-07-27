@@ -38,7 +38,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/(^|/)machines/.+/deploy/install-tools\\.sh$/"
+        "/(^|/)machines/.+/deploy/bootstrap-host\\.sh$/"
       ],
       "matchStrings": [
         "SOPS_VERSION=(?<currentValue>v[0-9.]+)"
