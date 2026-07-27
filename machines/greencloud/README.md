@@ -152,6 +152,22 @@ on the internal network and Traefik terminates it, so renewals never restart Omn
 matters because siderolabs/omni#2524 reports machines failing to reconnect after an Omni
 restart.
 
+## Hardening notes
+
+`no-new-privileges`, a healthcheck against Traefik's `/ping`, and `json-file` log rotation
+(10 MB x 3) are set. Rotation matters because `accessLog` writes to stdout and this is a
+public endpoint on a 60 GB disk.
+
+**Known weakness: Traefik has full Docker API access.** The socket is mounted `:ro`, but
+that only prevents modifying the socket *file*; every Docker API call still works,
+including container creation. Traefik is the internet-facing process here, so a compromise
+of it is effectively host root. The real fix is a socket proxy sitting between Traefik and
+the daemon, exposing only the container and event endpoints it needs. Not yet done.
+
+The dashboard runs with `api.insecure: true`, which means no authentication, but it is
+published on `127.0.0.1:8080` only. Reaching it requires an SSH tunnel. That is a
+deliberate trade for a single-admin box, not an oversight.
+
 ## Ports
 
 | Port | Purpose |

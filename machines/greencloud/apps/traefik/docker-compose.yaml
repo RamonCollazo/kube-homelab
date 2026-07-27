@@ -2,19 +2,32 @@ services:
   traefik:
     image: traefik:v3.7.9
     container_name: traefik
-    restart: always
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
-      - 80:80
-      - 443:443
-      - 8090:8090
-      - 8100:8100
-      - 127.0.0.1:8080:8080
+      - "80:80"
+      - "443:443"
+      - "8090:8090"
+      - "8100:8100"
+      - "127.0.0.1:8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./certs:/letsencrypt
     networks:
       - edge
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck", "--ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   edge:
