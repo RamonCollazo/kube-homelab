@@ -135,6 +135,16 @@ token with `Zone:DNS:Edit` and an `apps/traefik/secrets.env` to hold it.
 Port 80 must stay reachable permanently, not just at first issuance, because renewals use
 the same challenge.
 
+**Certificates are only requested when a router asks for one.** Setting `domains` on the
+`websecure` entrypoint does not trigger issuance by itself; it only supplies defaults to
+routers using that entrypoint. With no apps deployed, Traefik serves its self-signed
+`TRAEFIK DEFAULT CERT` and never contacts the CA.
+
+The `acme-bootstrap` router on the Traefik container exists purely to force issuance for
+`omni.raymondcollazo.com` before there is anything to serve, which validates the ACME path
+early. It points at `ping@internal`, so it answers `/ping` and 404s elsewhere. **Remove it
+when Omni claims the same hostname**, or the two routers will collide.
+
 The `web` entrypoint both serves the ACME challenge and redirects to HTTPS. Traefik's docs
 state "Redirection is fully compatible with the `HTTP-01` challenge", and this is running
 v3. If certificates ever fail to issue with challenge requests appearing to be redirected,
