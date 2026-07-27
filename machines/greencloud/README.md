@@ -26,7 +26,18 @@ machines/greencloud/
 ├── deploy/               systemd unit + timer, installed once by hand
 └── apps/
     └── traefik/          TLS termination and ACME for everything else
+        ├── docker-compose.yaml
+        └── traefik.yaml   Traefik static configuration
 ```
+
+Traefik's static configuration lives in `traefik.yaml` rather than as `command:` flags.
+Traefik treats its three static configuration sources (file, CLI arguments, environment
+variables) as mutually exclusive, so the compose file carries no `command:` at all.
+
+That file also does not expand environment variables, which is why the hostname, ACME
+email, and CA server are literals in it. `CF_DNS_API_TOKEN` is the exception: the ACME DNS
+provider reads its credentials directly from the process environment, bypassing the static
+configuration parser, so it stays a container environment variable.
 
 Each directory under `apps/` is an independent Compose project. They share the external
 Docker network `edge`, which `deploy.sh` creates if missing. Traefik discovers the others
@@ -73,15 +84,19 @@ used rather than HTTP-01 for two reasons: it issues the wildcard needed by Omni'
 proxying, and it validates without any inbound connection, so certificates can be obtained
 before the firewall is opened.
 
-`ACME_CA_SERVER` points at the Let's Encrypt **staging** endpoint in `.env.example`.
-Verify issuance against staging first, then switch to production:
+`caServer` in `traefik.yaml` points at the Let's Encrypt **staging** endpoint. Verify
+issuance against staging first, then switch to production by committing:
 
-```
-ACME_CA_SERVER=https://acme-v02.api.letsencrypt.org/directory
+```yaml
+caServer: https://acme-v02.api.letsencrypt.org/directory
 ```
 
 Delete `apps/traefik/certs/acme.json` when switching, or Traefik will keep serving the
 staging certificate.
+
+The ACME email receives expiry notices, so it must be an address someone actually reads.
+Certificate expiry is the failure mode that bites hardest here: it surfaces as cryptic
+behaviour during node reboots rather than an obvious outage.
 
 Certificates deliberately live with Traefik rather than inside Omni. Omni runs without TLS
 on the internal network and Traefik terminates it, so renewals never restart Omni. That
