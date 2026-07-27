@@ -61,13 +61,18 @@ through the Docker provider, so a new app only needs `traefik.*` labels and memb
 which does `git pull --ff-only` followed by `deploy.sh`. Merging to `main` converges the
 host within 5 minutes. Rolling back is `git revert`.
 
+The clone is anonymous HTTPS. This repo is public, so the host needs no deploy key, no
+token, and no credentials of any kind. Pulls are read-only by construction: a push fails
+with `could not read Username for 'https://github.com'`, so a compromised VPS cannot write
+back to the repo.
+
 Renovate already watches this repo and picks up `docker-compose.yaml` image tags through
 the default docker-compose manager, so version bumps arrive as PRs like everything else.
 
 ## First-time setup on the host
 
 ```bash
-git clone git@github.com:RamonCollazo/kube-homelab.git ~/kube-homelab
+git clone https://github.com/RamonCollazo/kube-homelab.git ~/kube-homelab
 cd ~/kube-homelab/machines/greencloud
 
 sudo ./deploy/install-tools.sh
