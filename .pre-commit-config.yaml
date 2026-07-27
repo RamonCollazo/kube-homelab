@@ -5,3 +5,10 @@ repos:
     hooks:
       - id: commitizen
         stages: [commit-msg]
+  - repo: local
+    hooks:
+      - id: sops-encrypted
+        name: refuse to commit unencrypted sops files
+        entry: scripts/check-sops-encrypted.sh
+        language: script
+        files: (^|/)secrets\.env$

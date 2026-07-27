@@ -34,6 +34,17 @@
         "https://github\\.com/(?<depName>[^/]+/[^/]+)/releases/download/(?<currentValue>[^/]+)/"
       ],
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)machines/.+/deploy/install-tools\\.sh$/"
+      ],
+      "matchStrings": [
+        "SOPS_VERSION=(?<currentValue>v[0-9.]+)"
+      ],
+      "depNameTemplate": "getsops/sops",
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [

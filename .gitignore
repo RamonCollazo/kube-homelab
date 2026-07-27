@@ -11,3 +11,6 @@ omni/staging/patches/netbird-worker-patch.yaml
 
 # AI agent configs
 .kiro/
+# host-level compose app state, never committed
+machines/*/apps/*/certs/
+machines/*/apps/*/data/
