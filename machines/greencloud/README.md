@@ -144,13 +144,24 @@ the same challenge.
 
 **Certificates are only requested when a router asks for one.** Setting `domains` on the
 `websecure` entrypoint does not trigger issuance by itself; it only supplies defaults to
-routers using that entrypoint. With no apps deployed, Traefik serves its self-signed
-`TRAEFIK DEFAULT CERT` and never contacts the CA.
+routers using that entrypoint. Until an app declares a router, Traefik serves its
+self-signed `TRAEFIK DEFAULT CERT` and never contacts the CA. That is the expected state
+here right now, not a fault.
 
-The `acme-bootstrap` router on the Traefik container exists purely to force issuance for
-`omni.raymondcollazo.com` before there is anything to serve, which validates the ACME path
-early. It points at `ping@internal`, so it answers `/ping` and 404s elsewhere. **Remove it
-when Omni claims the same hostname**, or the two routers will collide.
+Routing labels belong on the app that owns the route, never on Traefik itself. An app
+requests its certificate by declaring a router, for example:
+
+```yaml
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.omni.rule=Host(`omni.raymondcollazo.com`)"
+      - "traefik.http.routers.omni.entrypoints=websecure"
+      - "traefik.http.routers.omni.tls.certresolver=letsencrypt"
+```
+
+Issuance over HTTP-01 has been validated end to end against the Let's Encrypt staging
+endpoint, including confirming that the port 80 redirect does not interfere with the
+challenge.
 
 The `web` entrypoint both serves the ACME challenge and redirects to HTTPS. Traefik's docs
 state "Redirection is fully compatible with the `HTTP-01` challenge", and this is running

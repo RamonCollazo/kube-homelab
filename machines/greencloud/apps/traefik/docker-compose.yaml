@@ -41,11 +41,6 @@ services:
       - socket
     labels:
       - "config.hash=${CONFIG_HASH:-none}"
-      - "traefik.enable=true"
-      - "traefik.http.routers.acme-bootstrap.rule=Host(`omni.raymondcollazo.com`)"
-      - "traefik.http.routers.acme-bootstrap.entrypoints=websecure"
-      - "traefik.http.routers.acme-bootstrap.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.acme-bootstrap.service=ping@internal"
     healthcheck:
       test: ["CMD", "traefik", "healthcheck", "--ping"]
       interval: 30s
