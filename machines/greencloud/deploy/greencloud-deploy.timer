@@ -1,0 +1,11 @@
+[Unit]
+Description=Periodic greencloud compose sync
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+RandomizedDelaySec=30
+Unit=greencloud-deploy.service
+
+[Install]
+WantedBy=timers.target

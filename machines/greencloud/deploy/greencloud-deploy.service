@@ -1,0 +1,14 @@
+[Unit]
+Description=Sync kube-homelab and converge greencloud compose apps
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=ramon
+SupplementaryGroups=docker
+WorkingDirectory=/home/ramon/kube-homelab
+ExecStart=/usr/bin/git pull --ff-only
+ExecStart=/home/ramon/kube-homelab/machines/greencloud/deploy.sh
+TimeoutStartSec=600
