@@ -31,8 +31,6 @@ entryPoints:
         certResolver: letsencrypt
         domains:
           - main: omni.raymondcollazo.com
-            sans:
-              - "*.omni.raymondcollazo.com"
   mapi:
     address: ":8090"
   kproxy:
@@ -44,8 +42,5 @@ certificatesResolvers:
       email: acme@raymondcollazo.com
       storage: /letsencrypt/acme.json
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory
-      dnsChallenge:
-        provider: cloudflare
-        resolvers:
-          - "1.1.1.1:53"
-          - "8.8.8.8:53"
+      httpChallenge:
+        entryPoint: web

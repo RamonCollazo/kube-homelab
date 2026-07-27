@@ -27,25 +27,24 @@ machines/greencloud/
 └── apps/
     └── traefik/          TLS termination and ACME for everything else
         ├── docker-compose.yaml
-        ├── traefik.yaml         Traefik static configuration
-        ├── secrets.env          SOPS-encrypted, committed
-        └── secrets.env.example  plaintext template
+        └── traefik.yaml  Traefik static configuration
 ```
 
-Secrets sit next to the compose file that consumes them, matching how
-`apps/staging/<app>/secrets.yaml` works elsewhere in this repo. `deploy.sh` decrypts each
-app's `secrets.env` separately, so an app only ever sees its own secrets: the Cloudflare
-token reaches Traefik and nothing else. Apps with no `secrets.env` are converged without
-one.
+An app that needs secrets gets a SOPS-encrypted `secrets.env` next to its compose file,
+matching how `apps/staging/<app>/secrets.yaml` works elsewhere in this repo. `deploy.sh`
+decrypts each app's secrets separately, so an app only ever sees its own. Apps with no
+`secrets.env` are converged without one.
+
+**Nothing here currently has secrets.** Traefik uses the HTTP-01 ACME challenge, which
+needs no credentials. The scaffolding stays because Omni will need it.
 
 Traefik's static configuration lives in `traefik.yaml` rather than as `command:` flags.
 Traefik treats its three static configuration sources (file, CLI arguments, environment
 variables) as mutually exclusive, so the compose file carries no `command:` at all.
 
 That file also does not expand environment variables, which is why the hostname, ACME
-email, and CA server are literals in it. `CF_DNS_API_TOKEN` is the exception: the ACME DNS
-provider reads its credentials directly from the process environment, bypassing the static
-configuration parser, so it stays a container environment variable.
+email, and CA server are literals in it. That is no loss: it means switching the CA server
+from staging to production is a commit rather than an untracked edit on the host.
 
 Each directory under `apps/` is an independent Compose project. They share the external
 Docker network `edge`, which `deploy.sh` creates if missing. Traefik discovers the others
@@ -84,12 +83,14 @@ Check on it with `systemctl list-timers greencloud-deploy.timer` and
 
 ## Secrets
 
-Each app's `secrets.env` is SOPS-encrypted with an age key and committed to this repo,
-matching how the clusters handle theirs. SOPS encrypts dotenv values while leaving keys
-readable, so diffs still show which variable changed.
+No app currently needs a secret. The machinery below is set up and ready for the first one
+that does, which will be Omni.
 
-`deploy.sh` runs each app's `docker compose` under `sops exec-env`, so decrypted values
-reach it through the environment and plaintext never touches disk.
+An app's `secrets.env` is SOPS-encrypted with an age key and committed to this repo,
+matching how the clusters handle theirs. SOPS encrypts dotenv values while leaving keys
+readable, so diffs still show which variable changed. `deploy.sh` runs each app's `docker
+compose` under `sops exec-env`, so decrypted values reach it through the environment and
+plaintext never touches disk.
 
 This machine has **its own age recipient**, distinct from the cluster keys in
 `clusters/*/.sops.yaml`. A compromise of the VPS must not expose cluster secrets.
@@ -98,27 +99,39 @@ This machine has **its own age recipient**, distinct from the cluster keys in
 age1tmvafqxwdw0nmpw9pryhgmpnuxjm9y6wztnas048zf3zvjgm29fsjls3gv
 ```
 
-The private key lives at `~/.config/sops/age/keys.txt` on the host, mode 600. **Back it
-up somewhere off the machine.** Without it, `secrets.env` and any future encrypted file
-here are unrecoverable. To edit secrets you need the same key wherever you run `sops`.
+The private key lives at `~/.config/sops/age/keys.txt` on the host, mode 600. **Back it up
+somewhere off the machine.** Without it every encrypted file here becomes unrecoverable.
+To edit secrets you need the same key wherever you run `sops`.
 
 ```bash
-sops apps/traefik/secrets.env      # opens $EDITOR, re-encrypts on save
-sops -d apps/traefik/secrets.env   # print decrypted, for debugging
+sops apps/<app>/secrets.env      # opens $EDITOR, re-encrypts on save
+sops -d apps/<app>/secrets.env   # print decrypted, for debugging
 ```
-
-`CF_DNS_API_TOKEN` needs `Zone:DNS:Edit` on the `raymondcollazo.com` zone. It is used only
-for ACME DNS-01 challenges.
 
 A `sops-encrypted` pre-commit hook refuses to commit a `secrets.env` that is not
 encrypted, because this repo is public and that mistake is unrecoverable once pushed.
 
 ## TLS
 
-Traefik obtains certificates from Let's Encrypt over DNS-01 through Cloudflare. DNS-01 is
-used rather than HTTP-01 for two reasons: it issues the wildcard needed by Omni's workload
-proxying, and it validates without any inbound connection, so certificates can be obtained
-before the firewall is opened.
+Traefik obtains certificates from Let's Encrypt over the HTTP-01 challenge on port 80. No
+credentials are involved, which is why this machine has no secrets yet.
+
+The tradeoff is that **HTTP-01 cannot issue wildcards**; that is an ACME constraint, not a
+Traefik one. The only thing here that would want `*.omni.raymondcollazo.com` is Omni's
+workload proxying, which exposes cluster services at `<id>-<name>.omni.<domain>`. That
+overlaps with what Cloudflare tunnels plus Authentik already do, so it is not being used.
+Enabling it later means switching this resolver to DNS-01, which needs a Cloudflare API
+token with `Zone:DNS:Edit` and an `apps/traefik/secrets.env` to hold it.
+
+Port 80 must stay reachable permanently, not just at first issuance, because renewals use
+the same challenge.
+
+The `web` entrypoint both serves the ACME challenge and redirects to HTTPS. Traefik's docs
+state "Redirection is fully compatible with the `HTTP-01` challenge", and this is running
+v3. If certificates ever fail to issue with challenge requests appearing to be redirected,
+that combination is the first thing to suspect: `traefik/traefik#7825` reported it on v2.4,
+though the issue was frozen due to age without resolution. The fallback is to drop the
+`redirections` block from the `web` entrypoint, leaving port 80 serving only ACME.
 
 `caServer` in `traefik.yaml` points at the Let's Encrypt **staging** endpoint. Verify
 issuance against staging first, then switch to production by committing:
@@ -143,7 +156,7 @@ restart.
 
 | Port | Purpose |
 |---|---|
-| 80 | redirect to 443 |
+| 80 | ACME HTTP-01 challenge, and redirect to 443. Must stay open for renewals |
 | 443 | Omni UI and API |
 | 8090 | Omni SideroLink gRPC, Talos nodes connect here |
 | 8100 | Omni Kubernetes proxy |
