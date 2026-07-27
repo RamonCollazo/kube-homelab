@@ -25,10 +25,14 @@ machines/greencloud/
 ├── deploy.sh             converges every app under apps/
 ├── deploy/               systemd unit + timer + tool installer, run once by hand
 └── apps/
-    └── traefik/          TLS termination and ACME for everything else
+    └── traefik/          TLS termination and ACME, plus its socket proxy
         ├── docker-compose.yaml
         └── traefik.yaml  Traefik static configuration
 ```
+
+`socket-proxy` lives in Traefik's compose project rather than its own directory because it
+is a privilege-separation sidecar, not an independent app: it exists only to keep Traefik
+away from the Docker socket and has no purpose without it.
 
 An app that needs secrets gets a SOPS-encrypted `secrets.env` next to its compose file,
 matching how `apps/staging/<app>/secrets.yaml` works elsewhere in this repo. `deploy.sh`
@@ -158,11 +162,27 @@ restart.
 (10 MB x 3) are set. Rotation matters because `accessLog` writes to stdout and this is a
 public endpoint on a 60 GB disk.
 
-**Known weakness: Traefik has full Docker API access.** The socket is mounted `:ro`, but
-that only prevents modifying the socket *file*; every Docker API call still works,
-including container creation. Traefik is the internet-facing process here, so a compromise
-of it is effectively host root. The real fix is a socket proxy sitting between Traefik and
-the daemon, exposing only the container and event endpoints it needs. Not yet done.
+**Traefik never touches the Docker socket.** Mounting it `:ro` is not a security boundary:
+that only prevents modifying the socket *file*, while every Docker API call still works,
+including container creation. Since Traefik is the internet-facing process here, that would
+make a compromise of it equivalent to host root.
+
+Instead `socket-proxy` holds the socket and exposes a filtered API to Traefik over the
+`socket` network, which is `internal: true`. Only `CONTAINERS` and `NETWORKS` are enabled
+and `POST` is off, so the Docker provider gets exactly what it needs and nothing else.
+Verified against the running pair:
+
+| Request | Result |
+|---|---|
+| `GET /containers/json` | 200 |
+| `GET /networks` | 200 |
+| `POST /containers/create` | 403 |
+| `POST /containers/<id>/stop` | 403 |
+| `GET /images/json` | 403 |
+| `GET /secrets` | 403 |
+
+If a future app needs the Docker provider, put it on the `socket` network rather than
+mounting the socket.
 
 The dashboard runs with `api.insecure: true`, which means no authentication, but it is
 published on `127.0.0.1:8080` only. Reaching it requires an SSH tunnel. That is a
