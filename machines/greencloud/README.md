@@ -22,15 +22,21 @@ currently managing the `homelab-staging` Talos cluster.
 ```
 machines/greencloud/
 ├── .sops.yaml            age recipient for this machine's secrets
-├── secrets.env.example   plaintext template
-├── secrets.env           SOPS-encrypted, committed
-├── deploy.sh             decrypts secrets, converges every app under apps/
+├── deploy.sh             converges every app under apps/
 ├── deploy/               systemd unit + timer + tool installer, run once by hand
 └── apps/
     └── traefik/          TLS termination and ACME for everything else
         ├── docker-compose.yaml
-        └── traefik.yaml   Traefik static configuration
+        ├── traefik.yaml         Traefik static configuration
+        ├── secrets.env          SOPS-encrypted, committed
+        └── secrets.env.example  plaintext template
 ```
+
+Secrets sit next to the compose file that consumes them, matching how
+`apps/staging/<app>/secrets.yaml` works elsewhere in this repo. `deploy.sh` decrypts each
+app's `secrets.env` separately, so an app only ever sees its own secrets: the Cloudflare
+token reaches Traefik and nothing else. Apps with no `secrets.env` are converged without
+one.
 
 Traefik's static configuration lives in `traefik.yaml` rather than as `command:` flags.
 Traefik treats its three static configuration sources (file, CLI arguments, environment
@@ -78,12 +84,12 @@ Check on it with `systemctl list-timers greencloud-deploy.timer` and
 
 ## Secrets
 
-Secrets live in `secrets.env`, SOPS-encrypted with an age key and committed to this repo,
+Each app's `secrets.env` is SOPS-encrypted with an age key and committed to this repo,
 matching how the clusters handle theirs. SOPS encrypts dotenv values while leaving keys
 readable, so diffs still show which variable changed.
 
-`deploy.sh` re-executes itself under `sops exec-env`, so decrypted values reach `docker
-compose` through the environment and plaintext never touches disk.
+`deploy.sh` runs each app's `docker compose` under `sops exec-env`, so decrypted values
+reach it through the environment and plaintext never touches disk.
 
 This machine has **its own age recipient**, distinct from the cluster keys in
 `clusters/*/.sops.yaml`. A compromise of the VPS must not expose cluster secrets.
@@ -97,8 +103,8 @@ up somewhere off the machine.** Without it, `secrets.env` and any future encrypt
 here are unrecoverable. To edit secrets you need the same key wherever you run `sops`.
 
 ```bash
-sops secrets.env      # opens $EDITOR, re-encrypts on save
-sops -d secrets.env   # print decrypted, for debugging
+sops apps/traefik/secrets.env      # opens $EDITOR, re-encrypts on save
+sops -d apps/traefik/secrets.env   # print decrypted, for debugging
 ```
 
 `CF_DNS_API_TOKEN` needs `Zone:DNS:Edit` on the `raymondcollazo.com` zone. It is used only
