@@ -55,6 +55,13 @@ Docker network `edge`, which `deploy.sh` creates if missing. Traefik discovers t
 through the Docker provider, so a new app only needs `traefik.*` labels and membership of
 `edge`.
 
+`deploy.sh` hashes every file in an app directory except `docker-compose.yaml` and
+`secrets.env`, exporting it as `CONFIG_HASH`. A compose file that mounts configuration
+should carry `config.hash=${CONFIG_HASH:-none}` as a label. Without it `docker compose up
+-d` sees an unchanged compose config and leaves the container running, so an edit to a
+mounted file like `traefik.yaml` would never take effect. This is the same trick as the
+`configMapGenerator` rollout convention used in the cluster.
+
 ## Continuous deployment
 
 `greencloud-deploy.timer` fires every 5 minutes and runs `greencloud-deploy.service`,
@@ -152,15 +159,16 @@ that combination is the first thing to suspect: `traefik/traefik#7825` reported 
 though the issue was frozen due to age without resolution. The fallback is to drop the
 `redirections` block from the `web` entrypoint, leaving port 80 serving only ACME.
 
-`caServer` in `traefik.yaml` points at the Let's Encrypt **staging** endpoint. Verify
-issuance against staging first, then switch to production by committing:
+`caServer` in `traefik.yaml` points at Let's Encrypt **production**. Issuance was validated
+against the staging endpoint first:
 
 ```yaml
-caServer: https://acme-v02.api.letsencrypt.org/directory
+caServer: https://acme-staging-v02.api.letsencrypt.org/directory
 ```
 
-Delete `apps/traefik/certs/acme.json` when switching, or Traefik will keep serving the
-staging certificate.
+When switching between the two, delete `apps/traefik/certs/acme.json` or Traefik keeps
+serving the certificate it already holds. That file is root-owned mode 600, which is
+correct since it contains private keys, so removing it needs `sudo`.
 
 The ACME email receives expiry notices, so it must be an address someone actually reads.
 Certificate expiry is the failure mode that bites hardest here: it surfaces as cryptic

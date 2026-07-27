@@ -8,6 +8,12 @@ docker network inspect edge >/dev/null 2>&1 || docker network create edge
 for app in apps/*/; do
   [ -f "${app}docker-compose.yaml" ] || continue
   echo "converging ${app%/}"
+
+  CONFIG_HASH=$(find "$app" -maxdepth 1 -type f \
+    ! -name 'docker-compose.yaml' ! -name 'secrets.env*' -print0 \
+    | sort -z | xargs -0 -r sha256sum | sha256sum | cut -c1-12)
+  export CONFIG_HASH
+
   if [ -f "${app}secrets.env" ]; then
     (cd "$app" && sops exec-env secrets.env 'docker compose up -d --remove-orphans')
   else
