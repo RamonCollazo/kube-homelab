@@ -8,6 +8,7 @@ resources:
   - ./datastore.yaml
   - ./secrets.yaml
   - ./route.yaml
+  - ./tokenreview.yaml
 configurations:
   - ./kustomizeconfig.yaml
 

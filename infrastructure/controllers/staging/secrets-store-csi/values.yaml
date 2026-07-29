@@ -15,3 +15,5 @@ secrets-store-csi-driver:
     enabled: true
   enableSecretRotation: true
   rotationPollInterval: 2m
+  tokenRequests:
+    - audience: infisical
