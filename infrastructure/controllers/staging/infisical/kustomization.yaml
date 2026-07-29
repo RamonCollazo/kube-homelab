@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: infisical
+resources:
+  - ../../base/infisical/
+  - ./database.yaml
+  - ./backup.yaml
+  - ./datastore.yaml
+  - ./secretproviderclass.yaml
+  - ./secrets.yaml
+  - ./route.yaml
+configurations:
+  - ./kustomizeconfig.yaml
+
+configMapGenerator:
+  - name: infisical-values
+    files:
+      - ./values.yaml

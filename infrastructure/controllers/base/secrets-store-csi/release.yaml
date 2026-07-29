@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: oci-secrets-provider
+  namespace: secrets-store-csi
+spec:
+  releaseName: oci-secrets-provider
+  interval: 15m
+  chart:
+    spec:
+      chart: oci-secrets-store-csi-driver-provider
+      version: "0.4.1"
+      sourceRef:
+        kind: HelmRepository
+        name: oci-secrets-provider
+        namespace: secrets-store-csi
+      interval: 12h
+  valuesFrom:
+    - kind: ConfigMap
+      name: oci-secrets-provider-values
+      valuesKey: values.yaml

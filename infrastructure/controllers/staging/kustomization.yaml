@@ -9,6 +9,7 @@ resources:
   - ../base/cnpg-barman-plugin/
   - ./dragonfly/
   - ./hermes/
+  - ./infisical/
   - ./kubevirt/
   - ./metrics-server/
   - ./netbird/
@@ -16,4 +17,5 @@ resources:
   - ./renovate/
   - ./rook-ceph/
   - ./rustfs/
+  - ./secrets-store-csi/
   - ../base/signal-cli/

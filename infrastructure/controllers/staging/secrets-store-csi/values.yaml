@@ -1,0 +1,17 @@
+provider:
+  oci:
+    auth:
+      types:
+        instance:
+          enabled: false
+        user:
+          enabled: true
+        workload:
+          enabled: false
+
+secrets-store-csi-driver:
+  install: true
+  syncSecret:
+    enabled: true
+  enableSecretRotation: true
+  rotationPollInterval: 2m
