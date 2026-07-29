@@ -1,4 +1,7 @@
 alertmanager:
+  alertmanagerSpec:
+    alertmanagerConfigMatcherStrategy:
+      type: None
   config:
     route:
       receiver: 'null'
