@@ -8,6 +8,10 @@ spec:
     storage: 250Gi
   accessModes:
     - ReadWriteMany
+  mountOptions:
+    - soft
+    - timeo=600
+    - retrans=2
   nfs:
     server: 10.0.150.100
     path: /mnt/DataVault/PaperlessNGX

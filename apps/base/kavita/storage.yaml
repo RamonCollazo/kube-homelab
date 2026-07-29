@@ -9,3 +9,38 @@ spec:
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kavita-media-ebooks-pv
+spec:
+  capacity:
+    storage: 500Gi
+  accessModes:
+    - ReadWriteMany
+  mountOptions:
+    - soft
+    - timeo=600
+    - retrans=2
+  nfs:
+    server: 10.0.150.100
+    path: /mnt/DataVault/Media/eBooks
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    name: kavita-media-ebooks-pvc
+    namespace: kavita
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kavita-media-ebooks-pvc
+  namespace: kavita
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Gi
+  volumeName: kavita-media-ebooks-pv
+  storageClassName: ""

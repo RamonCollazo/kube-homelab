@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nextcloud-data-pv
+  name: kiwix-media-zim-pv
 spec:
   capacity:
     storage: 500Gi
@@ -14,22 +14,22 @@ spec:
     - retrans=2
   nfs:
     server: 10.0.150.100
-    path: /mnt/DataVault/NextCloud
+    path: /mnt/DataVault/Media/ZIM
   persistentVolumeReclaimPolicy: Retain
   claimRef:
-    name: nextcloud-data-pvc
-    namespace: nextcloud
+    name: kiwix-media-zim-pvc
+    namespace: kiwix
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nextcloud-data-pvc
-  namespace: nextcloud
+  name: kiwix-media-zim-pvc
+  namespace: kiwix
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 500Gi
-  volumeName: nextcloud-data-pv
+  volumeName: kiwix-media-zim-pv
   storageClassName: ""

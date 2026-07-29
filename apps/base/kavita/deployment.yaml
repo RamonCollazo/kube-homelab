@@ -53,7 +53,6 @@ spec:
           persistentVolumeClaim:
             claimName: kavita-config-pvc
         - name: media-ebooks
-          nfs:
-            server: 10.0.150.100
-            path: /mnt/DataVault/Media/eBooks
+          persistentVolumeClaim:
+            claimName: kavita-media-ebooks-pvc
             readOnly: true
