@@ -1,0 +1,36 @@
+infisical:
+  fullnameOverride: infisical
+  replicaCount: 2
+  kubeSecretRef: infisical-secrets
+  extraEnv:
+    - name: SITE_URL
+      value: https://secrets.raymondcollazo.com
+    - name: REDIS_URL
+      value: redis://infisical-ds.infisical.svc.cluster.local:6379
+  extraVolumes:
+    - name: oci-secrets
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: infisical-oci
+  extraVolumeMounts:
+    - name: oci-secrets
+      mountPath: /mnt/secrets-store
+      readOnly: true
+
+ingress:
+  enabled: false
+  nginx:
+    enabled: false
+
+postgresql:
+  enabled: false
+  useExistingPostgresSecret:
+    enabled: true
+    existingConnectionStringSecret:
+      name: infisical-db-app
+      key: uri
+
+redis:
+  enabled: false

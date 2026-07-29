@@ -11,4 +11,5 @@ repos:
         name: refuse to commit unencrypted sops files
         entry: scripts/check-sops-encrypted.sh
         language: script
-        files: (^|/)secrets\.env$
+        files: (^|/)([^/]*secrets?)\.(ya?ml|env)$
+        exclude: ^apps/base/homepage/secret\.yaml$
