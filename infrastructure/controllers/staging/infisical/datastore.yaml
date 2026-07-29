@@ -5,6 +5,8 @@ metadata:
   namespace: infisical
 spec:
   replicas: 3
+  args:
+    - --default_lua_flags=allow-undeclared-keys
   resources:
     requests:
       cpu: 100m
