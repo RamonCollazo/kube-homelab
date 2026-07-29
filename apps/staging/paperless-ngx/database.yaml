@@ -46,7 +46,7 @@ metadata:
   name: paperless-db-backup
   namespace: paperless-ngx
 spec:
-  schedule: "0 4 * * *"
+  schedule: "0 0 4 * * *"
   backupOwnerReference: self
   method: plugin
   pluginConfiguration:
