@@ -48,7 +48,6 @@ spec:
               mountPath: /data
       volumes:
         - name: media-zim
-          nfs:
-            server: 10.0.150.100
-            path: /mnt/DataVault/Media/ZIM
+          persistentVolumeClaim:
+            claimName: kiwix-media-zim-pvc
             readOnly: true

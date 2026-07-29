@@ -8,15 +8,11 @@ persistence:
 
 volumes:
   - name: media-movies
-    nfs:
-      server: 10.0.150.100
-      path: /mnt/DataVault/Media/Movies
-      readOnly: false
+    persistentVolumeClaim:
+      claimName: jellyfin-media-movies-pvc
   - name: media-series
-    nfs:
-      server: 10.0.150.100
-      path: /mnt/DataVault/Media/Series
-      readOnly: false
+    persistentVolumeClaim:
+      claimName: jellyfin-media-series-pvc
   - name: epg
     persistentVolumeClaim:
       claimName: zap2xml-epg
