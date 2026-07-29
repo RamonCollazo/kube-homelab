@@ -6,7 +6,6 @@ resources:
   - ./database.yaml
   - ./backup.yaml
   - ./datastore.yaml
-  - ./secretproviderclass.yaml
   - ./secrets.yaml
   - ./route.yaml
 configurations:
