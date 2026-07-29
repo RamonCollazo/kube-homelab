@@ -5,7 +5,7 @@ metadata:
   name: mattermost-db-backup
   namespace: mattermost
 spec:
-  schedule: "0 4 * * *"
+  schedule: "0 0 4 * * *"
   backupOwnerReference: self
   method: plugin
   pluginConfiguration:
