@@ -9,6 +9,8 @@ features:
 patches:
   - name: cni-proxy
     file: ./patches/cni-proxy.yaml
+  - name: controlplane-metrics
+    file: ./patches/controlplane-metrics.yaml
 ---
 kind: Machine
 name: 30303031-3030-3030-3133-316366306400
