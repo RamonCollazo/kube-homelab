@@ -10,6 +10,7 @@ spec:
     size: 50Gi
   postgresql:
     parameters:
+      max_slot_wal_keep_size: 8GB
       wal_level: replica
       wal_keep_size: "0"
   bootstrap:
