@@ -19,6 +19,9 @@ alertmanager:
         equal:
           - namespace
 
+kubeProxy:
+  enabled: false
+
 prometheus:
   prometheusSpec:
     retentionSize: 45GB
