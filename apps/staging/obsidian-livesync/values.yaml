@@ -1,0 +1,64 @@
+clusterSize: 1
+
+createAdminSecret: false
+extraSecretName: couchdb-admin
+
+autoSetup:
+  enabled: false
+
+enableSearch: false
+
+couchdbConfig:
+  couchdb:
+    # uuid and cluster.n/q are baked into every database at creation time.
+    # Changing either after first sync orphans the existing data.
+    uuid: 5b5cd70a2646897a6fe71841448969c8
+    single_node: true
+    max_document_size: 50000000
+  cluster:
+    # "n" unquoted is the YAML 1.1 boolean false, which renders as `false = 1`
+    # and leaves CouchDB on its default n = 3.
+    "n": 1
+    "q": 1
+  chttpd:
+    bind_address: any
+    require_valid_user: true
+    enable_cors: true
+    max_http_request_size: 4294967296
+  chttpd_auth:
+    require_valid_user: true
+  httpd:
+    enable_cors: true
+    WWW-Authenticate: 'Basic realm="couchdb"'
+  cors:
+    credentials: true
+    origins: "app://obsidian.md,capacitor://localhost,http://localhost"
+    headers: "accept, authorization, content-type, origin, referer"
+    methods: "GET, PUT, POST, HEAD, DELETE"
+
+persistentVolume:
+  enabled: true
+  storageClass: ceph-block
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+
+service:
+  enabled: true
+  type: ClusterIP
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+initResources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi

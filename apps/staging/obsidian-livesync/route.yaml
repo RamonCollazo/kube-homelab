@@ -1,0 +1,17 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: obsidian-livesync
+  namespace: obsidian-livesync
+spec:
+  parentRefs:
+    - name: lan-gateway
+      namespace: lan-gateway
+      sectionName: lan-https
+  hostnames:
+    - "obsidian.raymondcollazo.com"
+  rules:
+    - backendRefs:
+        - name: livesync-svc-couchdb
+          port: 5984
