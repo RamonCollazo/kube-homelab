@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: obsidian-livesync
+  labels:
+    lan-gateway: "true"

@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: obsidian-livesync
+resources:
+  - ../../base/obsidian-livesync/
+  - ./secrets.yaml
+  - ./route.yaml
+
+configurations:
+  - kustomizeconfig.yaml
+
+configMapGenerator:
+  - name: couchdb-values
+    files:
+      - values.yaml=values.yaml
