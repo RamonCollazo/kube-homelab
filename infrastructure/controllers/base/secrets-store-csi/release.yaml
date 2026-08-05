@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: oci-secrets-store-csi-driver-provider
-      version: "0.4.1"
+      version: "0.5.1"
       sourceRef:
         kind: HelmRepository
         name: oci-secrets-provider
