@@ -6,3 +6,4 @@ resources:
   - ./cert-manager/
   - ./reloader/
   - ./mariadb/
+  - ./gateway-api/
