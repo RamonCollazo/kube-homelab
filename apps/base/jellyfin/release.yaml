@@ -17,3 +17,31 @@ spec:
     - kind: ConfigMap
       name: jellyfin-values
       valuesKey: values.yaml
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: jellyfin
+            patch: |
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: jellyfin
+              spec:
+                template:
+                  spec:
+                    volumes:
+                      - name: cache
+                        emptyDir:
+                          sizeLimit: 50Gi
+                      - name: media
+                        emptyDir:
+                          sizeLimit: 1Gi
+                    containers:
+                      - name: jellyfin
+                        resources:
+                          requests:
+                            ephemeral-storage: 2Gi
+                          limits:
+                            ephemeral-storage: 60Gi
