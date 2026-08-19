@@ -1,6 +1,7 @@
 operatorNamespace: rook-ceph
 monitoring:
   enabled: true
+  createPrometheusRules: true
 cephClusterSpec:
   resources:
     mon:
