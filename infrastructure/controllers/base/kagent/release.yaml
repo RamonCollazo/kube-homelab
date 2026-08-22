@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kagent-crds
+  namespace: kagent
+spec:
+  interval: 15m
+  releaseName: kagent-crds
+  chartRef:
+    kind: OCIRepository
+    name: kagent-crds
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kagent
+  namespace: kagent
+spec:
+  interval: 15m
+  timeout: 10m
+  dependsOn:
+    - name: kagent-crds
+  releaseName: kagent
+  chartRef:
+    kind: OCIRepository
+    name: kagent
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  valuesFrom:
+    - kind: ConfigMap
+      name: kagent-values
+      valuesKey: values.yaml
