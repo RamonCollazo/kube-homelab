@@ -22,3 +22,18 @@ spec:
     - kind: ConfigMap
       name: netbox-values
       valuesKey: values.yaml
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: CronJob
+              name: netbox-housekeeping
+            patch: |
+              apiVersion: batch/v1
+              kind: CronJob
+              metadata:
+                name: netbox-housekeeping
+              spec:
+                jobTemplate:
+                  spec:
+                    ttlSecondsAfterFinished: 172800

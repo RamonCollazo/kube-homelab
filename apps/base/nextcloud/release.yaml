@@ -22,3 +22,18 @@ spec:
     - kind: ConfigMap
       name: nextcloud-values
       valuesKey: values.yaml
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: CronJob
+              name: nextcloud-cron
+            patch: |
+              apiVersion: batch/v1
+              kind: CronJob
+              metadata:
+                name: nextcloud-cron
+              spec:
+                jobTemplate:
+                  spec:
+                    ttlSecondsAfterFinished: 172800
