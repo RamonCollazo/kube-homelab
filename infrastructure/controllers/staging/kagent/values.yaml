@@ -1,0 +1,103 @@
+database:
+  postgres:
+    # Written by CNPG into the kagent-db-app secret; mounted below.
+    urlFile: /etc/kagent/db/uri
+    vectorEnabled: true
+    bundled:
+      enabled: false
+
+rbac:
+  namespaces:
+    - kagent
+
+controller:
+  auth:
+    mode: unsecure
+  volumes:
+    - name: db-uri
+      secret:
+        secretName: kagent-db-app
+        items:
+          - key: uri
+            path: uri
+  volumeMounts:
+    - name: db-uri
+      mountPath: /etc/kagent/db
+      readOnly: true
+
+providers:
+  default: openAI
+  openAI:
+    provider: OpenAI
+    model: gpt-4.1-mini
+    apiKeySecretRef: kagent-openai
+    apiKeySecretKey: OPENAI_API_KEY
+
+ui:
+  route:
+    enabled: false
+  httpRoute:
+    enabled: false
+
+oauth2-proxy:
+  enabled: false
+
+kmcp:
+  enabled: true
+
+kagent-tools:
+  enabled: true
+  # This subchart has its OWN rbac block; the top-level `rbac` above does not
+  # gate it. Left at defaults it binds a `*/*/*` ClusterRole to the pod that
+  # actually executes every agent's tool calls.
+  rbac:
+    readOnly: true
+    allowSecrets: false
+    additionalRules:
+      - apiGroups: ["cilium.io"]
+        resources: ["*"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: ["gateway.networking.k8s.io"]
+        resources: ["*"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups:
+          - source.toolkit.fluxcd.io
+          - helm.toolkit.fluxcd.io
+          - kustomize.toolkit.fluxcd.io
+        resources: ["*"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: ["postgresql.cnpg.io"]
+        resources: ["*"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: ["metrics.k8s.io"]
+        resources: ["*"]
+        verbs: ["get", "list", "watch"]
+  tools:
+    args:
+      - --read-only
+
+k8s-agent:
+  enabled: true
+helm-agent:
+  enabled: true
+promql-agent:
+  enabled: true
+cilium-policy-agent:
+  enabled: true
+cilium-manager-agent:
+  enabled: true
+cilium-debug-agent:
+  enabled: true
+
+istio-agent:
+  enabled: false
+kgateway-agent:
+  enabled: false
+argo-rollouts-agent:
+  enabled: false
+observability-agent:
+  enabled: false
+grafana-mcp:
+  enabled: false
+querydoc:
+  enabled: false
