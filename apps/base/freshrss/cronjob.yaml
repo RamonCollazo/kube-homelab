@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: freshrss-refresh
+  namespace: freshrss
+spec:
+  schedule: "0 6 * * *"
+  timeZone: America/Puerto_Rico
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      activeDeadlineSeconds: 1800
+      template:
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: freshrss-refresh
+          containers:
+            - name: kubectl
+              image: registry.k8s.io/kubectl:v1.36.4
+              args:
+                - exec
+                - deploy/freshrss
+                - -c
+                - freshrss
+                - --
+                - su
+                - www-data
+                - -s
+                - /bin/sh
+                - -c
+                - php /var/www/FreshRSS/app/actualize_script.php
+              securityContext:
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                runAsUser: 65534
+                capabilities:
+                  drop:
+                    - ALL
+                seccompProfile:
+                  type: RuntimeDefault
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  cpu: 100m
+                  memory: 64Mi
