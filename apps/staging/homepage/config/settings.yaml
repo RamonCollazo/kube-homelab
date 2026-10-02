@@ -1,0 +1,21 @@
+title: Homelab
+theme: dark
+color: zinc
+headerStyle: boxed
+background:
+  image: https://w.wallhaven.cc/full/d8/wallhaven-d86673.jpg
+  blur: sm
+  opacity: 20
+layout:
+  Management:
+    style: column
+  Networking:
+    style: column
+  Infrastructure:
+    style: column
+  Monitoring:
+    style: column
+  Dev Tools:
+    style: column
+  Apps:
+    style: column
