@@ -14,8 +14,8 @@ resources:
   - ./grampsweb/
   - ./hermes/
   - ./immich/
-  - ./open-webui/
+  # - ./open-webui/
   - ./nextcloud/
-  - ./paperless-ngx/
+  # - ./paperless-ngx/
   - ./jellyfin/
   - ./obsidian-livesync/
