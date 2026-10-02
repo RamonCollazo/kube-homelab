@@ -109,11 +109,6 @@
         description: Self-hosted file sync and sharing
         icon: nextcloud.png
         siteMonitor: https://nextcloud.raymondcollazo.com
-    - Obsidian LiveSync:
-        href: https://obsidian.raymondcollazo.com
-        description: CouchDB sync server for Obsidian vaults
-        icon: obsidian.png
-        siteMonitor: https://obsidian.raymondcollazo.com
     - SmartrEnergy:
         href: https://smartrenergy.com/
         description: WordPress-based capstone portfolio site
