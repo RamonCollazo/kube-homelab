@@ -15,3 +15,11 @@ config:
     log_level: "warn"
     log_rotation:
       keep_files: 24
+
+extraEnv:
+  - name: RUSTFS_UNSUPPORTED_FS_POLICY
+    value: "warn"
+  - name: RUSTFS_DRIVE_TIMEOUT_PROFILE
+    value: "high_latency"
+  - name: RUSTFS_DRIVE_TIMEOUT_HEALTH_ACTION
+    value: "ignore_scanner"
