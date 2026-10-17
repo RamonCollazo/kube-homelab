@@ -1,9 +1,9 @@
 kind: Cluster
 name: homelab-staging
 talos:
-  version: v1.13.9
+  version: v1.14.4
 kubernetes:
-  version: 1.36.4
+  version: 1.36.5
 features:
   diskEncryption: true
 patches:
