@@ -1,0 +1,40 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cnpg-instances
+  namespace: monitoring
+spec:
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      cnpg.io/podRole: instance
+  podMetricsEndpoints:
+    - port: metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cnpg-wal-archiving
+  namespace: monitoring
+spec:
+  groups:
+    - name: cnpg-wal-archiving
+      rules:
+        - alert: CNPGWALArchivingFailing
+          expr: cnpg_pg_stat_archiver_last_failed_time > cnpg_pg_stat_archiver_last_archived_time
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "WAL archiving failing for {{ $labels.namespace }}/{{ $labels.pod }}"
+            description: "The last WAL archive attempt failed and none has succeeded since. Check rustfs and the barman-cloud plugin; WAL is piling up on the primary and point-in-time recovery is not current."
+        - alert: CNPGWALArchivingStale
+          expr: cnpg_pg_stat_archiver_seconds_since_last_archival > 36 * 3600
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "No WAL archived for {{ $labels.namespace }}/{{ $labels.pod }} in {{ $value | humanizeDuration }}"
+            description: "No WAL segment has been archived in over 36h, although the daily ScheduledBackup should force one. Archiving may have stopped silently."

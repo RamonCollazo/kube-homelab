@@ -10,6 +10,7 @@ resources:
   - ./route.yaml
   - ./secrets.yaml
   - ./alertmanager-config.yaml
+  - ./cnpg-monitoring.yaml
 configMapGenerator:
   - name: kube-prometheus-stack-values
     files:
