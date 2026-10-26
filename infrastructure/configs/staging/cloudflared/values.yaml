@@ -5,6 +5,8 @@ metadata:
   namespace: cloudflared
 data:
   values.yaml: |
+    image:
+      tag: 2026.10.4
     tunnelConfig:
       name: kube-homelab-staging
       protocol: http2
