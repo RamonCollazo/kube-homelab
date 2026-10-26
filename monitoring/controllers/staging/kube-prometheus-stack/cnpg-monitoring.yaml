@@ -31,10 +31,10 @@ spec:
             summary: "WAL archiving failing for {{ $labels.namespace }}/{{ $labels.pod }}"
             description: "The last WAL archive attempt failed and none has succeeded since. Check rustfs and the barman-cloud plugin; WAL is piling up on the primary and point-in-time recovery is not current."
         - alert: CNPGWALArchivingStale
-          expr: cnpg_pg_stat_archiver_seconds_since_last_archival > 36 * 3600
-          for: 15m
+          expr: cnpg_collector_pg_wal_archive_status{value="ready"} > 0
+          for: 1h
           labels:
             severity: warning
           annotations:
-            summary: "No WAL archived for {{ $labels.namespace }}/{{ $labels.pod }} in {{ $value | humanizeDuration }}"
-            description: "No WAL segment has been archived in over 36h, although the daily ScheduledBackup should force one. Archiving may have stopped silently."
+            summary: "WAL archiving stuck for {{ $labels.namespace }}/{{ $labels.pod }}"
+            description: "{{ $value }} WAL segment(s) have been waiting to be archived for over 1h. Archiving may have stopped silently; check the barman-cloud plugin sidecar and rustfs."
