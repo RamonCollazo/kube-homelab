@@ -30,5 +30,19 @@ spec:
       scramCredentialsSecretName: unifi-db-scram
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: zlib
+    storage.wiredTiger.engineConfig.cacheSizeGB: 0.5
     setParameter:
       authenticationMechanisms: "SCRAM-SHA-1,SCRAM-SHA-256"
+  statefulSet:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: mongod
+              resources:
+                requests:
+                  cpu: 500m
+                  memory: 1Gi
+                limits:
+                  cpu: "2"
+                  memory: 1536Mi
