@@ -49,11 +49,11 @@
   ],
   "packageRules": [
     {
-      "description": "Authentik uses CalVer (YYYY.MM.MICRO)",
+      "description": "Authentik uses CalVer (YYYY.MM.MICRO); Renovate has no calver scheme, so match it with regex",
       "matchPackageNames": [
         "authentik"
       ],
-      "versioning": "calver:YYYY.MM.MICRO"
+      "versioning": "regex:^(?<major>\\d{4})\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
       "description": "Group rook-ceph operator and cluster chart upgrades together; hold on 1.20.x until the Talos Ceph with Rook guide covers 1.21",
