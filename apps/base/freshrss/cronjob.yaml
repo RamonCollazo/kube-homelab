@@ -19,7 +19,7 @@ spec:
           serviceAccountName: freshrss-refresh
           containers:
             - name: kubectl
-              image: registry.k8s.io/kubectl:v1.37.1
+              image: registry.k8s.io/kubectl:v1.37.2
               args:
                 - exec
                 - deploy/freshrss
