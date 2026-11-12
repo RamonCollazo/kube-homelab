@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: firecrawl-mcp-token
+    namespace: agentgateway-system
+data:
+    Authorization: ENC[AES256_GCM,data:qMt1wKrjo94aNMrto3kY16OG8RWGpQWvOIlw86R79eEW0CzPfVPbmJS9rCUphOYC,iv:fLozVQHn7i3AoaV6d72ypJM8x3cWZjj4xh6Fr5ehos4=,tag:qA2LfExowyV0lEmE6BSdJg==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB5ejBkOWlZTjJhRSs0VzJW
+            SndlUTRYZTc1cmNKOTUvRm5RMXhCaCs3cFZJCkZGbDBhd1Q5UGk0NmNvQ3BDYUVG
+            NnNYM2tZS3BKclo3N0pYUGlYdXZZc0EKLS0tIHUyYnBpa2ZpemNEMFVhMURjQWhk
+            VUt0TkdOa3I5YVM0alp5VzBvNEF3Z00K/q+GXewQOXhAAp6GfCH7R0H8YOvcTvyH
+            Um3jI7ZkHKQ0lP3w/yomxGtvJWYI77xfLaGWGTMB4dvi/bFTnDm1aA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age10u5tg7sqes7uqs4f9s0k449vn4j3kl4x9ge3mulaq2w8crqchu7q5fe6e5
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-11-12T06:06:59Z"
+    mac: ENC[AES256_GCM,data:UA7Xwqp1YsAX3UUFfpXKfzVpzT8qo0sxcWJXFyvNJnKF4cAN2BwrTDdErf8UjOt1kw1IbrmejrTxdQs325R1av/CRL8P6+1RKGtra01/xyBTrtQNDWndf/a1zvuBC7u5qVGQKUWKO+GEfq8rsI8YdW4c9/TcAvWAmacjD1rQ0vE=,iv:pAaAvgoYpSHIobK3Us2c9oqMeAKTWy78WfFpbpCmjJw=,tag:hmLoOwIKK4fQS72T1uxnWQ==,type:str]
+    version: 3.13.3
