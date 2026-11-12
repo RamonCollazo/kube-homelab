@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: hindsight-mcp-token
+    namespace: agentgateway-system
+data:
+    Authorization: ENC[AES256_GCM,data:p6udEuPBaNzVGAtoCEIaBfLZAWS9d5e5lIcAA3NOSMg5voUA5hFCFtAw+zjl1MCeReCgjLnNmcYWyb4OOxYosqEHqrU=,iv:RaHdLdapI4mb18goGHtk+7+Ol22nK9GTQGJlMPd9HrU=,tag:36tONo0tfWg01VgWzVSCLg==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZaGs4M29PeE1CaGFZb2Rz
+            Uk44ajVsbkNic3BmcnJvbWZza1JpbGZENERzCmhNS2VDdEVmamNuUVpyQ0xYRlRi
+            Y0lxSk5uNi9WcnVXd05nUEJNbFcrdUUKLS0tIFZKRTc2a3N1TXBGZjZvdU1YbnIr
+            N2pMN0V4MHRJdkx3N2I3ZFdmWjBDTjQKgJ/z/f6UqvOR286KshqLdoJnN5TPyrJ+
+            wIFcDBWcjegtEgAXQcxk0HkX/C1WT6G/Gl/kZAoP+m/fWQ0ZLkVhVA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age10u5tg7sqes7uqs4f9s0k449vn4j3kl4x9ge3mulaq2w8crqchu7q5fe6e5
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-11-12T05:32:50Z"
+    mac: ENC[AES256_GCM,data:FhDXp3fjP1n5r/z58reEwGBANPAytAmZmZXtuEPG8PECuZJOfVla5U5eID4wv8Yyi+9e1ZERzMdRJod6FUjZxfflTuz1oVRoOVLkYke0+XXp3s+vwaju/bhkQwKmrZH94q8jpQM/Yip7ZDWSRJJJQf9Owiij67gfQ7gdYwK4xT4=,iv:zbXmdw6pVTpcoJo8DZOfMlflfbt0WaeZwt0pUmHUNLc=,tag:yJFLZhnVlpl4DwlUXI9OTw==,type:str]
+    version: 3.13.3
