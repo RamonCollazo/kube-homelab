@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - ./gateway.yaml
   - ./policy.yaml
+  - ./lan-route.yaml
   - ./llm/
   - ./mcp/

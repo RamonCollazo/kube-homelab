@@ -1,0 +1,23 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: lan-agentgateway
+  namespace: agentgateway-system
+spec:
+  parentRefs:
+    - name: lan-gateway
+      namespace: lan-gateway
+      sectionName: lan-https
+  hostnames:
+    - "mcp.raymondcollazo.com"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /mcp
+      timeouts:
+        request: 10m
+      backendRefs:
+        - name: agentgateway-proxy
+          port: 80
