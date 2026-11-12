@@ -17,6 +17,7 @@ resources:
   - ./immich/
   # - ./open-webui/
   - ./nextcloud/
+  - ./notebooklm/
   # - ./paperless-ngx/
   - ./jellyfin/
   - ./obsidian-livesync/

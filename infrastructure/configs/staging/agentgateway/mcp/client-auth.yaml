@@ -1,0 +1,16 @@
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: homelab-mcp-client-auth
+  namespace: agentgateway-system
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: homelab-mcp
+  traffic:
+    apiKeyAuthentication:
+      mode: Strict
+      secretRef:
+        name: mcp-client-keys

@@ -1,0 +1,21 @@
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: homelab-mcp
+  namespace: agentgateway-system
+spec:
+  mcp:
+    failureMode: FailOpen
+    prefixMode: Always
+    targets:
+      - name: notebooklm
+        static:
+          host: notebooklm-mcp.notebooklm.svc.cluster.local
+          port: 9420
+          path: /mcp
+          protocol: StreamableHTTP
+          policies:
+            auth:
+              secretRef:
+                name: notebooklm-mcp-token

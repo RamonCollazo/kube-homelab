@@ -1,0 +1,16 @@
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: anthropic-teams
+  namespace: agentgateway-system
+spec:
+  ai:
+    provider:
+      anthropic: {}
+  policies:
+    ai:
+      routes:
+        '/v1/messages': Messages
+        '/v1/messages/count_tokens': AnthropicTokenCount
+        '*': Passthrough

@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notebooklm-mcp
+  namespace: notebooklm
+  labels:
+    app: notebooklm-mcp
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: notebooklm-mcp
+  template:
+    metadata:
+      labels:
+        app: notebooklm-mcp
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: notebooklm-mcp
+          image: tenglin/notebooklm-mcp:0.8.6
+          ports:
+            - name: mcp
+              containerPort: 9420
+          env:
+            - name: NOTEBOOKLM_MCP_ALLOW_EXTERNAL_BIND
+              value: "1"
+            - name: NOTEBOOKLM_HOME
+              value: /data
+            - name: NOTEBOOKLM_PROFILE
+              value: server
+            - name: HOME
+              value: /data/profiles/server
+            - name: NOTEBOOKLM_MCP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: notebooklm-mcp
+                  key: NOTEBOOKLM_MCP_TOKEN
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          readinessProbe:
+            tcpSocket:
+              port: mcp
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: mcp
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: notebooklm-profile
+        - name: tmp
+          emptyDir:
+            sizeLimit: 256Mi
