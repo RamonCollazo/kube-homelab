@@ -15,4 +15,4 @@ spec:
         action: Require
         policy:
           matchExpressions:
-            - '!(mcp.tool.name in ["notebooklm_share_set_access", "notebooklm_share_set_user", "notebooklm_share_remove_user", "notebooklm_notebook_delete", "notebooklm_source_delete", "notebooklm_studio_delete"])'
+            - '!(mcp.tool.name in ["share_set_access", "share_set_user", "share_remove_user", "notebook_delete", "source_delete", "studio_delete", "notebooklm_share_set_access", "notebooklm_share_set_user", "notebooklm_share_remove_user", "notebooklm_notebook_delete", "notebooklm_source_delete", "notebooklm_studio_delete"])'
