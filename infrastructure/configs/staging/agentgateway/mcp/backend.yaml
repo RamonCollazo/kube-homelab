@@ -29,3 +29,15 @@ spec:
             auth:
               secretRef:
                 name: hindsight-mcp-token
+      - name: firecrawl
+        static:
+          host: mcp.firecrawl.dev
+          port: 443
+          path: /v2/mcp
+          protocol: StreamableHTTP
+          policies:
+            tls:
+              sni: mcp.firecrawl.dev
+            auth:
+              secretRef:
+                name: firecrawl-mcp-token

@@ -8,3 +8,4 @@ resources:
   - ./client-keys.yaml
   - ./targets/notebooklm.yaml
   - ./targets/hindsight.yaml
+  - ./targets/firecrawl.yaml
