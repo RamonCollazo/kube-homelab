@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: notebooklm-mcp-token
+    namespace: agentgateway-system
+data:
+    Authorization: ENC[AES256_GCM,data:z+KIo0+BJOnmsAu3QhJl4ZruPdR0HvJvmI56/UN7BM/L0YVNxX2/9VVP3rEa2tNNY0G3nMYbi8o3+dpX,iv:65EhHmC0MYZgdRQ6rtu8aIBudyHr4OAi1dZobSR3DuE=,tag:GhR4ZOrjzq+I635q5UoDIg==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFVHFCbFgvaUdpSTlJUnJW
+            c1hER0d5Q2VRN1phc0VzbzdtMVhlMzN1VlV3Ck9wNlRTaVNEV0xZcHRHaTBLaXdP
+            ekxEUURUMEo4NXlwZGRsOE5wYWdDYTAKLS0tIDdTcFJ4a0k3a0srYlNmN2Rlem5v
+            OWZka1Y0V0pQaEEzT21EWm92R3JqVE0KbFkV8IJmXoLoQS44jjopN8mn6hkL3Fud
+            1gqyCid98rcryT/HoV9qwYmLv1iabl3qbNIQZ5QJPP/AOic47VKDAA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age10u5tg7sqes7uqs4f9s0k449vn4j3kl4x9ge3mulaq2w8crqchu7q5fe6e5
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-11-12T04:01:20Z"
+    mac: ENC[AES256_GCM,data:7os+BNDTfGHxY5x7xWaQI7MupaZyeiWfgafNlpph5hvf80Y7zUTWipDX92FIoiDzYgXWAmokAXacz1P1q2nxWp2Bl1Sh2UvElRD2p+dmkygk6zOB3vwabOjaSGx5bzp8sa8cxOyoyqXIoA2GnTJwSI9vAgtpxKmnHkfDpVWyl0s=,iv:ZaXjDvkobLsaTJ9A8MyoqWhD66wkgLZ+TaSdED14vs0=,tag:vIh2wzR8BtjmJUncOC9gJQ==,type:str]
+    version: 3.13.3

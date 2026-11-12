@@ -1,0 +1,18 @@
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: homelab-mcp-tool-access
+  namespace: agentgateway-system
+spec:
+  targetRefs:
+    - group: agentgateway.dev
+      kind: AgentgatewayBackend
+      name: homelab-mcp
+  backend:
+    mcp:
+      authorization:
+        action: Require
+        policy:
+          matchExpressions:
+            - '!(mcp.tool.name in ["notebooklm_share_set_access", "notebooklm_share_set_user", "notebooklm_share_remove_user", "notebooklm_notebook_delete", "notebooklm_source_delete", "notebooklm_studio_delete"])'
