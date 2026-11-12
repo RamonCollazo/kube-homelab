@@ -7,3 +7,4 @@ resources:
   - ./tool-access.yaml
   - ./client-keys.yaml
   - ./targets/notebooklm.yaml
+  - ./targets/hindsight.yaml
