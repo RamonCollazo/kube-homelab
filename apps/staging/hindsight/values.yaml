@@ -1,0 +1,45 @@
+existingSecret: hindsight-env
+
+postgresql:
+  enabled: false
+  external:
+    host: hindsight-pg-rw.hindsight.svc.cluster.local
+    port: 5432
+    database: hindsight
+    username: hindsight
+
+api:
+  strategy:
+    type: Recreate
+  startupProbe:
+    httpGet:
+      path: /health/live
+      port: 8888
+    periodSeconds: 10
+    failureThreshold: 60
+  resources:
+    requests:
+      cpu: 250m
+      memory: 1536Mi
+    limits:
+      memory: 4Gi
+  persistence:
+    modelCache:
+      enabled: true
+      size: 5Gi
+      storageClass: ceph-block
+  env:
+    HINDSIGHT_API_LLM_PROVIDER: openai
+    HINDSIGHT_API_LLM_MODEL: gemini-3.8-flash
+    HINDSIGHT_API_LLM_BASE_URL: http://agentgateway-proxy.agentgateway-system.svc.cluster.local/gemini/v1
+    HINDSIGHT_API_LLM_API_KEY: held-by-agentgateway
+    HINDSIGHT_API_TENANT_EXTENSION: hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension
+    HINDSIGHT_API_DB_POOL_MAX_SIZE: "20"
+
+controlPlane:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 256Mi
+    limits:
+      memory: 1Gi

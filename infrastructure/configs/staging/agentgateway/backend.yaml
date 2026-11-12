@@ -14,3 +14,22 @@ spec:
         '/v1/messages': Messages
         '/v1/messages/count_tokens': AnthropicTokenCount
         '*': Passthrough
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: gemini
+  namespace: agentgateway-system
+spec:
+  ai:
+    provider:
+      gemini: {}
+  policies:
+    auth:
+      secretRef:
+        name: gemini-api-key
+    ai:
+      routes:
+        '/v1/chat/completions': Completions
+        '/v1/models': Models
+        '*': Passthrough

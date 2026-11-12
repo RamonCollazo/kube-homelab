@@ -1,0 +1,49 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: hindsight-pg
+  namespace: hindsight
+spec:
+  instances: 3
+  storage:
+    size: 5Gi
+  postgresql:
+    parameters:
+      max_slot_wal_keep_size: 1GB
+  bootstrap:
+    initdb:
+      database: hindsight
+      owner: hindsight
+      secret:
+        name: hindsight-db
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS vector
+        - CREATE EXTENSION IF NOT EXISTS pg_trgm
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: hindsight-pg-store
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: hindsight-pg-store
+  namespace: hindsight
+spec:
+  configuration:
+    endpointURL: http://rustfs-svc.rustfs.svc.cluster.local:9000
+    destinationPath: s3://hindsight-db/
+    s3Credentials:
+      accessKeyId:
+        name: rustfs-backup-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: rustfs-backup-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: 30d
