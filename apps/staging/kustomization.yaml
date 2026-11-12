@@ -12,6 +12,7 @@ resources:
   - ./forgejo/
   - ./n8n/
   - ./grampsweb/
+  - ./hindsight/
   - ./hermes/
   - ./immich/
   # - ./open-webui/

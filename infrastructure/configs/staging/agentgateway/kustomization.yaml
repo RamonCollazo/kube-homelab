@@ -5,3 +5,4 @@ resources:
   - ./backend.yaml
   - ./policy.yaml
   - ./httproute.yaml
+  - ./secrets.yaml
