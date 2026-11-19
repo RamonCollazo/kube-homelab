@@ -15,10 +15,9 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /mcp
-        - path:
-            type: PathPrefix
             value: /v1
+      timeouts:
+        request: 10m
       backendRefs:
         - name: hindsight-api
           port: 8888

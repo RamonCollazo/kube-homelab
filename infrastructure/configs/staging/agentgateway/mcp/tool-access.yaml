@@ -16,4 +16,3 @@ spec:
         policy:
           matchExpressions:
             - 'mcp.tool.target != "notebooklm" || !(mcp.tool.name in ["share_set_access", "share_set_user", "share_remove_user", "notebook_delete", "source_delete", "studio_delete"])'
-            - 'mcp.tool.target != "hindsight" || mcp.tool.name in ["retain", "recall", "reflect"]'
