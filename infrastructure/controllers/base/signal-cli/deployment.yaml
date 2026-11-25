@@ -23,7 +23,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: signal-cli
-          image: bbernhard/signal-cli-rest-api:0.101
+          image: bbernhard/signal-cli-rest-api:0.102
           command:
             - signal-cli
           args:
