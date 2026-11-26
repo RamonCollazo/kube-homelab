@@ -5,10 +5,11 @@ metadata:
   namespace: jellyfin
 spec:
   interval: 15m
+  timeout: 30m
   chart:
     spec:
       chart: jellyfin
-      version: 3.2.0
+      version: 3.7.0
       sourceRef:
         kind: HelmRepository
         name: jellyfin
