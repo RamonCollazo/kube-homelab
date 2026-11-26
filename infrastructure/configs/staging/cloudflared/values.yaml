@@ -20,6 +20,10 @@ data:
     replica:
       allNodes: false
       count: 2
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
     ingress:
       - hostname: forgejo.raymondcollazo.com
         service: http://forgejo-http.forgejo.svc.cluster.local:3000
