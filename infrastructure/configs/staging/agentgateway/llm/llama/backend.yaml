@@ -1,0 +1,21 @@
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: llama
+  namespace: agentgateway-system
+spec:
+  ai:
+    provider:
+      openai: {}
+      host: 10.0.100.99
+      port: 8081
+  policies:
+    auth:
+      secretRef:
+        name: llama-api-key
+    ai:
+      routes:
+        '/v1/chat/completions': Completions
+        '/v1/models': Models
+        '*': Passthrough
