@@ -12,6 +12,7 @@
       "/(^|/)statefulset\\.ya?ml$/",
       "/(^|/)daemonset\\.ya?ml$/",
       "/(^|/)cronjob\\.ya?ml$/",
+      "/(^|/)[^/]+-deployment\\.ya?ml$/",
       "/(^|/)apps/base/.+\\.ya?ml$/",
       "/(^|/)infrastructure/controllers/base/.+\\.ya?ml$/",
       "/(^|/)monitoring/controllers/base/.+\\.ya?ml$/"

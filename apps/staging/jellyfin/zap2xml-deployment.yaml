@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: zap2xml
-          image: ghcr.io/jef/zap2xml:latest
+          image: ghcr.io/jef/zap2xml:nightly@sha256:b221224971da6a9b386ecad774ed3799d127c31552546e8b5351c6005f08cb8d
           env:
             - name: POSTAL_CODE
               value: "00961"
