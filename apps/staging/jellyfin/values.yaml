@@ -55,7 +55,7 @@ livenessProbe:
     path: /health
     port: http
   initialDelaySeconds: 10
-  failureThreshold: 180
+  failureThreshold: 10
   timeoutSeconds: 5
   periodSeconds: 10
 
