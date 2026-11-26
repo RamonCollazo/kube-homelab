@@ -5,6 +5,7 @@ persistence:
     size: 5Gi
   media:
     enabled: false
+    readOnly: false
 
 volumes:
   - name: media-movies
@@ -73,13 +74,19 @@ extraInitContainers:
       - |
         set -e
 
-        PLUGIN_DIR="/config/plugins/sso-authentication_4.0.0.3"
+        PLUGIN_VERSION="5.1.1"
+        PLUGIN_SHA256="db126b4763bda3a3754fa2103232fc03ef1bf929cfeda35f2e9af39c875233b1"
+        PLUGIN_DIR="/config/plugins/sso-authentication_${PLUGIN_VERSION}"
         CONFIG_FILE="/config/plugins/configurations/SSO-Auth.xml"
 
+        rm -rf /config/plugins/sso-authentication_4.*
+
         if [ ! -f "${PLUGIN_DIR}/SSO-Auth.dll" ]; then
-          mkdir -p "${PLUGIN_DIR}"
           wget -q -O /tmp/sso.zip \
-            https://github.com/9p4/jellyfin-plugin-sso/releases/download/v4.0.0.3/sso-authentication_4.0.0.3.zip
+            "https://github.com/K0lin/jellyfin-plugin-sso/releases/download/v${PLUGIN_VERSION}/sso-authentication_${PLUGIN_VERSION}.zip"
+          echo "${PLUGIN_SHA256}  /tmp/sso.zip" | sha256sum -c -
+          rm -rf "${PLUGIN_DIR}"
+          mkdir -p "${PLUGIN_DIR}"
           unzip -q /tmp/sso.zip -d "${PLUGIN_DIR}"
           rm /tmp/sso.zip
         fi
