@@ -19,3 +19,5 @@ spec:
         '/v1/chat/completions': Completions
         '/v1/models': Models
         '*': Passthrough
+    tcp:
+      connectTimeout: 3s

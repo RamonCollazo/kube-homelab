@@ -30,11 +30,22 @@ api:
       storageClass: ceph-block
   env:
     HINDSIGHT_API_LLM_PROVIDER: openai
-    HINDSIGHT_API_LLM_MODEL: gemini-3.8-flash
-    HINDSIGHT_API_LLM_BASE_URL: http://agentgateway-proxy.agentgateway-system.svc.cluster.local/gemini/v1
+    HINDSIGHT_API_LLM_MODEL: gemma-4-12b
+    HINDSIGHT_API_LLM_BASE_URL: http://agentgateway-proxy.agentgateway-system.svc.cluster.local/llama/v1
     HINDSIGHT_API_LLM_API_KEY: held-by-agentgateway
     HINDSIGHT_API_TENANT_EXTENSION: hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension
     HINDSIGHT_API_DB_POOL_MAX_SIZE: "20"
+    HINDSIGHT_API_LLM_EXTRA_BODY: '{"chat_template_kwargs":{"enable_thinking":false}}'
+    HINDSIGHT_API_LLM_MAX_RETRIES: "0"
+    HINDSIGHT_API_LLM_MAX_CONCURRENT: "4"
+    HINDSIGHT_API_LLM_OPENAI_COMPATIBLE_ENFORCE_SCHEMA: "true"
+    HINDSIGHT_API_LLM_1_PROVIDER: openai
+    HINDSIGHT_API_LLM_1_MODEL: gemini-3.8-flash
+    HINDSIGHT_API_LLM_1_BASE_URL: http://agentgateway-proxy.agentgateway-system.svc.cluster.local/gemini/v1
+    HINDSIGHT_API_LLM_1_API_KEY: held-by-agentgateway
+    HINDSIGHT_API_LLM_1_EXTRA_BODY: '{}'
+    HINDSIGHT_API_LLM_1_MAX_RETRIES: "3"
+    HINDSIGHT_API_LLM_STRATEGY: '{"mode":"failover"}'
 
 controlPlane:
   resources:
