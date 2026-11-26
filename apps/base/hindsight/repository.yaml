@@ -8,4 +8,4 @@ spec:
   interval: 24h
   url: oci://ghcr.io/vectorize-io/charts/hindsight
   ref:
-    tag: "1.2.3"
+    tag: "1.3.0"
